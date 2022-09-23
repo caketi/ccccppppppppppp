@@ -233,10 +233,40 @@ int maxSubArray(vector<int> &nums)
     return ans;
 }
 
+bool is_palindrome(string &s, int i, int j)
+{
+    while (i <= j)
+    {
+        if (s[i] - s[j])
+            return false;
+        ++i, --j;
+    }
+    return true;
+}
+
 int main()
 {
-    vector<int> nums = {10, 9, 2, 5, 3, 7, 101, 18};
-    cout << lengthOfLIS(nums) << endl;
+    string s;
+    cin >> s;
+    int n = s.size();
+    vector<int> dp(n + 1);
+    dp[0] = 0; // dp[i]===字符串长度i
+    for (int i = 1; i <= n; i++)
+    {
+        dp[i] = i;
+        for (int j = 0; j < i; j++)
+        {
+            if (is_palindrome(s, j, i - 1))
+            {
+                dp[i] = min(dp[j] + 1, dp[i]);
+            }
+        }
+    }
+    cout << dp[n] << endl;
+    return 0;
+
+    // vector<int> nums = {10, 9, 2, 5, 3, 7, 101, 18};
+    // cout << lengthOfLIS(nums) << endl;
 
     // vector<vector<int>> costs = {{17, 2, 17}, {16, 16, 5}, {14, 3, 19}};
     // cout << minCost(costs) << endl;

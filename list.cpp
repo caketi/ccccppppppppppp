@@ -46,7 +46,7 @@ Node1 *copyRandomList(Node1 *head)
     }
     p = head->next; // 第一个被复制出的node
     while (p)
-    { // 
+    { //
         if (p->random)
             p->random = p->random->next;
         (p = p->next) && (p = p->next); // p = p->next->next;先试探
@@ -59,7 +59,7 @@ Node1 *copyRandomList(Node1 *head)
         p->next = q->next;
         if (p->next)
             q->next = p->next->next;
-        p = p->next; 
+        p = p->next;
     }
     return new_head;
 }
@@ -367,3 +367,61 @@ int main()
     printf("\n NoCycle is 0, hasCycle is 1!\n The value is: %d  detect: %d \n", hasCycle2, detectCycle2);
     return 0;
 }
+
+class randomAccessNode
+{
+    int n;
+    Node *head;
+    randomAccessNode(Node *head) : head(head), n(0)
+    {
+        Node *p = head, *q;
+        while (p)
+            q = p, p = p->next, n += 1;
+        q->next = head; // 连成环
+    }
+    int getRandom()
+    {
+        int x = rand() % n;
+        while (x--)
+            head = head->next;
+        return head->data;
+    }
+};
+
+//
+class palindromeList
+{
+    Node *reverse(Node *head)
+    {
+        Node ret, *p = head, *q;
+        while (p)
+        {
+            q = p->next;
+            p->next = ret.next;
+            p = q;
+        }
+        return ret.next;
+    }
+    bool isPalindrome(Node *head)
+    {
+        if (head == nullptr)
+            return false;
+        Node *p = head, *q = head;
+        while (q->next && q->next->next)
+        {
+            p = p->next;
+            q = q->next->next;
+        }
+        p->next = reverse(p->next);
+        q = p->next;
+        p = head;
+        while (q)
+        {
+            if (p->data != q->data)
+                return false;
+            p = p->next;
+            q = q->next;
+        }
+        return true;
+    }
+};
