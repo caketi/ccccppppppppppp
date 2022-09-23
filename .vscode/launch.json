@@ -1,0 +1,80 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch overrideload",
+      "request": "launch",
+      "mainClass": "overrideload",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
+      "name": "Launch bst",
+      "request": "launch",
+      "mainClass": "bst",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
+      "name": "Launch minheapmax",
+      "request": "launch",
+      "mainClass": "minheapmax",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
+      "name": "Launch length",
+      "request": "launch",
+      "mainClass": "length",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
+      "name": "Launch list",
+      "request": "launch",
+      "mainClass": "list",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
+      "name": "Launch hashta",
+      "request": "launch",
+      "mainClass": "hashta",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
+      "name": "Launch randomMac",
+      "request": "launch",
+      "mainClass": "randomMac",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
+      "name": "Launch bitOpr",
+      "request": "launch",
+      "mainClass": "bitOpr",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "e:/ww/ccccppppppppppp",
+      "program": "e:/ww/ccccppppppppppp/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
