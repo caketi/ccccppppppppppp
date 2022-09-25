@@ -16,28 +16,67 @@
 #include <time.h>
 #include <math.h>
 using namespace std;
+void fnc(char* &temp){
+    char *p = (char*)malloc(64);
+    memset(p, 0, 64);
+    strcpy(p, "xia");
+    temp = p;
+}
+void test02(){
+    char* mp = NULL;
+    fnc(mp);
+    cout << mp;
+}
+
+const int a = 1;
+void test()
+{
+    int *p = (int *)&a;
+    //  a = 200;
+    *p = 11;
+    printf("%d\n", a);
+}
+int main()
+{
+    // 常量zhedie
+    // test();
+    // 禁止优化
+    volatile const int b = 2;
+
+    int *p = (int *)&b;
+    *p = 200;
+    printf("%d\n", b);
+    printf("%d\n", *p);
+    test02();
+    system("pause");
+}
 
 //对应二进制位不同的位置的数目
-int hamingDistance(int x, int y){
+int hamingDistance(int x, int y)
+{
     x ^= y;
     int cnt = 0;
-    while(x){
-        x &= (x-1); //踢掉x二进制末尾的1
+    while (x)
+    {
+        x &= (x - 1); //踢掉x二进制末尾的1
         cnt += 1;
     }
     return cnt;
 }
 
-
-string convertToBase7(int num){
-    if(num == 0) return "0";
+string convertToBase7(int num)
+{
+    if (num == 0)
+        return "0";
     int flag = (num < 0);
     string s = "";
-    while(num){
+    while (num)
+    {
         s += char(abs(num) % 7 + '0'); // 留下个位
-        num /= 7; // 踢掉个位
+        num /= 7;                      // 踢掉个位
     }
-    if (flag) s+="-";
+    if (flag)
+        s += "-";
     reverse(s.begin(), s.end());
     return s;
 }
@@ -64,8 +103,7 @@ int countPrimes(int n)
     return cnt;
 }
 
-
-int main(){
-    // cout << countPrimes(10) << endl;
-    cout << convertToBase7(12)<<endl;
-}
+// int main(){
+//     // cout << countPrimes(10) << endl;
+//     cout << convertToBase7(12)<<endl;
+// }
