@@ -15,15 +15,50 @@
 #include <assert.h>
 #include <time.h>
 #include <math.h>
+#include <random>
 using namespace std;
-void fnc(char* &temp){
-    char *p = (char*)malloc(64);
+void Multiset_test()
+{
+    // STL中的set和multiset基于红黑树实现，默认排序为从小到大。
+    multiset<int, greater<int>> greadterSet;
+    multiset<int, less<int>> lessSet;
+    multiset<int> defaultSet;
+   
+    for (int i = 0; i < 10; i++)
+    {
+        int v = int(rand() % 1011);
+        greadterSet.insert(v);
+        lessSet.insert(v);
+        defaultSet.insert(v);
+    }
+
+    for (auto v : greadterSet)
+    {
+        printf("%d ", v);
+    }
+    printf("\n");
+    for (auto v : lessSet)
+    {
+        printf("%d ", v);
+    }
+    printf("\n");
+    for (auto v : defaultSet)
+    {
+        printf("%d ", v);
+    }
+    printf("\n");
+}
+
+void fnc(char *&temp)
+{
+    char *p = (char *)malloc(64);
     memset(p, 0, 64);
     strcpy(p, "xia");
     temp = p;
 }
-void test02(){
-    char* mp = NULL;
+void test02()
+{
+    char *mp = NULL;
     fnc(mp);
     cout << mp;
 }
@@ -38,17 +73,18 @@ void test()
 }
 int main()
 {
+    Multiset_test();
     // 常量zhedie
     // test();
     // 禁止优化
-    volatile const int b = 2;
+    // volatile const int b = 2;
 
-    int *p = (int *)&b;
-    *p = 200;
-    printf("%d\n", b);
-    printf("%d\n", *p);
-    test02();
-    system("pause");
+    // int *p = (int *)&b;
+    // *p = 200;
+    // printf("%d\n", b);
+    // printf("%d\n", *p);
+    // test02();
+    // system("pause");
 }
 
 //对应二进制位不同的位置的数目
