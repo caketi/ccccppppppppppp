@@ -291,6 +291,20 @@ Node *partition(Node *head, int x)
     return less_head.next; //返回less_head的next节点
 }
 
+// nums = {1,3,4,2,2}
+int findDuplicate(vector<int>& nums){
+    int p = 0, q = 0;
+    do{
+        p = nums[p];
+        q = nums[nums[q]];
+    } while(p != q);
+    p = 0; //meet here , go together
+    while(p != q){
+        p = nums[p];
+        q = nums[q];
+    }
+    return p;
+}
 Node *detectCycle_v2(Node *head)
 {
     set<Node *> node_set;

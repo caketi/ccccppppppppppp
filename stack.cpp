@@ -11,6 +11,231 @@
 #include <vector>
 #include <time.h>
 using namespace std;
+int caclculate(string s)
+{
+    static const int STATE_BEGIN = 0;
+    static const int NUMBER_STATE = 1;
+    static const int OPERATION_STATE = 2;
+    stack<int> nubmer_stack;
+    stack<char> operation_stack;
+
+    int number = 0;
+    int STATE = STATE_BEGIN;
+    int compute_flag = 0;
+    for (int i = 0; i < s.length(); i++)
+    {
+        if (s[i] == ' ')
+        {
+            continue;
+        }
+        switch (STATE)
+        {
+        case STATE_BEGIN:
+            if (s[i] >= '0' && s[i] <= '9')
+            {
+                STATE = NUMBER_STATE;
+            }
+            else
+            {
+                STATE = OPERATION_STATE;
+            }
+            i--;
+            break;
+        case NUMBER_STATE:
+            if (s[i] >= '0' && s[i] <= '9')
+            {
+                number = number * 10 + s[i] - '0';
+            }
+            else
+            {
+                nubmer_stack.push(number);
+                if (compute_flag == 1)
+                {
+                    compute(nubmer_stack, operation_stack);
+                }
+                number = 0;
+                i--;
+                STATE = OPERATION_STATE;
+            }
+            break;
+        case OPERATION_STATE:
+            if (s[i] == '+' || s[i] == '-')
+            {
+                operation_stack.push(s[i]);
+                compute_flag = 1;
+            }
+            else if (s[i] == '(')
+            {
+                STATE = NUMBER_STATE;
+                compute_flag = 0;
+            }
+            else if (s[i] >= '0' && s[i] <= '9')
+            {
+                STATE = NUMBER_STATE;
+                i--;
+            }
+            else if (s[i] == ')')
+            {
+                compute(nubmer_stack, operation_stack);
+            }
+            break;
+        }
+    }
+}
+void compute(stack<int> &number_stack, stack<char> &operation_stack)
+{
+    if (number_stack.size() < 2)
+    {
+        return;
+    }
+    int num2 = number_stack.top();
+    number_stack.pop();
+    int num1 = number_stack.top();
+    number_stack.pop();
+    if (operation_stack.top() == '+')
+    {
+        number_stack.push(num1 + num2);
+    }
+    else if (operation_stack.top() == '-')
+    {
+        number_stack.push(num1 - num2);
+    }
+    operation_stack.pop();
+}
+
+bool checkIsValidOrder(queue<int> &order)
+{
+    stack<int> s;
+    int n = order.size();
+    for (int i = 1; i <= n; i++)
+    {
+        s.push(i);
+        while (!s.empty() && order.front() == s.top())
+        {
+            s.pop();
+            order.pop();
+        }
+    }
+    if (!s.empty())
+    {
+        return false;
+    }
+    return true;
+}
+
+class MinStack
+{
+public:
+    void push(int x)
+    {
+        _data.push(x);
+        if (!_min.empty())
+        {
+            _min.push(x);
+        }
+        else
+        {
+            if (x > _min.top())
+            {
+                x = _min.top();
+            }
+            _min.push(x);
+        }
+    }
+    int top()
+    {
+        return _data.top();
+    }
+    void pop()
+    {
+        _data.pop();
+        _min.pop();
+    }
+    int getMin()
+    {
+        return _min.top();
+    }
+
+private:
+    stack<int> _data;
+    stack<int> _min;
+};
+
+class MyQueue
+{
+public:
+    void push(int x)
+    {
+        stack<int> tmep_stack;
+        while (!_data.empty())
+        {
+            tmep_stack.push(_data.top());
+            _data.pop();
+        }
+        while (!tmep_stack.empty())
+        {
+            _data.push(tmep_stack.top());
+            tmep_stack.pop();
+        }
+    }
+    int pop()
+    {
+        int x = _data.top();
+        _data.pop();
+        return x;
+    }
+    int peek()
+    {
+        return _data.top();
+    }
+    bool empty()
+    {
+        return _data.empty();
+    }
+
+private:
+    stack<int> _data;
+};
+class MyStack
+{
+public:
+    MyStack()
+    {
+    }
+    void push(int x)
+    {
+        queue<int> temp_queue;
+        temp_queue.push(x);
+        while (!_data.empty())
+        {
+            temp_queue.push(_data.front());
+            _data.pop();
+        }
+        while (!temp_queue.empty())
+        {
+            _data.push(temp_queue.front());
+            temp_queue.pop();
+        }
+    }
+    int pop()
+    {
+        int x = _data.front();
+        _data.pop();
+        return x;
+    }
+    int top()
+    {
+        return _data.front();
+    }
+    bool empty()
+    {
+        return _data.empty();
+    }
+
+private:
+    queue<int> _data; // 存储的元素顺序就是栈存储元素的顺序
+};
+
 // {8,9,9,6,0,2,8,11};
 // -1 0 1 0 -1 -2 -3 1
 // 9, 9, 6, 0, 6, 6, 9
@@ -19,68 +244,77 @@ using namespace std;
 //     1 2 3 4
 //   0 1 3 6 10
 // sum[i, j] = s[j] - s[i-1]
-///i-ind[cnt-1] + f[cnt-1] --- 计算最长
-// pos(n)-pos(n-1) + f(n-1)  
-// map ind====-3:6 -2:5 -1:0 0:-1 1:2 
+/// i-ind[cnt-1] + f[cnt-1] --- 计算最长
+// pos(n)-pos(n-1) + f(n-1)
+// map ind====-3:6 -2:5 -1:0 0:-1 1:2
 // map f======-3:0 -2:0 -1:0 0:0 1:3
-int logestWPT(vector<int>& hours){
-    map<int,int> ind;  
-    map<int, int> f; 
+int logestWPT(vector<int> &hours)
+{
+    map<int, int> ind;
+    map<int, int> f;
     ind[0] = -1;
     f[0] = 0;
-    int cnt = 0, ans =0; // cnt ----前缀和
-    for(int i = 0; i < hours.size(); i++){
-        if(hours[i] > 8) cnt += 1;
-        else cnt -= 1;
-        if(ind.find(cnt) == ind.end()){
+    int cnt = 0, ans = 0; // cnt ----前缀和
+    for (int i = 0; i < hours.size(); i++)
+    {
+        if (hours[i] > 8)
+            cnt += 1;
+        else
+            cnt -= 1;
+        if (ind.find(cnt) == ind.end())
+        {
             ind[cnt] = i;
-            if(ind.find(cnt-1) == ind.end()) f[cnt] = 0;
-            else f[cnt] = f[cnt-1] + (i - ind[cnt-1]);
+            if (ind.find(cnt - 1) == ind.end())
+                f[cnt] = 0;
+            else
+                f[cnt] = f[cnt - 1] + (i - ind[cnt - 1]);
         }
-        if ( ind.find(cnt-1) == ind.end()) continue;
-        ans = max(ans, i-ind[cnt-1] + f[cnt-1]);
+        if (ind.find(cnt - 1) == ind.end())
+            continue;
+        ans = max(ans, i - ind[cnt - 1] + f[cnt - 1]);
     }
-    cout <<"map ind===";
-    for( auto it = ind.begin(); it!=ind.end(); it++){
+    cout << "map ind===";
+    for (auto it = ind.begin(); it != ind.end(); it++)
+    {
         printf("%d:%d ", it->first, it->second);
     }
-    cout<<"map f======";
-    for( auto it = f.begin(); it!=f.end(); it++){
+    cout << "map f======";
+    for (auto it = f.begin(); it != f.end(); it++)
+    {
         printf("%d:%d ", it->first, it->second);
     }
-    cout<<""<<endl;
+    cout << "" << endl;
     return ans;
-    
 }
-
-
-
-
 
 /// @brief  0:start:1
 ///         1:start:2
-/// @param n 
-/// @param logs 
-/// @return  
-vector<int> exclusiveTime(int n , vector<string>& logs){
+/// @param n
+/// @param logs
+/// @return
+vector<int> exclusiveTime(int n, vector<string> &logs)
+{
     vector<int> ans(n);
-    stack<int>  vID;
-    for(int i = 0, pre = 0; i < logs.size(); i++){
+    stack<int> vID;
+    for (int i = 0, pre = 0; i < logs.size(); i++)
+    {
         int pos1 = logs[i].find_first_of(":");
         int pos2 = logs[i].find_last_of(":");
         string id_str = logs[i].substr(0, pos1);
-        string status = logs[i].substr(pos1+1, pos2-pos1-1);
-        string time_str = logs[i].substr(pos2+1, logs[i].size());
+        string status = logs[i].substr(pos1 + 1, pos2 - pos1 - 1);
+        string time_str = logs[i].substr(pos2 + 1, logs[i].size());
         int id = atoi(id_str.c_str());
         int time_stamp = atoi(time_str.c_str());
-        if(!vID.empty()) ans[vID.top()] += time_stamp - pre + (status == "end");
+        if (!vID.empty())
+            ans[vID.top()] += time_stamp - pre + (status == "end");
         pre = time_stamp + (status == "end");
-        if(status == "start") vID.push(id);
-        else vID.pop();
+        if (status == "start")
+            vID.push(id);
+        else
+            vID.pop();
     }
     return ans;
 }
-
 
 // int level(char c){
 //     switch(c){
@@ -108,7 +342,7 @@ vector<int> exclusiveTime(int n , vector<string>& logs){
 //     for(int i = 0, num = 0; i < s.size(); i++){
 //             if(s[i] == ' ') continue;
 //             if(level(s[i]) == 0){
-//                 n = n * 10 + (s[i] - '0'); // 将字符变为数字 '123'===>123 
+//                 n = n * 10 + (s[i] - '0'); // 将字符变为数字 '123'===>123
 //                 continue;
 //             }
 //             num.push(n);
@@ -123,8 +357,6 @@ vector<int> exclusiveTime(int n , vector<string>& logs){
 //     }
 //     return num.top();
 // }
-
-
 
 // // 9,3,4,#,#,1,#,#,2#,6,#,#   1##---> #
 // bool isValidSerialization(string preorder)
@@ -555,14 +787,16 @@ int main()
     //     printf("%s = %d\n", s, calc(s, 0, strlen(s) - 1));
     // }
     // return 0;
-    vector<int> wpt = {8,9,9,6,0,2,8,11};
+    vector<int> wpt = {8, 9, 9, 6, 0, 2, 8, 11};
     auto res = logestWPT(wpt);
-   
-    cout<< "=====" << res << "\n" << endl;
 
-    vector<string> logs = {"0:start:0","1:start:2","1:end:5","0:end:6"};
+    cout << "=====" << res << "\n"
+         << endl;
+
+    vector<string> logs = {"0:start:0", "1:start:2", "1:end:5", "0:end:6"};
     auto ans = exclusiveTime(4, logs);
-    for(int e : ans){
+    for (int e : ans)
+    {
         cout << e << endl;
     }
 
