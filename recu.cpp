@@ -13,6 +13,256 @@
 #include <unistd.h>
 #include <time.h>
 using namespace std;
+// pair -- 元素和count绑定
+void merge_sort_two_vec(vector<pair<int, int>> &sub_vec1, vector<pair<int, int>> &sub_vec2, vector<pair<int, int>> &vec, vector<int> &count)
+{
+    int i = 0;
+    int j = 0;
+    while (i < sub_vec1.size() && j < sub_vec2.size())
+    {
+        if (sub_vec1[i].first <= sub_vec2[j].first) 
+        {
+            count[sub_vec1[i].second] += j;
+            vec.push_back(sub_vec1[i]);
+            i++;
+        } //插入i指针指向的元素时，对应的count[i]---j的索引值 即明确比  a[i] > a[j] j++ ====  a[i] < a[j] 那么我比之前都大
+        else
+        {   
+            vec.push_back(sub_vec2[j]);
+            j++;
+        }
+    }
+    for (; i < sub_vec1.size(); i++)
+    {
+        count[sub_vec1[i].second] += j;
+        vec.push_back(sub_vec1[i]);
+    }
+    for (; j < sub_vec2.size(); j++)
+    {
+        vec.push_back(sub_vec2[j]);
+    }
+}
+void merge_sort(vector<pair<int,int>> &vec, vector<int> &count)
+{
+    if (vec.size() < 2)
+    {
+        return;
+    }
+    int mid = vec.size() / 2;
+    vector<pair<int, int>> sub_vec1;
+    vector<pair<int, int>> sub_vec2;
+    for (int i = 0; i < mid; i++)
+    {
+        sub_vec1.push_back(vec[i]);
+    }
+    for (int i = mid; i < vec.size(); i++)
+    {
+        sub_vec2.push_back(vec[i]);
+    }
+    merge_sort(sub_vec1, count);
+    merge_sort(sub_vec2, count);
+    vec.clear();
+    merge_sort_two_vec(sub_vec1, sub_vec2, vec, count);
+}
+
+vector<int> countSmaller(vector<int> &nums)
+{
+    vector<pair<int, int>> vec;
+    vector<int> count;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        vec.push_back(make_pair(nums[i], i));
+        count.push_back(0);
+    }
+    merge_sort(vec, count);
+    return count;
+}
+
+vector<vector<string>> solveNQueens(int n)
+{
+    vector<vector<string>> result;
+    vector<vector<int>> mark; //标记是否可以放
+    vector<string> location;  //记录皇后的位置
+    for (int i = 0; i < n; i++)
+    {
+        mark.push_back((vector<int>()));
+        for (int j = 0; j < n; j++)
+        {
+            mark[i].push_back(0);
+        }
+        location.push_back("");
+        location[i].append(n, '.');
+    }
+    generate_queen(0, n, location, result, mark);
+    return result;
+}
+void generate_queen(int k, int n, vector<string> &location, vector<vector<string>> &result, vector<vector<int>> &mark)
+{ // k-放了几个皇后
+    if (k == n)
+    {
+        result.push_back(location);
+        return;
+    }
+    for (int i = 0; i < n; i++)
+    {
+        if (mark[k][i] == 0)
+        {
+            vector<vector<int>> tmp_mark = mark; //记录回溯前的mark
+            location[k][i] = 'Q';                //记录当前皇后位置
+            put_down_the_queen(k, i, mark);
+            generate_queen(k + 1, n, location, result, mark);
+            mark = tmp_mark;      //回溯
+            location[k][i] = '.'; //回溯
+        }
+    }
+}
+// N皇后
+void put_down_the_queen(int x, int y, vector<vector<int>> &mark)
+{
+    static const int dx[] = {-1, 1, 0, 0, -1, -1, 1, 1}; //八方旅人
+    static const int dy[] = {0, 0, -1, 1, -1, 1, -1, 1};
+    mark[x][y] = 1; // (x,y)放皇后
+    for (int i = 1; i < mark.size(); i++)
+    { //哪一行，压缩饼干，二向箔打击
+        for (int j = 0; j < 8; j++)
+        {
+            int new_x = x + i * dx[j];
+            int new_y = y + i * dy[j];
+            if (new_x >= 0 && new_x < mark.size() && new_y >= 0 && new_y < mark.size())
+            {
+                mark[new_x][new_y] = 1;
+            }
+        }
+    }
+}
+
+vector<string> generate_parenthesis(int n)
+{
+    vector<string> result;
+    generate_string_item("", n, n, result);
+    return result;
+}
+void generate_string_item(string item, int left, int right, vector<string> &result)
+{ // left,right --- 可以放括号的剩余数量，海克斯最后通牒，精准，优雅
+    if (left == 0 && right == 0)
+    {
+        result.push_back(item);
+        return;
+    }
+    if (left > 0)
+    {
+        generate_string_item(item + '(', left - 1, right, result);
+    }
+    if (left > right)
+    {
+        generate_string_item(item + ')', left, right - 1, result);
+    }
+}
+// n---括号组数
+void generate_parenthesis_may_illegal(string item, int n, vector<string> &result)
+{
+    if (item.size() == 2 * n)
+    {
+        result.push_back(item);
+        return;
+    }
+    generate_parenthesis_may_illegal(item + '(', n, result);
+    generate_parenthesis_may_illegal(item + ')', n, result);
+}
+
+vector<vector<int>> combinationSum2(vector<int> &candidates, int target)
+{
+    vector<vector<int>> result;
+    vector<int> item;
+    set<vector<int>> res_set;
+    sort(candidates.begin(), candidates.end());
+    generateSum(0, candidates, result, item, res_set, 0, target);
+    return result;
+}
+void generateSum(int i, vector<int> &nums, vector<vector<int>> &result, vector<int> &item, set<vector<int>> &res_set, int sum, int target)
+{
+    if (i >= nums.size() || sum > target)
+    {
+        return;
+    }
+    sum += nums[i]; //看这里，选不选
+    item.push_back(nums[i]);
+
+    if (target == sum && res_set.find(item) == res_set.end())
+    {
+        result.push_back(item);
+        res_set.insert(item);
+    }
+    generateSum(i + 1, nums, result, item, res_set, sum, target);
+
+    sum -= nums[i]; //看这里，选不选
+    item.pop_back();
+    generateSum(i + 1, nums, result, item, res_set, sum, target);
+}
+vector<vector<int>> subsets_with_dup(vector<int> &nums)
+{
+    vector<vector<int>> result;
+    vector<int> item;
+    set<vector<int>> res_set;
+    sort(nums.begin(), nums.end());
+    result.push_back(item);
+    generate_no_dup(0, nums, result, item, res_set);
+    return result;
+}
+void generate_no_dup(int i, vector<int> &nums, vector<vector<int>> &result, vector<int> &item, set<vector<int>> &res_set)
+{
+    if (i >= nums.size())
+    {
+        return;
+    }
+    item.push_back(nums[i]);
+    if (res_set.find(item) == res_set.end()) //去重
+    {
+        result.push_back(item);
+        res_set.insert(item);
+    }
+    generate_no_dup(i + 1, nums, result, item, res_set);
+    item.pop_back();
+    generate_no_dup(i + 1, nums, result, item, res_set);
+}
+vector<vector<int>> subsets_bitop(vector<int> &nums)
+{
+    vector<vector<int>> result;
+    int all_set = 1 << nums.size();
+    for (int i = 0; i < all_set; i++)
+    {
+        vector<int> item;
+        for (int j = 0; j < nums.size(); j++)
+        {
+            if (i & (1 << j))
+            {
+                item.push_back(nums[j]);
+            }
+        }
+        result.push_back(item);
+    }
+    return result;
+}
+vector<vector<int>> subsets(vector<int> &nums)
+{
+    vector<vector<int>> result;
+    vector<int> item;       //回溯时，产生各个子集的数组
+    result.push_back(item); //空集push-result
+    generate(0, nums, item, result);
+    return result;
+}
+void generate(int i, vector<int> &nums, vector<int> &item, vector<vector<int>> &result)
+{
+    if (i >= nums.size())
+    {
+        return;
+    }
+    item.push_back(nums[i]);
+    result.push_back(item);
+    generate(i + 1, nums, item, result); //选择 不选
+    item.pop_back();
+    generate(i + 1, nums, item, result);
+}
 
 // nums = {10, 9, 2, 5 , 3, 7, 101, 18}  --4  {2,3,7,101}
 int lengthOfLIS(vector<int> &nums)

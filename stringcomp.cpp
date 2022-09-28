@@ -31,6 +31,39 @@ int brute_force(const char *text, const char *pattern)
     }
     return -1;
 }
+void getNext(int *next, const string &s)
+{
+    next[0] = -1;
+    int j = -1;
+    for (int i = 1; i < s.size(); i++)
+    {
+        while (j >= 0 && s[i] != s[j + 1]) // 前后缀不相同了
+        {
+            j = next[j];  // 回退
+        }
+        if (s[i] == s[j + 1])
+        {
+            j++;
+        }
+        next[i] = j;
+    }
+}
+bool repeatedSubstringPattern(string s)
+{
+    if (s.size() == 0)
+    {
+        return false;
+    }
+    int next[s.size()];
+    getNext(next, s);
+    int len = s.size();
+    if (next[len - 1] != -1 && len % (len - (next[len - 1] + 1)) == 0)
+    {// next[len - 1] + 1---最长相等前后缀的长度
+        return true;
+    }
+    return false;
+}
+
 // 状态机--给个字符，j变
 void GetNext(const char *pattern, int *next)
 {
@@ -67,7 +100,7 @@ int kmp(const char *text, const char *pattern)
         //     j = next[j];
         // if (text[i] == pattern[j + 1])
         //     j += 1;
-        if (pattern[j + 1] == 0)
+        if (pattern[j + 1] == 0) // 如果j指向了模式串t的末尾，那么就说明模式串t完全匹配文本串s里的某个子串了。
             return i - j;
     }
     return -1;
