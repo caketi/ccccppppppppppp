@@ -136,7 +136,7 @@ Node *reverseList2(Node *head)
         return head;
     Node *tail = head->next;
     Node *p = reverseList2(head->next);
-    head->next = tail->next;
+    head->next = tail->next; //想想就两个节点head tail
     tail->next = head;
     return p;
 }

@@ -646,8 +646,166 @@ class PathSum
         h[0] = 1;
         return count(root, 0, targetSum);
     }
+    vector<vector<int>> pathSum_v2(TreeNode *root, int sum)
+    {
+        vector<vector<int>> result;
+        vector<int> path;   //路径栈
+        int path_value = 0; //路径值
+        preorder(root, path_value, sum, path, result);
+        return result;
+    }
+    void preorder(TreeNode *node, int &path_value, int sum, vector<int> &path,
+                  vector<vector<int>> &result)
+    {
+        if (!node)
+        {
+            return;
+        }
+        path_value += node->val;
+        path.push_back(node->val);
+        if (!node->left && !node->right && path_value == sum)
+        {
+            result.push_back(path);
+        }
+        preorder(node->left, path_value, sum, path, result);
+        preorder(node->right, path_value, sum, path, result);
+        path_value -= node->val;
+        path.pop_back();
+    }
 };
 
+class flattenTree_v2{
+    void flattern(TreeNode* root){
+        TreeNode* last = NULL;
+        preorder(root, last);
+    }
+    void preorder(TreeNode* node, TreeNode* &last){
+        if(!node){
+            return;
+        }
+        if(!node->left&& !node->right){
+            last = node;
+            return;
+        }
+        TreeNode* left = node->left;
+        TreeNode* right = node->right;
+        TreeNode* left_last = nullptr;
+        TreeNode* right_last = nullptr;
+        if(left){
+            preorder(left, left_last);
+            node->left = nullptr;
+            node->right = left;
+            last = left_last;
+        }
+        if(right){
+            preorder(right, right_last);
+            if(left_last){
+                left_last->right = right;
+            }
+            last = right_last;
+        }
+    }
+};
+class flattenTree
+{
+    void flattern(TreeNode *root)
+    {
+        vector<TreeNode *> node_vec;
+        preorder(root, node_vec);
+        for (int i = 1; i < node_vec.size(); i++)
+        {
+            node_vec[i - 1]->left = nullptr;
+            node_vec[i - 1]->right = node_vec[i];
+        }
+    }
+    void preorder(TreeNode *node, vector<TreeNode *> &node_vec)
+    {
+        if (!node)
+        {
+            return;
+        }
+        node_vec.push_back(node);
+        preorder(node->left, node_vec);
+        preorder(node->right, node_vec);
+    }
+};
+
+class lowestCommAncestor
+{
+    void preorder(TreeNode *node, TreeNode *search, vector<TreeNode *> &path,
+                  vector<TreeNode *> &result, int &finish)
+    {
+        if (!node || finish)
+        {
+            return;
+        }
+        path.push_back(node);
+        if (node == search)
+        {
+            finish = 1;
+            result = path;
+        }
+        preorder(node->left, search, path, result, finish);
+        preorder(node->right, search, path, result, finish);
+        path.pop_back();
+    }
+    TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q)
+    {
+        vector<TreeNode *> path;
+        vector<TreeNode *> node_p_path;
+        vector<TreeNode *> node_q_path;
+        int finish = 0;
+
+        preorder(root, p, path, node_p_path, finish);
+        path.clear(); //清空path。finish
+        finish = 0;
+        preorder(root, q, path, node_q_path, finish);
+        int path_len = 0;
+        if (node_p_path.size() < node_q_path.size())
+        {
+            path_len = node_p_path.size();
+        }
+        else
+        {
+            path_len = node_q_path.size();
+        }
+        TreeNode *result = 0;
+        for (int i = 0; i < path_len; i++)
+        {
+            if (node_q_path[i] = node_p_path[i])
+            {
+                result = node_p_path[i];
+            }
+        }
+        return result;
+    }
+};
+
+vector<int> rightSideView(TreeNode* root){
+    vector<int> view; //按层遍历的最后一个节点
+    queue<pair<TreeNode* , int>> Q; //宽度优先搜索队列<节点，层数>
+    if(root){
+        Q.push(make_pair(root, 0));
+    }//根节点非空，将<root, 0>push进queue
+    while(!Q.empty()){
+        TreeNode* node = Q.front().first; //搜索节点
+        int depth = Q.front().second; //待搜索节点的层数
+        Q.pop();
+        if(view.size() == depth){ //新遇到
+            view.push_back(node->val);
+        }
+        else {
+            view[depth] = node->val;
+        }
+        if(node->left){
+            Q.push(make_pair(node->left, depth+1));
+        }
+        if(node->right){
+            Q.push(make_pair(node->right, depth+1));
+        }
+    }
+    return view;
+}
 class recoverTre
 {
     TreeNode *pre, *q, *p;

@@ -1,37 +1,32 @@
 # Details
 
-Date : 2022-09-23 20:37:02
+Date : 2022-09-29 10:48:16
 
 Directory e:\\ww\\ccccppppppppppp
 
-Total : 55 files,  34812 codes, 1908 comments, 597 blanks, all 37317 lines
+Total : 60 files,  9859 codes, 2290 comments, 661 blanks, all 12810 lines
 
 [Summary](results.md) / Details / [Diff Summary](diff.md) / [Diff Details](diff-details.md)
 
 ## Files
 | filename | language | code | comment | blank | total |
 | :--- | :--- | ---: | ---: | ---: | ---: |
-| [01-bag.cpp](/01-bag.cpp) | C++ | 162 | 7 | 8 | 177 |
+| [.fleet/run.json](/.fleet/run.json) | JSON | 4 | 0 | 1 | 5 |
+| [01-bag.cpp](/01-bag.cpp) | C++ | 208 | 10 | 11 | 229 |
 | [Queue.cpp](/Queue.cpp) | C++ | 156 | 0 | 4 | 160 |
 | [README.md](/README.md) | Markdown | 2 | 0 | 1 | 3 |
 | [binary_search.cpp](/binary_search.cpp) | C++ | 387 | 15 | 17 | 419 |
-| [binary_tree.cpp](/binary_tree.cpp) | C++ | 414 | 273 | 40 | 727 |
+| [binary_tree.cpp](/binary_tree.cpp) | C++ | 544 | 273 | 43 | 860 |
 | [c_strcopy.cpp](/c_strcopy.cpp) | C++ | 130 | 3 | 11 | 144 |
 | [dbfs.cpp](/dbfs.cpp) | C++ | 402 | 12 | 17 | 431 |
-| [f/README.md](/f/README.md) | Markdown | 38 | 0 | 33 | 71 |
-| [f/package-lock.json](/f/package-lock.json) | JSON | 27,679 | 0 | 1 | 27,680 |
-| [f/package.json](/f/package.json) | JSON | 40 | 0 | 1 | 41 |
-| [f/public/index.html](/f/public/index.html) | HTML | 20 | 23 | 1 | 44 |
-| [f/public/manifest.json](/f/public/manifest.json) | JSON | 25 | 0 | 1 | 26 |
-| [f/src/App.js](/f/src/App.js) | JavaScript | 32 | 18 | 4 | 54 |
-| [f/src/hook.js](/f/src/hook.js) | JavaScript | 95 | 11 | 15 | 121 |
-| [f/src/index.css](/f/src/index.css) | CSS | 12 | 0 | 2 | 14 |
-| [f/src/index.js](/f/src/index.js) | JavaScript | 10 | 0 | 5 | 15 |
-| [f/src/reducer.js](/f/src/reducer.js) | JavaScript | 20 | 1 | 3 | 24 |
-| [fire_anna/README.md](/fire_anna/README.md) | Markdown | 2 | 0 | 1 | 3 |
+| [encapsulateTrie.cpp](/encapsulateTrie.cpp) | C++ | 216 | 162 | 20 | 398 |
+| [fenwickTree.cpp](/fenwickTree.cpp) | C++ | 0 | 83 | 9 | 92 |
 | [frontMiddleBackQueue.cpp](/frontMiddleBackQueue.cpp) | C++ | 270 | 38 | 20 | 328 |
+| [gcd.cpp](/gcd.cpp) | C++ | 93 | 8 | 6 | 107 |
+| [greedy.cpp](/greedy.cpp) | C++ | 228 | 8 | 9 | 245 |
 | [haash.cpp](/haash.cpp) | C++ | 466 | 102 | 24 | 592 |
 | [heap-priqueue.cpp](/heap-priqueue.cpp) | C++ | 194 | 3 | 6 | 203 |
+| [hman.cpp](/hman.cpp) | C++ | 350 | 17 | 13 | 380 |
 | [indequeue.cpp](/indequeue.cpp) | C++ | 392 | 42 | 17 | 451 |
 | [inenstack.cpp](/inenstack.cpp) | C++ | 332 | 3 | 13 | 348 |
 | [javaaaaa/HashMap.java](/javaaaaa/HashMap.java) | Java | 81 | 10 | 9 | 100 |
@@ -50,20 +45,30 @@ Total : 55 files,  34812 codes, 1908 comments, 597 blanks, all 37317 lines
 | [javaaaaa/overrideload.java](/javaaaaa/overrideload.java) | Java | 31 | 9 | 6 | 46 |
 | [javaaaaa/randomMac.java](/javaaaaa/randomMac.java) | Java | 172 | 25 | 18 | 215 |
 | [javaaaaa/stackqueue.java](/javaaaaa/stackqueue.java) | Java | 85 | 0 | 6 | 91 |
-| [list.cpp](/list.cpp) | C++ | 302 | 51 | 16 | 369 |
+| [list.cpp](/list.cpp) | C++ | 659 | 54 | 22 | 735 |
 | [merge_sort.cpp](/merge_sort.cpp) | C++ | 188 | 137 | 17 | 342 |
 | [new_heap.cpp](/new_heap.cpp) | C++ | 96 | 207 | 28 | 331 |
 | [python/type_object_class.py](/python/type_object_class.py) | Python | 33 | 13 | 8 | 54 |
+| [python/zipsort.py](/python/zipsort.py) | Python | 62 | 13 | 13 | 88 |
 | [quick_find.cpp](/quick_find.cpp) | C++ | 30 | 1 | 3 | 34 |
 | [quick_sort.cpp](/quick_sort.cpp) | C++ | 289 | 14 | 13 | 316 |
 | [quick_union.cpp](/quick_union.cpp) | C++ | 25 | 1 | 7 | 33 |
-| [radix_sort.cpp](/radix_sort.cpp) | C++ | 173 | 24 | 12 | 209 |
+| [radix_sort.cpp](/radix_sort.cpp) | C++ | 383 | 25 | 11 | 419 |
 | [rbtree.cpp](/rbtree.cpp) | C++ | 405 | 6 | 19 | 430 |
-| [recu.cpp](/recu.cpp) | C++ | 247 | 9 | 17 | 273 |
-| [stack.cpp](/stack.cpp) | C++ | 70 | 496 | 26 | 592 |
+| [recu.cpp](/recu.cpp) | C++ | 488 | 12 | 23 | 523 |
+| [rust/mystack/src/main.rs](/rust/mystack/src/main.rs) | Rust | 262 | 8 | 15 | 285 |
+| [rust/mystack/target/.rustc_info.json](/rust/mystack/target/.rustc_info.json) | JSON | 1 | 0 | 0 | 1 |
+| [rust/mystack/target/debug/.fingerprint/mystack-35542c1baf6f5b95/bin-mystack.json](/rust/mystack/target/debug/.fingerprint/mystack-35542c1baf6f5b95/bin-mystack.json) | JSON | 1 | 0 | 0 | 1 |
+| [rust/mystack/target/debug/.fingerprint/mystack-459807942da6641d/bin-mystack.json](/rust/mystack/target/debug/.fingerprint/mystack-459807942da6641d/bin-mystack.json) | JSON | 1 | 0 | 0 | 1 |
+| [rust/mystack/target/debug/.fingerprint/mystack-97f5a12640f1853e/test-bin-mystack.json](/rust/mystack/target/debug/.fingerprint/mystack-97f5a12640f1853e/test-bin-mystack.json) | JSON | 1 | 0 | 0 | 1 |
+| [rust/mystack/target/debug/.fingerprint/mystack-ffed88e9ea78de1d/test-bin-mystack.json](/rust/mystack/target/debug/.fingerprint/mystack-ffed88e9ea78de1d/test-bin-mystack.json) | JSON | 1 | 0 | 0 | 1 |
+| [stack.cpp](/stack.cpp) | C++ | 304 | 496 | 26 | 826 |
+| [stringcomp.cpp](/stringcomp.cpp) | C++ | 391 | 17 | 14 | 422 |
+| [tempCodeRunnerFile.cpp](/tempCodeRunnerFile.cpp) | C++ | 0 | 1 | 0 | 1 |
 | [test-preoderserialization.cpp](/test-preoderserialization.cpp) | C++ | 46 | 1 | 1 | 48 |
 | [testcPP.cpp](/testcPP.cpp) | C++ | 207 | 3 | 3 | 213 |
-| [tt.cpp](/tt.cpp) | C++ | 62 | 3 | 6 | 71 |
+| [trie.cpp](/trie.cpp) | C++ | 135 | 93 | 11 | 239 |
+| [tt.cpp](/tt.cpp) | C++ | 118 | 18 | 9 | 145 |
 | [weight_quick_union.cpp](/weight_quick_union.cpp) | C++ | 217 | 10 | 11 | 238 |
 | [weighted_withpath.cpp](/weighted_withpath.cpp) | C++ | 0 | 0 | 1 | 1 |
 

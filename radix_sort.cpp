@@ -13,41 +13,54 @@
 #include <assert.h>
 using namespace std;
 
-#define low16(a) ((a) & 0xffff)
-#define high16(a) (((a) & 0xffff0000) >> 16)
-void radix_sort(int *arr, int n){
+#define low16(a) ((a)&0xffff)
+#define high16(a) (((a)&0xffff0000) >> 16)
+void radix_sort(int *arr, int n)
+{
     int cnt[65536] = {0};
-    int *temp = (int *) malloc(sizeof(int) *n);
+    int *temp = (int *)malloc(sizeof(int) * n);
     // low 16 bit sort
-    for(int i = 0; i <n ;i ++) cnt[low16(arr[i])] += 1; //count
-    for(int i = 1; i<65536; i++) cnt[i] += cnt[i-1]; //prefix sum
-    for(int i = n-1; i>=0; --i) temp[--cnt[low16(arr[i])]] = arr[i]; // placement
+    for (int i = 0; i < n; i++)
+        cnt[low16(arr[i])] += 1; // count
+    for (int i = 1; i < 65536; i++)
+        cnt[i] += cnt[i - 1]; // prefix sum
+    for (int i = n - 1; i >= 0; --i)
+        temp[--cnt[low16(arr[i])]] = arr[i]; // placement
 
-    //init cnt
-    for(int i = 0; i< 65536; i++) cnt[i] = 0;
+    // init cnt
+    for (int i = 0; i < 65536; i++)
+        cnt[i] = 0;
 
     // high 16 bit sort
-    for(int i = 0; i< n; i++) cnt[high16(temp[i])] += 1;
-    for(int i = 1; i < 65536; i ++) cnt[i] += cnt[i-1];
-    for(int i = n-1; i>=0;--i) arr[--cnt[high16(temp[i])]] = temp[i];
+    for (int i = 0; i < n; i++)
+        cnt[high16(temp[i])] += 1;
+    for (int i = 1; i < 65536; i++)
+        cnt[i] += cnt[i - 1];
+    for (int i = n - 1; i >= 0; --i)
+        arr[--cnt[high16(temp[i])]] = temp[i];
     free(temp);
     return;
 }
 
-void output(int *arr, int n){
-    for(int i = 0; i<n; i++){
+void output(int *arr, int n)
+{
+    for (int i = 0; i < n; i++)
+    {
         printf("%d ", arr[i]);
     }
     printf("\n");
-    return ;
+    return;
 }
-int *getRandData(int n){
+int *getRandData(int n)
+{
     int *temp = (int *)malloc(sizeof(int) * n);
-    for(int i = 0; i<n;i++) temp[i] = rand();
+    for (int i = 0; i < n; i++)
+        temp[i] = rand();
     return temp;
 }
-int main(){
-    #define MAX_N 20
+int main()
+{
+#define MAX_N 20
     int *arr = getRandData(MAX_N);
     output(arr, MAX_N);
     radix_sort(arr, MAX_N);
@@ -56,17 +69,24 @@ int main(){
     return 0;
 }
 
-// arr1= [2,3,1,3,2,4,6,7,9,2,19] 
+// arr1= [2,3,1,3,2,4,6,7,9,2,19]
 // arr2 = [2,1,4,3,9,6]
 // [2,2,2,1,4,3,3,9,6,7,19]
-vector<int> relativeSortArray(vector<int> &arr1, vector<int> &arr2){
+vector<int> relativeSortArray(vector<int> &arr1, vector<int> &arr2)
+{
     int cnt[1005] = {0};
-    for(auto x: arr1) cnt[x] += 1;
+    for (auto x : arr1)
+        cnt[x] += 1;
     int k = 0;
-    for(auto x : arr2) while(cnt[x]--) arr1[k++] = x;
-    for(int i = 0; i< 1001; i++){
-        if(cnt[i] <= 0) continue;
-        while(cnt[i] --) arr1[k++] = i;
+    for (auto x : arr2)
+        while (cnt[x]--)
+            arr1[k++] = x;
+    for (int i = 0; i < 1001; i++)
+    {
+        if (cnt[i] <= 0)
+            continue;
+        while (cnt[i]--)
+            arr1[k++] = i;
     }
     return arr1;
 }
@@ -74,18 +94,25 @@ vector<int> relativeSortArray(vector<int> &arr1, vector<int> &arr2){
 // [3,6,9,1] ----- [1,3,6,9] 相邻最大差距值
 //  3
 
-int maximumGap(vector<int>& nums){
+int maximumGap(vector<int> &nums)
+{
     int cnt[65536] = {0};
     vector<int> temp(nums.size());
-    for(auto x : nums) cnt[x & 0xffff] += 1;
-    for(int i = 1; i < 65536; i++) cnt[i] += cnt[i-1];
-    for(int i = nums.size() -1; i>=0; --i) temp[--cnt[nums[i] % 65536]] = nums[i];
+    for (auto x : nums)
+        cnt[x & 0xffff] += 1;
+    for (int i = 1; i < 65536; i++)
+        cnt[i] += cnt[i - 1];
+    for (int i = nums.size() - 1; i >= 0; --i)
+        temp[--cnt[nums[i] % 65536]] = nums[i];
     memset(cnt, 0, sizeof(cnt));
-    for(auto x : temp)  cnt[x/65536] += 1;
-    for(int i = temp.size() -1; i >= 0; --i) nums[--cnt[temp[i] / 65536]] = temp[i];
+    for (auto x : temp)
+        cnt[x / 65536] += 1;
+    for (int i = temp.size() - 1; i >= 0; --i)
+        nums[--cnt[temp[i] / 65536]] = temp[i];
     int ans = 0;
-    for(int i = 1; i< nums.size(); i++){
-        ans = max(ans, nums[i] - nums[i-1]);
+    for (int i = 1; i < nums.size(); i++)
+    {
+        ans = max(ans, nums[i] - nums[i - 1]);
     }
     return ans;
 }
@@ -93,51 +120,220 @@ int maximumGap(vector<int>& nums){
 //  citations = [ 3, 0 ,6, 1,5]
 //  01356
 //  3
-int hIndex(vector<int> & citations){
+int hIndex(vector<int> &citations)
+{
     sort(citations.begin(), citations.end());
     int h = 1, n = citations.size();
-    while( h<=n && citations[n-h] >= h)  ++h;
-    return h-1;
+    while (h <= n && citations[n - h] >= h)
+        ++h;
+    return h - 1;
 }
+struct GraphNode
+{
+    int label;
+    vector<GraphNode *> neighbors;
+    GraphNode(int x) : label(x){};
+};
+void BFS_graph(GraphNode *node, int visit[])
+{
+    queue<GraphNode *> Q;
+    Q.push(node);
+    visit[node->label] = 1;
+    while (!Q.empty())
+    {
+        GraphNode *node = Q.front();
+        Q.pop();
+        printf("%d ", node->label);
+        for (int i = 0; i < node->neighbors.size(); i++)
+        {
+            if (visit[node->neighbors[i]->label] == 0)
+            {
+                Q.push(node->neighbors[i]);
+                visit[node->neighbors[i]->label] = 1;
+            }
+        }
+    }
+}
+void DFS_graph(GraphNode *node, int visit[])
+{
+    visit[node->label] = 1;
+    printf("%d ", node->label);
+    for (int i = 0; i < node->neighbors.size(); i++)
+    {
+        if (visit[node->neighbors[i]->label] == 0)
+        {
+            DFS_graph(node->neighbors[i], visit);
+        }
+    }
+}
+int main()
+{
+    const int MAXN = 5;
+    GraphNode *Graph[MAXN];
+    for (int i = 0; i < MAXN; i++)
+    {
+        Graph[i] = new GraphNode(i);
+    }
+    Graph[0]->neighbors.push_back(Graph[4]);
+    Graph[0]->neighbors.push_back(Graph[2]);
+    Graph[1]->neighbors.push_back(Graph[0]);
+    Graph[1]->neighbors.push_back(Graph[2]);
+    Graph[2]->neighbors.push_back(Graph[3]);
+    Graph[3]->neighbors.push_back(Graph[4]);
+    Graph[4]->neighbors.push_back(Graph[3]);
+    int visit[MAXN] = {0};
+    for (int i = 0; i < MAXN; i++)
+    {
+        if (visit[i] == 0)
+        {
+            printf("From label(%d) : ", Graph[i]->label);
+            DFS_graph(Graph[i], visit);
+            BFS_graph(Graph[i], visit);
+            printf("\n");
+        }
+    }
+    for (int i = 0; i < MAXN; i++)
+    {
+        delete Graph[i];
+    }
+    return 0;
+}
+// -1没访问过，0正在访问，1已完成访问
+bool DFS_graph(GraphNode *node, vector<int> &visit)
+{
+    visit[node->label] = 0;
+    for (int i = 0; i < node->neighbors.size(); i++)
+    {
+        if (visit[node->neighbors[i]->label] == -1)
+        {
+            if (DFS_graph(node->neighbors[i], visit) == 0)
+            {
+                return false;
+            }
+        }
+        else if (visit[node->neighbors[i]->label] == 0)
+        {
+            return false;
+        }
+    }
+    visit[node->label] = 1;
+    return true;
+}
+bool canFinish_v2(int numCourses, vector<pair<int, int>> &prerequisites)
+{
+    vector<GraphNode *> graph;
+    vector<int> visit;
+    for (int i = 0; i < numCourses; i++)
+    {
+        graph.push_back(new GraphNode(i));
+        visit.push_back(-1);
+    }
+    for (int i = 0; i < prerequisites.size(); i++)
+    {
+        GraphNode *begin = graph[prerequisites[i].second];
+        GraphNode *end = graph[prerequisites[i].first];
+        begin->neighbors.push_back(end);
+    }
+    for (int i = 0; i < graph.size(); i++)
+    {
+        if (visit[i] == -1 && !DFS_graph(graph[i], visit))
+        {
+            return false;
+        }
+    }
+    for (int i = 0; i < numCourses; i++)
+    {
+        delete graph[i];
+    }
+    return true;
+}
+bool canFinish_v3(int numCourses, vector<pair<int, int>> &prerequisites){
+    vector<GraphNode*> graph;
+    vector<int> degree;
+    for(int i = 0; i < numCourses; i++){
+        degree.push_back(0);
+        graph.push_back(new GraphNode(i));
+    }
 
+    for(int i = 0; i < prerequisites.size(); i++){
+        GraphNode* begin = graph[prerequisites[i].second];
+        GraphNode* end = graph[prerequisites[i].first];
+        begin->neighbors.push_back(end);
+        degree[prerequisites[i].first]++;
+    }
+    queue<GraphNode*> Q;
+    for(int i = 0; i < numCourses; i++){
+        if(degree[i] == 0){
+                Q.push(graph[i]);
+        }
+    }
+    while(!Q.empty()){
+        GraphNode* node =Q.front();
+        Q.pop();
+        for(int i  =0; i < node->neighbors.size(); i++){
+            degree[node->neighbors[i]->label]--;
+            if(degree[node->neighbors[i]->label] == 0){
+                Q.push(node->neighbors[i]);
+            }
+        }
+    }
+    for(int i  =0; i <graph.size(); i++){
+        delete graph[i];
+    }
+    for(int i = 0; i <degree.size(); i++){
+        if(degree[i]){
+            return false;
+        }
+    }
+    return true;
+}
 // 课程依赖
 // 5   1->3->4->1 有环
 // [[1,0], [1,2], [3,1], [1,4], [4,3]]
 //  false
-bool canFinish(int numCourses, vector<vector<int>> &prerequisites){
-    int indeg[numCourses];  // 入度
+bool canFinish(int numCourses, vector<vector<int>> &prerequisites)
+{
+    int indeg[numCourses]; // 入度
     memset(indeg, 0, sizeof(indeg));
     vector<vector<int>> g(numCourses); // 点指向其他点集合
-    queue<int> q; // 入度0
-    for(auto x: prerequisites){
+    queue<int> q;                      // 入度0
+    for (auto x : prerequisites)
+    {
         indeg[x[0]] += 1;
         g[x[1]].push_back(x[0]); // x1-->x0
     }
-    for(int i = 0; i<numCourses; i++){
-        if(indeg[i] == 0) q.push(i); // 入度0 加入 q
+    for (int i = 0; i < numCourses; i++)
+    {
+        if (indeg[i] == 0)
+            q.push(i); // 入度0 加入 q
     }
     int cnt = 0;
     // vector<int> ans;
-    while(!q.empty()){
+    while (!q.empty())
+    {
         int ind = q.front();
         q.pop();
-        cnt+=1; // 过不去的节点
+        cnt += 1; // 过不去的节点
         // ans.push_back(ind);
         cout << "pop : " << ind << endl;
-        for(auto to: g[ind]){
+        for (auto to : g[ind])
+        {
             indeg[to] -= 1;
-            if(indeg[to] == 0) q.push(to);
+            if (indeg[to] == 0)
+                q.push(to);
         }
     }
     return cnt == numCourses;
     // if(ans.size() == numCourses) return ans;
-    //  return 
+    //  return
 }
 // 合并区间
-vector<vector<int>> merge(vector<vector<int>> & intervals){
+vector<vector<int>> merge(vector<vector<int>> &intervals)
+{
     vector<vector<int>> arr;
     vector<int> temp(2); // [1, 2] 1 -1 左右括号 区间
-    for( auto x: intervals){
+    for (auto x : intervals)
+    {
         temp[0] = x[0];
         temp[1] = 1;
         arr.push_back(temp);
@@ -146,17 +342,21 @@ vector<vector<int>> merge(vector<vector<int>> & intervals){
         arr.push_back(temp);
     }
     sort(arr.begin(), arr.end(),
-    [](const vector<int> &a, const vector<int> &b)->bool{
-        if(a[0] - b[0]) return a[0] < b[0]; // small -> big
-        return a[1] > b[1]; // 1 -1 1 -1 ---   1 1 -1 -1 
-    }
-    );
+         [](const vector<int> &a, const vector<int> &b) -> bool
+         {
+             if (a[0] - b[0])
+                 return a[0] < b[0]; // small -> big
+             return a[1] > b[1];     // 1 -1 1 -1 ---   1 1 -1 -1
+         });
     int pre = -1, sum = 0;
     vector<vector<int>> ret;
-    for(int i = 0; i< arr.size(); i++){
-        if(pre == -1) pre = arr[i][0];
+    for (int i = 0; i < arr.size(); i++)
+    {
+        if (pre == -1)
+            pre = arr[i][0];
         sum += arr[i][1];
-        if(sum == 0){
+        if (sum == 0)
+        {
             temp[0] = pre;
             temp[1] = arr[i][0];
             ret.push_back(temp);
@@ -165,22 +365,26 @@ vector<vector<int>> merge(vector<vector<int>> & intervals){
     }
     return ret;
 }
-struct TreeNode{
+struct TreeNode
+{
     int val;
     TreeNode *left;
     TreeNode *right;
-    TreeNode(int x): val(x), left(NULL), right(NULL){}
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-int getPathSum(TreeNode* root, int sum){
-    if(root == NULL) return 0;
+int getPathSum(TreeNode *root, int sum)
+{
+    if (root == NULL)
+        return 0;
     int val = sum - root->val;
     return (root->val == sum) + getPathSum(root->left, val) + getPathSum(root->right, val);
 }
 
-
-int pathSum(TreeNode* root , int sum){
-    if(root == NULL) return 0;
+int pathSum(TreeNode *root, int sum)
+{
+    if (root == NULL)
+        return 0;
     int a = getPathSum(root, sum);
     return a + pathSum(root->left, sum) + pathSum(root->right, sum);
 }
@@ -188,21 +392,27 @@ int pathSum(TreeNode* root , int sum){
 //  不下降子序列 长度至少2
 // [4,6,7,7] [4,6] 47 467 4677 67 677 77 477
 // k -- 从哪里开始选数字 buff--k之前存了哪些
-void getResult(vector<int> &nums, int k, vector<int> buff, vector<vector<int>> &ret){
-    if(buff.size()) ret.push_back(buff);
+void getResult(vector<int> &nums, int k, vector<int> buff, vector<vector<int>> &ret)
+{
+    if (buff.size())
+        ret.push_back(buff);
     buff.push_back(0);
     unordered_map<int, int> can;
-    for(int i = k; i<nums.size(); i++){
-        if(can.find(nums[i]) != can.end()) continue;
-        if(buff.size() == 1 ||  nums[i] >= buff[buff.size() -2]){
-            buff[buff.size()-1] = nums[i];
+    for (int i = k; i < nums.size(); i++)
+    {
+        if (can.find(nums[i]) != can.end())
+            continue;
+        if (buff.size() == 1 || nums[i] >= buff[buff.size() - 2])
+        {
+            buff[buff.size() - 1] = nums[i];
             can[nums[i]] = 1;
-            getResult(nums, i+1, buff, ret);
+            getResult(nums, i + 1, buff, ret);
         }
     }
     return;
 }
-vector<vector<int>> findSubsequeneces(vector<int>& nums){
+vector<vector<int>> findSubsequeneces(vector<int> &nums)
+{
     vector<vector<int>> ret;
     getResult(nums, 0, vector<int>(), ret);
     return ret;

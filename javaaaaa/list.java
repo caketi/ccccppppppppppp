@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+import java.util.HashSet;
 import java.util.Stack;
 
 // 栈具有后进先出的特点，在遍历链表时将值按顺序放入栈中，最后出栈的顺序即为逆序。
@@ -327,5 +327,16 @@ public class list {
         while (!stack.isEmpty())
             ret.add(stack.pop());
         return ret;
+    }
+    public boolean hasCycle(ListNode head){
+        HashSet<ListNode> hashSet = new HashSet<ListNode>();
+        while(head != null){
+            if(!hashSet.add(head)) { // add-返回false--元素存在rue if this set did not already contain the specified element
+                return true;
+            }
+            head = head.next;
+        }
+        
+        return false;
     }
 }
