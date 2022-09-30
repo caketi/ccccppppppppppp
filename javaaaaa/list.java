@@ -1,3 +1,4 @@
+import java.nio.file.LinkOption;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Stack;
@@ -64,7 +65,7 @@ public class list {
 
         // ArrayList<Integer> list1ArrayList = null;
         // ArrayList<Integer> list2ArrayList = new ArrayList<Integer>();
-            
+
     }
 
     public static class Node {
@@ -118,8 +119,17 @@ public class list {
         public int val;
         public ListNode next;
 
+        public ListNode() {
+
+        }
+
         public ListNode(int data) {
             val = data;
+        }
+
+        public ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
         }
     }
 
@@ -282,7 +292,43 @@ public class list {
             cur = next;
         }
         start.next = end;// 链接start组和end
+    }
 
+    // pre curr next
+    public ListNode reverseList(ListNode head) {
+        ListNode pre = null, curr = head, next = null;
+        while (curr != null) {
+            next = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = next;
+        }
+        return pre;
+    }
+
+    public ListNode reverseBetweenV2(ListNode head, int left, int right) {
+        ListNode hair = new ListNode(0, head), con = hair, tail = null;
+        int n = right - left + 1;
+        while (left > 1) {
+            con = con.next;
+            left--;
+        }
+        con.next = reverse(con.next, n); // 头连接反转后的头
+        return hair.next;
+    }
+
+    // 找到m的前一个节点
+    public ListNode reverse(ListNode head, int n) {
+        ListNode pre = new ListNode(), curr = head, next = null;
+        while (n > 0) {
+            next = curr.next;
+            curr.next = pre.next; // curr指向反转
+            pre.next = curr;
+            curr = next;
+            n--;
+        }
+        head.next = curr; // 连接反转后的尾巴和原来链表的下一段
+        return pre.next; // 返回反转后的头 pre永远守护反转后的头（pre骑士团）
     }
 
     public ArrayList<Integer> printListFromTailToHead1(ListNode listNode) {
@@ -328,15 +374,179 @@ public class list {
             ret.add(stack.pop());
         return ret;
     }
-    public boolean hasCycle(ListNode head){
+
+    public ListNode detectCycle(ListNode head) {
+        if (head == null)
+            return null;
+        ListNode fast = head, slow = head;
+        do {
+            if (fast == null || fast.next == null) {
+                return null;
+            }
+            fast = fast.next.next;
+            slow = slow.next;
+        } while (fast != slow);
+        fast = head;
+        while (fast != head) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return fast;
+    }
+
+    public boolean hasCycle(ListNode head) {
         HashSet<ListNode> hashSet = new HashSet<ListNode>();
-        while(head != null){
-            if(!hashSet.add(head)) { // add-返回false--元素存在rue if this set did not already contain the specified element
-                return true;
+        while (head != null) {
+            if (!hashSet.add(head)) { // add-返回false--元素存在rue if this set did not already contain the specified
+                                      // element
+                return true; // return head;
             }
             head = head.next;
         }
-        
-        return false;
+
+        return false;// return null
     }
+
+    public boolean hasCycleV2(ListNode head) {
+        if (head == null)
+            return false;
+        ListNode fast = head, slow = head;
+        do {
+            if (fast == null || fast.next == null) {
+                return false;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        } while (fast != slow);
+        return true;
+    }
+
+    // 一个数拆开 平方和看能为1
+    public boolean isHappy(int n) {
+        int fast = n, slow = n;
+        do {
+            // if (fast == 1 || getNext(fast) == 1)
+            // return true;
+            fast = getNext(getNext(fast));
+            slow = getNext(slow);
+        } while (fast != slow && fast != 1);
+        return fast == 1;
+
+    }
+
+    public int getNext(int n) {
+        int sum = 0;
+        while (n > 0) {
+            // 15 ----- 5 * 5
+            sum += (n % 10) * (n % 10);
+            n = n / 10;
+        }
+        return sum;
+    }
+
+    public ListNode reverseKGroupV2(ListNode head, int k) {
+        ListNode hair = new ListNode(0, head), pre = hair, tail = null;
+        while (head != null) {
+            tail = pre;
+            for (int i = 0; i < k; i++) {
+                tail = tail.next;
+                if (tail == null) {
+                    return hair.next;
+                }
+            }
+            ListNode[] reverse = reverseV3(head, tail);
+            head = reverse[0];
+            tail = reverse[1];
+            pre.next = head; // 连接
+            pre = tail;
+            head = pre.next;
+        }
+        return hair.next;
+    }
+
+    public ListNode[] reverseV3(ListNode head, ListNode tail) {
+        ListNode pre = tail.next, curr = head, next = null;
+        while (pre != tail) {
+            next = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = next;
+        }
+        return new ListNode[] { tail, head };
+    }
+
+    public ListNode rotateRight(ListNode head, int k) {
+        if (head == null || head.next == null)
+            return head;
+        int length = 1;
+        ListNode oldTail = head;
+        while (oldTail.next != null) {
+            oldTail = oldTail.next;
+            length++;
+        }
+        oldTail.next = head; //练成环
+        // ListNode newTail = head;
+        for (int i = 0; i < length - k % length - 1; i++) {
+        //     newTail = newTail.next; //找到尾
+        // }
+            head = head.next;
+        }
+        //ListNode newHead = newTail.next;
+        // newTail.next = null;
+        ListNode newHead = head.next;
+        head.next = null;
+        return newHead;
+    }
+    public ListNode swapPairs(ListNode head){
+        ListNode hair = new ListNode(0,head), pre =hair;
+        while(pre.next!= null && pre.next.next!=null){
+            ListNode one = pre.next;
+            ListNode two = pre.next.next;
+            one.next = two.next;
+            two.next = one;
+            pre.next = two;
+            pre = one;
+        }//pre--守护
+        return hair.next;
+    }
+    public ListNode removeNthFromEnd(ListNode head, int n){
+        ListNode hair = new ListNode(0,head), fast = head, slow =hair;
+        while(n > 0){
+            fast = fast.next;
+            n--;
+        }
+        while(fast!= null){
+            slow =slow.next;
+            fast =fast.next;
+        }
+        slow.next = slow.next.next;
+        return hair.next;
+    }
+    public ListNode deleteDuplicates(ListNode head){
+        ListNode curr=head;
+        while(curr!= null && curr.next!=null){
+            if(curr.val == curr.next.val){
+                curr.next = curr.next.next;
+            }else {
+                curr =curr.next;
+            }
+        }
+        return head;
+    }
+    public ListNode deleteDuplicatesV2(ListNode head){
+        ListNode hair = new ListNode(0,head), pre= hair, curr= head;
+        while(curr != null){
+            while(curr.next != null && curr.val == curr.next.val){
+                curr =curr.next;    
+            }
+            if(pre.next == curr){
+                pre = pre.next;
+            }else {
+                pre.next = curr.next;
+            }
+            curr = curr.next;
+        }
+        return hair.next;
+    }
+
 }

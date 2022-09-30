@@ -1,0 +1,12 @@
+"filename", "language", "Python", "Java", "C++", "JSON", "comment", "blank", "total"
+"e:\ww\ccccppppppppppp\binary_search.cpp", "C++", 0, 0, 24, 0, 0, 2, 26
+"e:\ww\ccccppppppppppp\binary_tree.cpp", "C++", 0, 0, 25, 0, 0, 0, 25
+"e:\ww\ccccppppppppppp\javaaaaa\list.java", "Java", 0, 194, 0, 0, 12, 15, 221
+"e:\ww\ccccppppppppppp\python\list.py", "Python", 54, 0, 0, 0, 5, 11, 70
+"e:\ww\ccccppppppppppp\python\sort.py", "Python", 23, 0, 0, 0, 1, 3, 27
+"e:\ww\ccccppppppppppp\rust\mystack\target\.rustc_info.json", "JSON", 0, 0, 0, -1, 0, 0, -1
+"e:\ww\ccccppppppppppp\rust\mystack\target\debug\.fingerprint\mystack-35542c1baf6f5b95\bin-mystack.json", "JSON", 0, 0, 0, -1, 0, 0, -1
+"e:\ww\ccccppppppppppp\rust\mystack\target\debug\.fingerprint\mystack-459807942da6641d\bin-mystack.json", "JSON", 0, 0, 0, -1, 0, 0, -1
+"e:\ww\ccccppppppppppp\rust\mystack\target\debug\.fingerprint\mystack-97f5a12640f1853e\test-bin-mystack.json", "JSON", 0, 0, 0, -1, 0, 0, -1
+"e:\ww\ccccppppppppppp\rust\mystack\target\debug\.fingerprint\mystack-ffed88e9ea78de1d\test-bin-mystack.json", "JSON", 0, 0, 0, -1, 0, 0, -1
+"Total", "-", 77, 194, 49, -5, 18, 31, 364
