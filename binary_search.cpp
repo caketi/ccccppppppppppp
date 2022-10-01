@@ -15,23 +15,88 @@
 #include <math.h>
 using namespace std;
 
-int searchInsert(vector<int>& nums, int target){
+int searchRotateArr(vector<int> &nums, int target)
+{
+    int begin = 0;
+    int end = nums.size() - 1;
+    while (begin <= end)
+    {
+        int mid = (begin + end) / 2;
+        if (target == nums[mid])
+        {
+            return mid;
+        }
+        else if (target < nums[mid])
+        {
+            if (nums[begin] < nums[mid]) //being=====mid-1 是递增的
+            {
+                if (target >= nums[begin])
+                {
+                    end = mid - 1; //非旋转区间找
+                }
+                else
+                {
+                    begin = mid + 1; //去旋转区间找
+                }
+            }
+            else if (nums[begin] > nums[mid]) // begin ===== mid-1 是旋转区间
+            {
+                end = mid - 1;
+            }
+            else if (nums[begin] == nums[mid])
+            {
+                begin = mid + 1;
+            }
+        }
+        else if (target > nums[mid])
+        {
+            if (nums[begin] < nums[end])
+            {
+                begin = mid + 1;
+            }
+            else if (nums[begin] > nums[mid]) //旋转区间递减
+            {
+                if (target >= nums[begin])
+                {
+                    end = mid - 1;
+                }
+                else
+                {
+                    begin = mid + 1;
+                }
+            }
+            else if (nums[begin] == nums[mid])
+            {
+                begin = mid + 1;
+            }
+        }
+    }
+    return -1;
+}
+int searchInsert(vector<int> &nums, int target)
+{
     int index = -1;
     int begin = 0;
-    int end = nums.size() -1; 
-    while(index == -1){
-        int mid = (begin+end) /2;
-        if(target == nums[mid]){
+    int end = nums.size() - 1;
+    while (index == -1)
+    {
+        int mid = (begin + end) / 2;
+        if (target == nums[mid])
+        {
             index = mid;
         }
-        else if (target < nums[mid]){
-            if(mid == 0 || target > nums[mid-1]){
-                index  = mid;
+        else if (target < nums[mid])
+        { //  mid-1 < target < mid    mid
+            if (mid == 0 || target > nums[mid - 1])
+            {
+                index = mid;
             }
             end = mid - 1;
         }
-        else if (target > nums[mid]){
-            if(mid == nums.size()-1 || target< nums[mid+1]){
+        else if (target > nums[mid])
+        { // mid < target < mid+1
+            if (mid == nums.size() - 1 || target < nums[mid + 1])
+            {
                 index = mid + 1;
             }
             begin = mid + 1;
@@ -112,7 +177,26 @@ int binary_search(int *arr, int n, int x)
     // }
     return -1;
 }
-
+bool binary_searchv2(vector<int> &sort_array, int begin, int end, int target)
+{
+    if (begin > end)
+    {
+        return false;
+    }
+    int mid = (begin + end) >> 1;
+    if (target == sort_array[mid])
+    {
+        return true;
+    }
+    else if (target < sort_array[mid])
+    {
+        return binary_searchv2(sort_array, begin, mid - 1, target);
+    }
+    else if (target > sort_array[mid])
+    {
+        return binary_searchv2(sort_array, mid + 1, end, target);
+    }
+}
 int binary_search01(int *arr, int n, int x)
 {
     int head = 0, tail = n - 1, mid;
@@ -200,7 +284,7 @@ int searchInsert(vector<int> &nums, int target)
             tail = mid;
         else
             head = mid + 1;
-    }
+    } //大区间二分，小区间暴力
     for (int i = head; i <= tail; i++)
     {
         if (nums[i] >= target)
@@ -443,3 +527,4 @@ double findMedianSortedArrays(vector<int> &nums1, vector<int> &nums2)
     double b = findK(nums1, nums2, 0, 0, mid + 1);
     return (a + b) / 2.0;
 }
+// 一个排序数组a 乱序数组b，b中任意元素是否在a中 1-出现，0-

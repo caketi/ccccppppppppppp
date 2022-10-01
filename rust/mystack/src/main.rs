@@ -132,7 +132,7 @@ impl Solution {
         if haystack.len()<needle.len(){
             return -1;
         }
-        let mut next = Solution::get_next(needle,vec![0usize;m]);
+        let  next = Solution::get_next(needle,vec![0usize;m]);
         let mut i=0;
         let mut j=0;
         while i<haystack.len() && j<needle.len(){

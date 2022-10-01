@@ -674,32 +674,40 @@ class PathSum
     }
 };
 
-class flattenTree_v2{
-    void flattern(TreeNode* root){
-        TreeNode* last = NULL;
+class flattenTree_v2
+{
+    void flattern(TreeNode *root)
+    {
+        TreeNode *last = NULL;
         preorder(root, last);
     }
-    void preorder(TreeNode* node, TreeNode* &last){
-        if(!node){
+    void preorder(TreeNode *node, TreeNode *&last)
+    {
+        if (!node)
+        {
             return;
         }
-        if(!node->left&& !node->right){
+        if (!node->left && !node->right)
+        {
             last = node;
             return;
         }
-        TreeNode* left = node->left;
-        TreeNode* right = node->right;
-        TreeNode* left_last = nullptr;
-        TreeNode* right_last = nullptr;
-        if(left){
+        TreeNode *left = node->left;
+        TreeNode *right = node->right;
+        TreeNode *left_last = nullptr;
+        TreeNode *right_last = nullptr;
+        if (left)
+        {
             preorder(left, left_last);
             node->left = nullptr;
             node->right = left;
             last = left_last;
         }
-        if(right){
+        if (right)
+        {
             preorder(right, right_last);
-            if(left_last){
+            if (left_last)
+            {
                 left_last->right = right;
             }
             last = right_last;
@@ -781,27 +789,34 @@ class lowestCommAncestor
     }
 };
 
-vector<int> rightSideView(TreeNode* root){
-    vector<int> view; //按层遍历的最后一个节点
-    queue<pair<TreeNode* , int>> Q; //宽度优先搜索队列<节点，层数>
-    if(root){
+vector<int> rightSideView(TreeNode *root)
+{
+    vector<int> view;               //按层遍历的最后一个节点
+    queue<pair<TreeNode *, int>> Q; //宽度优先搜索队列<节点，层数>
+    if (root)
+    {
         Q.push(make_pair(root, 0));
-    }//根节点非空，将<root, 0>push进queue
-    while(!Q.empty()){
-        TreeNode* node = Q.front().first; //搜索节点
-        int depth = Q.front().second; //待搜索节点的层数
+    } //根节点非空，将<root, 0>push进queue
+    while (!Q.empty())
+    {
+        TreeNode *node = Q.front().first; //搜索节点
+        int depth = Q.front().second;     //待搜索节点的层数
         Q.pop();
-        if(view.size() == depth){ //新遇到
+        if (view.size() == depth)
+        { //新遇到
             view.push_back(node->val);
         }
-        else {
+        else
+        {
             view[depth] = node->val;
         }
-        if(node->left){
-            Q.push(make_pair(node->left, depth+1));
+        if (node->left)
+        {
+            Q.push(make_pair(node->left, depth + 1));
         }
-        if(node->right){
-            Q.push(make_pair(node->right, depth+1));
+        if (node->right)
+        {
+            Q.push(make_pair(node->right, depth + 1));
         }
     }
     return view;
@@ -882,3 +897,63 @@ int countPrimes(int n)
     delete[] prime;
     return cnt;
 }
+
+struct BSTNode
+{
+    int val;
+    int count;
+    BSTNode *left;
+    BSTNode *right;
+    BSTNode(int x) : val(x), left(NULL), right(NULL), count(0) {}
+};
+void BST_insert(BSTNode *node, BSTNode *insert_node, int &count_small)
+{
+    if (insert_node->val <= node->val)
+    {
+        node->count++; //左子树节点数量
+        if (node->left)
+        {
+            BST_insert(node->left, insert_node, count_small);
+        }
+        else
+        {
+            node->left = insert_node;
+        }
+    }
+    else
+    {
+        count_small += node->count + 1; //根节点+左子树
+        if (node->right)
+        {
+            BST_insert(node->right, insert_node, count_small);
+        }
+        else
+        {
+            node->right = insert_node;
+        }
+    }
+}
+vector<int> countSmaller(vector<int> &nums)
+{
+    vector<int> result;
+    vector<BSTNode *> node_vec;
+    vector<int> count;
+    for (int i = nums.size() - 1; i >= 0; i--)
+    {
+        node_vec.push_back(new BSTNode(nums[i]));
+    }
+    count.push_back(0);
+    for (int i = 1; i < node_vec.size(); i++)
+    {
+        int count_small = 0;
+        BST_insert(node_vec[0], node_vec[i], count_small);
+        count.push_back(count_small);
+    }
+    for (int i = node_vec.size() - 1; i >= 0; i--)
+    {
+        delete node_vec[i];
+        result.push_back(count[i]);
+    }
+    return result;
+}
+

@@ -286,7 +286,7 @@ pub mod sort_algorithms {
 
 #[allow(warnings)]
 #[cfg(test)]
-mod test {
+mod test_sort_algo {
     use crate::sort_algorithms::*;
     use crate::sort_algorithms_v2::*;
     #[test]

@@ -1,4 +1,3 @@
-import java.nio.file.LinkOption;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Stack;
@@ -484,69 +483,122 @@ public class list {
             oldTail = oldTail.next;
             length++;
         }
-        oldTail.next = head; //练成环
+        oldTail.next = head; // 练成环
         // ListNode newTail = head;
         for (int i = 0; i < length - k % length - 1; i++) {
-        //     newTail = newTail.next; //找到尾
-        // }
+            // newTail = newTail.next; //找到尾
+            // }
             head = head.next;
         }
-        //ListNode newHead = newTail.next;
+        // ListNode newHead = newTail.next;
         // newTail.next = null;
         ListNode newHead = head.next;
         head.next = null;
         return newHead;
     }
-    public ListNode swapPairs(ListNode head){
-        ListNode hair = new ListNode(0,head), pre =hair;
-        while(pre.next!= null && pre.next.next!=null){
+
+    public ListNode swapPairs(ListNode head) {
+        ListNode hair = new ListNode(0, head), pre = hair;
+        while (pre.next != null && pre.next.next != null) {
             ListNode one = pre.next;
             ListNode two = pre.next.next;
             one.next = two.next;
             two.next = one;
             pre.next = two;
             pre = one;
-        }//pre--守护
+        } // pre--守护
         return hair.next;
     }
-    public ListNode removeNthFromEnd(ListNode head, int n){
-        ListNode hair = new ListNode(0,head), fast = head, slow =hair;
-        while(n > 0){
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode hair = new ListNode(0, head), fast = head, slow = hair;
+        while (n > 0) {
             fast = fast.next;
             n--;
         }
-        while(fast!= null){
-            slow =slow.next;
-            fast =fast.next;
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
         }
         slow.next = slow.next.next;
         return hair.next;
     }
-    public ListNode deleteDuplicates(ListNode head){
-        ListNode curr=head;
-        while(curr!= null && curr.next!=null){
-            if(curr.val == curr.next.val){
+
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode curr = head;
+        while (curr != null && curr.next != null) {
+            if (curr.val == curr.next.val) {
                 curr.next = curr.next.next;
-            }else {
-                curr =curr.next;
+            } else {
+                curr = curr.next;
             }
         }
         return head;
     }
-    public ListNode deleteDuplicatesV2(ListNode head){
-        ListNode hair = new ListNode(0,head), pre= hair, curr= head;
-        while(curr != null){
-            while(curr.next != null && curr.val == curr.next.val){
-                curr =curr.next;    
+
+    public ListNode deleteDuplicatesV2(ListNode head) {
+        ListNode hair = new ListNode(0, head), pre = hair, curr = head;
+        while (curr != null) {
+            while (curr.next != null && curr.val == curr.next.val) {
+                curr = curr.next;
             }
-            if(pre.next == curr){
+            if (pre.next == curr) {
                 pre = pre.next;
-            }else {
+            } else {
                 pre.next = curr.next;
             }
             curr = curr.next;
         }
         return hair.next;
     }
+
+    // small链表 big链表 big链表尾巴滞空，small链表尾巴连接big头，返回small头
+    public ListNode partitionSmallAndBig(ListNode head, int x) {
+        ListNode small = new ListNode(0);
+        ListNode big = new ListNode(0);
+        ListNode smallHair = small;
+        ListNode bigHair = big;
+        while (head != null) {
+            if (head.val < x) {
+                small.next = head;
+                small = small.next;
+            } else {
+                big.next = head;
+                big = big.next;
+            }
+            head = head.next;
+        }
+        big.next = null;
+        small.next = bigHair.next;
+        return smallHair.next;
+    }
+
+    // public ListNode copyRandomList(ListNode head) {
+    //     if (head == null)
+    //         return null;
+    //     ListNode pointer = head;
+    //     while (pointer != null) {
+    //         ListNode newNode = new ListNode(pointer.val);
+    //         newNode.next = pointer.next;
+    //         pointer.next = newNode;// 复制节点
+    //         pointer = newNode.next; // 指向下一个待复制的节点
+    //     }
+    //     pointer = head;
+    //     while (pointer != null) {
+    //         pointer.next.random = (pointer.random != null) ? pointer.random.next : null;
+    //         pointer = pointer.next.next; // 复制random，跳向下一个
+    //     }
+    //     ListNode pointerOldList = head;
+    //     ListNode pointerNewList = head.next;
+    //     ListNode newHead = head.next;
+    //     while (pointerOldList != null) {
+    //         pointerOldList.next = pointerOldList.next.next;
+    //         pointerNewList.next = (pointerNewList.next != null) ? pointerNewList.next.next : null;
+    //         pointerOldList = pointerOldList.next;
+    //         pointerNewList = pointerNewList.next;
+    //     }
+    //     return newHead;
+
+    // }
 
 }
