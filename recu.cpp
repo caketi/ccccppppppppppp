@@ -78,23 +78,24 @@ vector<int> countSmaller(vector<int> &nums)
     return count;
 }
 
-vector<vector<string>> solveNQueens(int n)
+// N皇后
+void put_down_the_queen(int x, int y, vector<vector<int>> &mark)
 {
-    vector<vector<string>> result;
-    vector<vector<int>> mark; //标记是否可以放
-    vector<string> location;  //记录皇后的位置
-    for (int i = 0; i < n; i++)
-    {
-        mark.push_back((vector<int>()));
-        for (int j = 0; j < n; j++)
+    static const int dx[] = {-1, 1, 0, 0, -1, -1, 1, 1}; //八方旅人
+    static const int dy[] = {0, 0, -1, 1, -1, 1, -1, 1};
+    mark[x][y] = 1; // (x,y)放皇后
+    for (int i = 1; i < mark.size(); i++)
+    { //哪一行，压缩饼干，二向箔打击
+        for (int j = 0; j < 8; j++)
         {
-            mark[i].push_back(0);
+            int new_x = x + i * dx[j];
+            int new_y = y + i * dy[j];
+            if (new_x >= 0 && new_x < mark.size() && new_y >= 0 && new_y < mark.size())
+            {
+                mark[new_x][new_y] = 1;
+            }
         }
-        location.push_back("");
-        location[i].append(n, '.');
     }
-    generate_queen(0, n, location, result, mark);
-    return result;
 }
 void generate_queen(int k, int n, vector<string> &location, vector<vector<string>> &result, vector<vector<int>> &mark)
 { // k-放了几个皇后
@@ -116,30 +117,24 @@ void generate_queen(int k, int n, vector<string> &location, vector<vector<string
         }
     }
 }
-// N皇后
-void put_down_the_queen(int x, int y, vector<vector<int>> &mark)
-{
-    static const int dx[] = {-1, 1, 0, 0, -1, -1, 1, 1}; //八方旅人
-    static const int dy[] = {0, 0, -1, 1, -1, 1, -1, 1};
-    mark[x][y] = 1; // (x,y)放皇后
-    for (int i = 1; i < mark.size(); i++)
-    { //哪一行，压缩饼干，二向箔打击
-        for (int j = 0; j < 8; j++)
-        {
-            int new_x = x + i * dx[j];
-            int new_y = y + i * dy[j];
-            if (new_x >= 0 && new_x < mark.size() && new_y >= 0 && new_y < mark.size())
-            {
-                mark[new_x][new_y] = 1;
-            }
-        }
-    }
-}
 
-vector<string> generate_parenthesis(int n)
+
+vector<vector<string>> solveNQueens(int n)
 {
-    vector<string> result;
-    generate_string_item("", n, n, result);
+    vector<vector<string>> result;
+    vector<vector<int>> mark; //标记是否可以放
+    vector<string> location;  //记录皇后的位置
+    for (int i = 0; i < n; i++)
+    {
+        mark.push_back((vector<int>()));
+        for (int j = 0; j < n; j++)
+        {
+            mark[i].push_back(0);
+        }
+        location.push_back("");
+        location[i].append(n, '.');
+    }
+    generate_queen(0, n, location, result, mark);
     return result;
 }
 void generate_string_item(string item, int left, int right, vector<string> &result)
@@ -158,6 +153,13 @@ void generate_string_item(string item, int left, int right, vector<string> &resu
         generate_string_item(item + ')', left, right - 1, result);
     }
 }
+vector<string> generate_parenthesis(int n)
+{
+    vector<string> result;
+    generate_string_item("", n, n, result);
+    return result;
+}
+
 // n---括号组数
 void generate_parenthesis_may_illegal(string item, int n, vector<string> &result)
 {
@@ -170,15 +172,6 @@ void generate_parenthesis_may_illegal(string item, int n, vector<string> &result
     generate_parenthesis_may_illegal(item + ')', n, result);
 }
 
-vector<vector<int>> combinationSum2(vector<int> &candidates, int target)
-{
-    vector<vector<int>> result;
-    vector<int> item;
-    set<vector<int>> res_set;
-    sort(candidates.begin(), candidates.end());
-    generateSum(0, candidates, result, item, res_set, 0, target);
-    return result;
-}
 void generateSum(int i, vector<int> &nums, vector<vector<int>> &result, vector<int> &item, set<vector<int>> &res_set, int sum, int target)
 {
     if (i >= nums.size() || sum > target)
@@ -199,16 +192,16 @@ void generateSum(int i, vector<int> &nums, vector<vector<int>> &result, vector<i
     item.pop_back();
     generateSum(i + 1, nums, result, item, res_set, sum, target);
 }
-vector<vector<int>> subsets_with_dup(vector<int> &nums)
+vector<vector<int>> combinationSum2(vector<int> &candidates, int target)
 {
     vector<vector<int>> result;
     vector<int> item;
     set<vector<int>> res_set;
-    sort(nums.begin(), nums.end());
-    result.push_back(item);
-    generate_no_dup(0, nums, result, item, res_set);
+    sort(candidates.begin(), candidates.end());
+    generateSum(0, candidates, result, item, res_set, 0, target);
     return result;
 }
+
 void generate_no_dup(int i, vector<int> &nums, vector<vector<int>> &result, vector<int> &item, set<vector<int>> &res_set)
 {
     if (i >= nums.size())
@@ -225,6 +218,17 @@ void generate_no_dup(int i, vector<int> &nums, vector<vector<int>> &result, vect
     item.pop_back();
     generate_no_dup(i + 1, nums, result, item, res_set);
 }
+vector<vector<int>> subsets_with_dup(vector<int> &nums)
+{
+    vector<vector<int>> result;
+    vector<int> item;
+    set<vector<int>> res_set;
+    sort(nums.begin(), nums.end());
+    result.push_back(item);
+    generate_no_dup(0, nums, result, item, res_set);
+    return result;
+}
+
 vector<vector<int>> subsets_bitop(vector<int> &nums)
 {
     vector<vector<int>> result;
@@ -243,14 +247,6 @@ vector<vector<int>> subsets_bitop(vector<int> &nums)
     }
     return result;
 }
-vector<vector<int>> subsets(vector<int> &nums)
-{
-    vector<vector<int>> result;
-    vector<int> item;       //回溯时，产生各个子集的数组
-    result.push_back(item); //空集push-result
-    generate(0, nums, item, result);
-    return result;
-}
 void generate(int i, vector<int> &nums, vector<int> &item, vector<vector<int>> &result)
 {
     if (i >= nums.size())
@@ -263,6 +259,15 @@ void generate(int i, vector<int> &nums, vector<int> &item, vector<vector<int>> &
     item.pop_back();
     generate(i + 1, nums, item, result);
 }
+vector<vector<int>> subsets(vector<int> &nums)
+{
+    vector<vector<int>> result;
+    vector<int> item;       //回溯时，产生各个子集的数组
+    result.push_back(item); //空集push-result
+    generate(0, nums, item, result);
+    return result;
+}
+
 
 // nums = {10, 9, 2, 5 , 3, 7, 101, 18}  --4  {2,3,7,101}
 int lengthOfLIS(vector<int> &nums)
