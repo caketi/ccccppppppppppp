@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch magic",
+      "request": "launch",
+      "mainClass": "magic",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
       "name": "Launch binarySearch",
       "request": "launch",
       "mainClass": "binarySearch",
