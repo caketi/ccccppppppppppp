@@ -28,8 +28,8 @@ class calPoint {
 
 class MyQueue {
 
-  Stack<Integer> inStack = new Stack();
-  Stack<Integer> outStack = new Stack();
+  Stack<Integer> inStack = new Stack<>();
+  Stack<Integer> outStack = new Stack<>();
 
   MyQueue() {}
 

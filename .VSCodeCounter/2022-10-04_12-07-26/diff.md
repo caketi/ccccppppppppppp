@@ -1,21 +1,22 @@
 # Diff Summary
 
-Date : 2022-09-26 20:05:46
+Date : 2022-10-04 12:07:26
 
 Directory e:\\ww\\ccccppppppppppp
 
-Total : 3 files,  271 codes, 96 comments, 11 blanks, all 378 lines
+Total : 4 files,  345 codes, 3 comments, 45 blanks, all 393 lines
 
 [Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)
 
 ## Languages
 | language | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| C++ | 3 | 271 | 96 | 11 | 378 |
+| Java | 4 | 345 | 3 | 45 | 393 |
 
 ## Directories
 | path | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| . | 3 | 271 | 96 | 11 | 378 |
+| . | 4 | 345 | 3 | 45 | 393 |
+| javaaaaa | 4 | 345 | 3 | 45 | 393 |
 
 [Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)

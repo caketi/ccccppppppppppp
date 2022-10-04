@@ -4,11 +4,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Stack;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.stream.Collectors;
-import javax.xml.transform.TransformerException;
 
 public class bst {
 
@@ -30,6 +27,86 @@ public class bst {
     public TreeNode root;
     public TreeNode right;
     public TreeNode left;
+  }
+
+  public boolean isValidSerializationV2(String preorder) {
+    int i = 0;
+    int slots = 1;
+    int length = preorder.length();
+    while (i < length) {
+      if (slots == 0) return false;
+      if (preorder.charAt(i) == ',') {
+        i++;
+      } else if (preorder.charAt(i) == '#') {
+        slots--;
+        i++;
+      } else {
+        while (i < length && preorder.charAt(i) != ',') {
+          i++;
+        }
+        slots++;
+      }
+    }
+    return slots == 0;
+  }
+
+  public boolean isValidSerialization(String preorder) {
+    String[] strings = preorder.split(",");
+    List<String> list = new ArrayList<>();
+    for (int i = 0; i < strings.length; i++) {
+      list.add(strings[i]);
+      int lastIndex = list.size() - 1;
+      while (
+        list.size() >= 3 &&
+        list.get(lastIndex).equals("#") &&
+        list.get(lastIndex - 1).equals("#") &&
+        !list.get(lastIndex - 2).equals("#")
+      ) {
+        list.set(lastIndex - 2, "#");
+        list.remove(lastIndex);
+        list.remove(lastIndex - 1);
+        lastIndex = list.size() - 1;
+      }
+    }
+    return list.size() == 1 && list.get(0).equals("#");
+  }
+
+  public List<Integer> postOrderTraversal(TreeNode root) {
+    List<Integer> result = new ArrayList<>();
+    if (root == null) return result;
+    Deque<TreeNode> stack = new LinkedList<>();
+    Deque<Integer> statusStack = new LinkedList<>();
+    stack.push(root);
+    statusStack.push(0);
+    while (!stack.isEmpty()) {
+      switch (statusStack.pop()) {
+        case 0:
+          {
+            statusStack.push(1);
+            if (stack.peek().left != null) {
+              stack.push(stack.peek().left);
+              statusStack.push(0);
+            }
+            break;
+          }
+        case 1:
+          {
+            statusStack.push(2);
+            if (stack.peek().right != null) {
+              stack.push(stack.peek().right);
+              statusStack.push(0);
+            }
+            break;
+          }
+        case 2:
+          {
+            result.add(stack.peek().value);
+            stack.pop();
+            break;
+          }
+      }
+    }
+    return result;
   }
 
   public static void postOrder(TreeNode root) {
