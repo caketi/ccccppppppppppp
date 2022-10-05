@@ -5,6 +5,7 @@
 #include <queue>
 #include <stack>
 #include <algorithm>
+#include <stdint.h>
 #include <string>
 #include <map>
 #include <set>
@@ -111,7 +112,7 @@ void init_queue(queue<Dat> &q, vector<vector<int>> &vis, int n, int m, vector<ve
     }
     return;
 }
-int dir[4][2] = {0, 1, 1, 0, 0, -1, -1, 0}; // 下 右 上 左
+int dir1[4][2] = {0, 1, 1, 0, 0, -1, -1, 0}; // 下 右 上 左
 vector<vector<int>> updateMatrix(vector<vector<int>> &mat)
 {
     int n = mat.size(), m = mat[0].size();
@@ -123,8 +124,8 @@ vector<vector<int>> updateMatrix(vector<vector<int>> &mat)
         Dat cur = q.front();
         for (int k = 0; k < 4; k++)
         {
-            int x = cur.i + dir[k][0];
-            int y = cur.j + dir[k][1];
+            int x = cur.i + dir1[k][0];
+            int y = cur.j + dir1[k][1];
             if (x < 0 || x >= n)
                 continue;
             if (y < 0 || y >= m)
@@ -136,6 +137,7 @@ vector<vector<int>> updateMatrix(vector<vector<int>> &mat)
         }
         q.pop();
     }
+    return vis;
 }
 
 struct Dta
@@ -244,6 +246,7 @@ int openLock(vector<string> &deadends, string target)
         }
         q.pop();
     }
+    return -1;
 }
 
 //上下左右 走1 [0,0] [m-1,n-1]  [i,] --i+j >k不能走
@@ -252,7 +255,7 @@ struct Da
     Da(int i = 0, int j = 0) : i(i), j(j) {}
     int i, j;
 };
-int dir[4][2] = {0, 1, 1, 0, 0, -1, -1, 0};
+int dir3[4][2] = {0, 1, 1, 0, 0, -1, -1, 0};
 int movingCount(int m, int n, int k)
 {
     vector<int> dsum(100);
@@ -274,8 +277,8 @@ int movingCount(int m, int n, int k)
         ans += 1;
         for (int i = 0; i < 4; i++)
         {
-            int x = cur.i + dir[i][0];
-            int y = cur.j + dir[i][1];
+            int x = cur.i + dir3[i][0];
+            int y = cur.j + dir3[i][1];
             if (x < 0 || x >= m)
                 continue;
             if (y < 0 || y >= n)
@@ -294,7 +297,7 @@ int movingCount(int m, int n, int k)
 
 // 'x' 'o' 所有被x包围的变为x
 int n, m;
-int dir[4][2] = {0, 1, 1, 0, 0, -1, -1, 0};
+int dir2[4][2] = {0, 1, 1, 0, 0, -1, -1, 0};
 void dfs(int i, int j, vector<vector<char>> &board)
 {
     board[i][j] = 'o';
@@ -304,8 +307,8 @@ void dfs(int i, int j, vector<vector<char>> &board)
             return;
         if (j < 0 || j >= m)
             return;
-        int x = i + dir[k][0];
-        int y = j + dir[k][1];
+        int x = i + dir2[k][0];
+        int y = j + dir2[k][1];
         if (board[x][y] != 'O')
             continue;
         dfs(x, y, board);

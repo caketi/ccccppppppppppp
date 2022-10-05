@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
+#include <iostream>
 #include <queue>
 #include <stack>
 #include <algorithm>
@@ -9,7 +10,7 @@
 #include <unordered_map>
 #include <set>
 #include <vector>
-#include <unistd.h>
+
 #include <time.h>
 using namespace std;
 #define MAX_N 100

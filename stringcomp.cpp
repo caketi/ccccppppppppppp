@@ -157,7 +157,7 @@ int shift_and(const char *text, const char *pattern)
         printf("%s(%s, %s) = %d\n", #func, s1, s2, func(s1, s2)); \
     }
 
-bool repeatedSubstringPattern(string s)
+bool repeatedSubstringPatternV2(string s)
 {
     int pos = 0;
     char c = s[0];

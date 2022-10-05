@@ -172,43 +172,44 @@ class sl
     }
 };
 
-// class So{
-//     typedef pair<int, int> op;
-//     op getNext(int k, int x, int X, int y, int Y){
-//         switch(k){
-//             case 0: return op(0,y);
-//             case 1: return op(x,0);
-//             case 2: {
-//                 int delta = min(x, Y-y);
-//                 return op(x-delta, y+delta);
-//             }
-//             case 3: {
-//                 int delta = min(X-x,y);
-//                 return op(x+delta, y-delta);
-//             }
-//             case 4: return op(X,y);
-//             case 5: return op(x,Y);
-//         }
-//     }
-//     bool canMeasureWater(int jug1Capacity, int jug2Capacity, int targetCapacity){
-//         unordered_set<op> vis;
-//         queue<op> q;
-//         vis.insert(op(0,0));
-//         q.push(op(0,0));
-//         while(!q.empty()){
-//             op cur = q.front();
-//             if(cur.first+cur.second == targetCapacity) return true;
-//             q.pop();
-//             for(int i = 0; i< 6;i++){
-//                 op temp = getNext(i, cur.first, jug1Capacity, cur.second, jug2Capacity);
-//                 if(vis.find(temp) != vis.end()) continue;
-//                 vis.insert(temp);
-//                 q.push(temp);
-//             }
-//         }
-//         return false;
-//     }
-// };
+class So{
+    typedef pair<int, int> op;
+    op getNext(int k, int x, int X, int y, int Y){
+        switch(k){
+            case 0: return op(0,y);
+            case 1: return op(x,0);
+            case 2: {
+                int delta = min(x, Y-y);
+                return op(x-delta, y+delta);
+            }
+            case 3: {
+                int delta = min(X-x,y);
+                return op(x+delta, y-delta);
+            }
+            case 4: return op(X,y);
+            case 5: return op(x,Y);
+        }
+        return op(0,0);
+    }
+    bool canMeasureWater(int jug1Capacity, int jug2Capacity, int targetCapacity){
+        unordered_set<op> vis;
+        queue<op> q;
+        vis.insert(op(0,0));
+        q.push(op(0,0));
+        while(!q.empty()){
+            op cur = q.front();
+            if(cur.first+cur.second == targetCapacity) return true;
+            q.pop();
+            for(int i = 0; i< 6;i++){
+                op temp = getNext(i, cur.first, jug1Capacity, cur.second, jug2Capacity);
+                if(vis.find(temp) != vis.end()) continue;
+                vis.insert(temp);
+                q.push(temp);
+            }
+        }
+        return false;
+    }
+};
 
 int candy(vector<int> &ratings)
 {

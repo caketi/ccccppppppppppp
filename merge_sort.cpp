@@ -149,7 +149,7 @@ int countTwoPart(vector<long long> &sum, int l1, int r1, int l2, int r2, int low
     }
     return ans;
 }
-
+vector<long long> temp1;
 int mergeSort(vector<long long> &sum, int l, int r, int lower, int upper)
 {
     if (l >= r)
@@ -163,15 +163,15 @@ int mergeSort(vector<long long> &sum, int l, int r, int lower, int upper)
     {
         if ((p2 > r) || (p1 <= mid && sum[p1] <= sum[p2]))
         {
-            temp[k++] = sum[p1++];
+            temp1[k++] = sum[p1++];
         }
         else
         {
-            temp[k++] = sum[p2++];
+            temp1[k++] = sum[p2++];
         }
     }
     for (int i = l; i <= r; i++)
-        sum[i] = temp[i];
+        sum[i] = temp1[i];
     return ans;
 }
 vector<long long> temp;
@@ -266,7 +266,7 @@ int countRangeSum(vector<int> &nums, int lower, int upper)
 //     return ret.next;
 // }
 //逆序数 [7,4.3] 3
-vector<int> temp;
+vector<int> temp2;
 int countResult(vector<int> &nums, int l, int r)
 {
     if (l >= r)
@@ -279,16 +279,16 @@ int countResult(vector<int> &nums, int l, int r)
     {
         if ((p2 > r) || (p1 <= mid && nums[p1] <= nums[p2]))
         {
-            temp[k++] = nums[p1++];
+            temp2[k++] = nums[p1++];
         }
         else
         {
-            temp[k++] = nums[p2++];
+            temp2[k++] = nums[p2++];
             ans += (mid - p1 + 1);
         }
     }
     for (int i = l; i <= r; i++)
-        nums[i] = temp[i];
+        nums[i] = temp2[i];
     return ans;
 }
 int reversePairs(vector<int> &nums)

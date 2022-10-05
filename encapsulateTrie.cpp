@@ -203,7 +203,7 @@ public:
     {
         root = new node();
     }
-    bool insert(int x)
+    void insert(int x)
     {
         node *p = root;
         for (int i = 30; i >= 0; --i)
@@ -311,8 +311,8 @@ vector<int> diffWaysToCompute(string expression)
             }
             ret.push_back(num);
         }
-        return ret;
     }
+    return ret;
 }
 
 class Node

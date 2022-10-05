@@ -9,7 +9,7 @@
 #include <map>
 #include <set>
 #include <vector>
-#include <unistd.h>
+
 #include <time.h>
 using namespace std;
 typedef int ElemType;
@@ -102,15 +102,15 @@ ElemType DeletHeap(Heap &HBT)
     return temp;
 }
 #define MAX_N 1000
-int data[MAX_N + 5], cnt = 0;
-int top() { return data[0]; }
+int dat[MAX_N + 5], cnt = 0;
+int top() { return dat[0]; }
 int size() { return cnt; }
 
 void shift_up(int ind)
 {
-    while (ind && data[(ind - 1) / 2] < data[ind])
+    while (ind && dat[(ind - 1) / 2] < dat[ind])
     {
-        swap(data[(ind - 1) / 2], data[ind]);
+        swap(dat[(ind - 1) / 2], dat[ind]);
         ind = (ind - 1) / 2;
     }
     return;
@@ -121,13 +121,13 @@ void shift_down(int ind)
     while (ind * 2 + 1 <= n)
     {
         int temp = ind;
-        if (data[temp] < data[ind * 2 + 1])
+        if (dat[temp] < dat[ind * 2 + 1])
             temp = ind * 2 + 1;
-        if (ind * 2 + 2 <= n && data[temp] < data[ind * 2 + 2])
+        if (ind * 2 + 2 <= n && dat[temp] < dat[ind * 2 + 2])
             temp = ind * 2 + 2;
         if (temp == ind)
             break;
-        swap(data[temp], data[ind]);
+        swap(dat[temp], dat[ind]);
         ind = temp;
     }
     return;
@@ -135,7 +135,7 @@ void shift_down(int ind)
 
 void push(int x)
 {
-    data[cnt++] = x;
+    dat[cnt++] = x;
     shift_up(cnt - 1);
     return;
 }
@@ -143,7 +143,7 @@ void pop()
 {
     if (size() == 0)
         return;
-    swap(data[0], data[cnt - 1]); // 关爱小孩
+    swap(dat[0], dat[cnt - 1]); // 关爱小孩
     cnt -= 1;
     shift_down(0);
     return;
@@ -153,7 +153,7 @@ void output()
     cout << "heap : " << endl;
     for (int i = 0; i < cnt; i++)
     {
-        printf("%d ", data[i]);
+        printf("%d ", dat[i]);
     }
     printf("\n");
     return;
@@ -163,7 +163,7 @@ void output(int n)
     cout << "heap : " << endl;
     for (int i = 0; i < n; i++)
     {
-        printf("%d ", data[i]);
+        printf("%d ", dat[i]);
     }
     printf("\n");
     return;

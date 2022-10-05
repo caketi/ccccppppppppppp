@@ -10,7 +10,6 @@
 #include <unordered_map>
 #include <set>
 #include <vector>
-#include <unistd.h>
 #include <time.h>
 using namespace std;
 
@@ -20,7 +19,7 @@ struct node
     int freq;
     node *left;
     node *right;
-    node(int freq = 0, char ch = 0) : freq(freq), ch(ch), left(left), right(right) {}
+    node(int freq = 0, char ch = 0) : freq(freq), ch(ch), left(nullptr), right(nullptr) {}
     node(int freq = 0, node *left = nullptr, node *right = nullptr,  char ch = 0) : left(left), right(right), freq(freq), ch(ch) {}
 };
 struct CMP

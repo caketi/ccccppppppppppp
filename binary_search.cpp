@@ -5,6 +5,7 @@
 #include <queue>
 #include <stack>
 #include <algorithm>
+#include <stdio.h>
 #include <string>
 #include <map>
 #include <set>
@@ -73,6 +74,7 @@ int searchRotateArr(vector<int> &nums, int target)
     }
     return -1;
 }
+
 int searchInsert(vector<int> &nums, int target)
 {
     int index = -1;
@@ -104,7 +106,26 @@ int searchInsert(vector<int> &nums, int target)
     }
     return index;
 }
-
+// 一个排序数组，找target，返回索引，若不在，末尾追加，返回index
+int searchInsertV2(vector<int> &nums, int target)
+{
+    int head = 0, tail = nums.size() - 1, mid;
+    while (tail - head > 3)
+    {
+        mid = (head + tail) >> 1;
+        if (nums[mid] >= target)
+            tail = mid;
+        else
+            head = mid + 1;
+    } //大区间二分，小区间暴力
+    for (int i = head; i <= tail; i++)
+    {
+        if (nums[i] >= target)
+            return i;
+    }
+    // 不在二分search的区间
+    return nums.size();
+}
 // 数组： 下标-》值     映射 - 空间     互换
 // 函数： 参数-》值     计算 - 时间
 void output_binary_process(int *arr, int n, int head, int tail, int mid)
@@ -192,10 +213,11 @@ bool binary_searchv2(vector<int> &sort_array, int begin, int end, int target)
     {
         return binary_searchv2(sort_array, begin, mid - 1, target);
     }
-    else if (target > sort_array[mid])
+    else //if (target > sort_array[mid])
     {
         return binary_searchv2(sort_array, mid + 1, end, target);
     }
+
 }
 int binary_search01(int *arr, int n, int x)
 {
@@ -248,10 +270,10 @@ int main()
 {
     srand(time(0));
     int n, x;
-    scanf("%d", &n);
+    scanf_s("%d", &n);
     int *arr = getRandData(n);
     output(arr, n);
-    while (~scanf("%d", &x))
+    while (~scanf_s("%d", &x))
     {
         printf("arr[%d] = %d \n", binary_search01(arr, n, x), x);
     }
@@ -273,26 +295,7 @@ int mySqrt(int x)
     }
     return floor(head);
 }
-// 一个排序数组，找target，返回索引，若不在，末尾追加，返回index
-int searchInsert(vector<int> &nums, int target)
-{
-    int head = 0, tail = nums.size() - 1, mid;
-    while (tail - head > 3)
-    {
-        mid = (head + tail) >> 1;
-        if (nums[mid] >= target)
-            tail = mid;
-        else
-            head = mid + 1;
-    } //大区间二分，小区间暴力
-    for (int i = head; i <= tail; i++)
-    {
-        if (nums[i] >= target)
-            return i;
-    }
-    // 不在二分search的区间
-    return nums.size();
-}
+
 
 // nums=[2,7,11, 15] target = 9 [0,1] 2+7 可对下标排序
 int binary_se(vector<int> &nums, vector<int> &ind, int head, int x)

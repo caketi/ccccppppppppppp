@@ -1,8 +1,32 @@
-
+import java.util.HashMap;
 
 //java int 0-31 
 
 public class bitOpr {
+    HashMap<Integer,Integer> fibMap = new HashMap<>();
+    public int fibV2(int n ){
+        if(n < 2) return n;
+        if(fibMap.containsKey(n)) return fibMap.get(n);
+        int result = (fibV2(n-1) + fibV2(n-2)) % 1000000007;
+        fibMap.put(n, result);
+        return result;
+    }
+    public int fib(int n){
+        int a = 0, b = 1, sum;
+        for(int i = 0; i < n; i++){
+            sum = (a+b) % 1000000007;
+            a = b;
+            b = sum;
+        }
+        return a;
+    }
+    // k奇数（k%2 == 1）----与上一行(k+1)/2相同
+    // k偶数 与上一行k/2相反
+    public int kthGrammar(int N, int K){
+        if (N==0) return 0;
+        if(K % 2 == 1) return kthGrammar(N-1, (K+1)/2);
+        else return  Math.abs(kthGrammar(N-1, (K/2) -1));
+    }
     public static int add(int a, int b){
         int sum = a;
         while(b!=0){
@@ -29,8 +53,6 @@ public class bitOpr {
         }
         return res;
     }
-    // public static int div
-
 
 
     public static void printBit(int num) {
@@ -40,18 +62,18 @@ public class bitOpr {
         System.out.println();
     }
    
-    // int[] preSum;
-    // public  void RangeSum2(int[] arr){
-    //     int N = arr.length;
-    //     preSum = new int[N];
-    //     preSum[0] = arr[0];
-    //     for(int i = 1; i < N; i++){
-    //         preSum[i] = preSum[i-1] + arr[i];
-    //     }
-    // }
-    // public int rangeSum(int L, int R){
-    //     return L == 0? preSum[R] : preSum[R] - preSum[L-1];
-    // }
+    int[] preSum;
+    public  void RangeSum2(int[] arr){
+        int N = arr.length;
+        preSum = new int[N];
+        preSum[0] = arr[0];
+        for(int i = 1; i < N; i++){
+            preSum[i] = preSum[i-1] + arr[i];
+        }
+    }
+    public int rangeSum(int L, int R){
+        return L == 0? preSum[R] : preSum[R] - preSum[L-1];
+    }
 
     public static void swap(int[] arr, int a, int b){
         int tmp = arr[b];

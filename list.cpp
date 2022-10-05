@@ -9,7 +9,6 @@
 #include <map>
 #include <set>
 #include <vector>
-#include <unistd.h>
 #include <time.h>
 // 虚头--链表头地址可能改变
 
@@ -129,6 +128,30 @@ Node *partition(Node *head, int x)
     return p1->next;
 }
 
+Node *partitionV2(Node *head, int x)
+{
+    Node less_head(0);
+    Node more_head(0); //两个临时头结点
+    Node *less_ptr = &less_head;
+    Node *more_ptr = &more_head;
+    while (head)
+    {
+        if (head->data < x)
+        {
+            less_ptr->next = head;
+            less_ptr = head; //链接完成后，less_ptr向后移动，指向head
+        }
+        else
+        {
+            more_ptr->next = head;
+            more_ptr = head;
+        }
+        head = head->next;
+    }
+    less_ptr->next = more_head.next;
+    more_ptr->next = NULL;
+    return less_head.next; //返回less_head的next节点
+}
 // recursive
 Node *reverseList2(Node *head)
 {
@@ -266,30 +289,6 @@ bool isHappyNumber(int n)
     return q == 1;
 }
 
-Node *partition(Node *head, int x)
-{
-    Node less_head(0);
-    Node more_head(0); //两个临时头结点
-    Node *less_ptr = &less_head;
-    Node *more_ptr = &more_head;
-    while (head)
-    {
-        if (head->data < x)
-        {
-            less_ptr->next = head;
-            less_ptr = head; //链接完成后，less_ptr向后移动，指向head
-        }
-        else
-        {
-            more_ptr->next = head;
-            more_ptr = head;
-        }
-        head = head->next;
-    }
-    less_ptr->next = more_head.next;
-    more_ptr->next = NULL;
-    return less_head.next; //返回less_head的next节点
-}
 
 // nums = {1,3,4,2,2}
 int findDuplicate(vector<int>& nums){

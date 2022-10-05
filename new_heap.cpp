@@ -8,6 +8,7 @@
 #include <string>
 #include <map>
 #include <set>
+#include <unordered_map>
 #include <vector>
 #include <functional>
 using namespace std;
@@ -104,44 +105,47 @@ struct heap1{
 };
 
 // //找中最小的k个数
-// vector<int> getLeastNumbers(vector<int> &arr, int K){
-//     Heap<int> h{less<int> ()};
-//     for( auto x : arr){
-//         h.push(x);
-//         if( h.size() > k) h.pop();
-//     }
-//     return h;
-// }
+vector<int> getLeastNumbers(vector<int> &arr, int k){
+    Heap<int> h{less<int> ()};
+    for( auto x : arr){
+        h.push(x);
+        if( h.size() > k) h.pop();
+    }
+    return h;
+}
 
-// int lastStoneWeight(vector<int> &stones){
-//     Heap<int> h{less<int>()};
-//     for(auto x:stones){
-//         h.push(x);
-//     }
-//     while(h.size() > 1){
-//         int y = h.top(); h.pop();
-//         int x = h.top(); h.pop();
-//         if(x == y) continue;
-//         h.push(y-x);
-//     }
-//     if ( h.size() == 0) return 0;
-//     return h.top();
-// }
+int lastStoneWeight(vector<int> &stones){
+    Heap<int> h{less<int>()};
+    for(auto x:stones){
+        h.push(x);
+    }
+    while(h.size() > 1){
+        int y = h.top(); h.pop();
+        int x = h.top(); h.pop();
+        if(x == y) continue;
+        h.push(y-x);
+    }
+    if ( h.size() == 0) return 0;
+    return h.top();
+}
 
 // 返回第k大元素-----每次和最小值比，谁小谁zou,小堆
-// Heap<int> h{greater<int>()};
-// int k;
-// KthLargest(int k, vector<int>& nums): k(K){
-//     for(auto x :nums){
-//         add(x);
-//     }
-//     return ;
-// }
-// int add( int val){
-//     h.push(val);
-//     if( h.size() > k) h.pop();
-//     return h.top();
-// }
+
+Heap<int> h{greater<int>()};
+int k;
+int add( int val){
+    h.push(val);
+    if( h.size() > k) h.pop();
+    return h.top();
+}
+void KthLargest(int k, vector<int>& nums){
+    for(auto x :nums){
+        add(x);
+    }
+    return ;
+}
+
+
 
 // struct CMP
 // {
@@ -174,21 +178,21 @@ struct heap1{
 //     }
 // }
 
-// vector<string> topKFrequent(vector<string>& words, int k){
-//     unordered_map<string, int> freq;
-//     for( auto x : words) freq[x] += 1;
-//     auto cmp = [&freq](string a, string b)->bool{
-//         if(freq[a] - freq[b]) return freq[a] > freq[b];
-//         return a < b;
-//     };
-//     Heap<string> h{cmp};
-//     for(auto x : freq){
-//         h.push(x.first);    --> 
-//         if( h.size() > k) h.pop();
-//     }
-//     sort(h.begin(), h.end(), cmp);
-//     return h;
-// }
+vector<string> topKFrequent(vector<string>& words, int k){
+    unordered_map<string, int> freq;
+    for( auto x : words) freq[x] += 1;
+    auto cmp = [&freq](string a, string b)->bool{
+        if(freq[a] - freq[b]) return freq[a] > freq[b];
+        return a < b;
+    };
+    Heap<string> h{cmp};
+    for(auto x : freq){
+        h.push(x.first);   
+        if( h.size() > k) h.pop();
+    }
+    sort(h.begin(), h.end(), cmp);
+    return h;
+}
 
 
 // int maximumScore(int a, int b, int c){
@@ -263,46 +267,46 @@ struct heap1{
 
 
 
-// int nthUglyNumber(int n){
-//     Heap<long long> h{greater<long long>()};
-//     long long  ans = 0;
-//     h.push(1);
-//     while(n--){
-//         ans = h.top();
-//         h.pop();
-//         if(ans % 5 == 0){
-//             h.push(ans * 5);
-//         }
-//         if (ans % 3 == 0){
-//             h.push(ans * 5);
-//             h.push(ans * 3);
-//         } else{
-//             h.push(ans * 5);
-//             h.push(ans * 3);
-//             h.push(ans * 2);
-//         }
-//     }
-//     return ans;
-// }
+int nthUglyNumber(int n){
+    Heap<long long> h{greater<long long>()};
+    long long  ans = 0;
+    h.push(1);
+    while(n--){
+        ans = h.top();
+        h.pop();
+        if(ans % 5 == 0){
+            h.push(ans * 5);
+        }
+        if (ans % 3 == 0){
+            h.push(ans * 5);
+            h.push(ans * 3);
+        } else{
+            h.push(ans * 5);
+            h.push(ans * 3);
+            h.push(ans * 2);
+        }
+    }
+    return ans;
+}
 
 
-// int nthSuperUglyNumber(int n, vector<int>& primes){
-//     vector<int> p(primes.size());
-//     vector<int> data;
-//     data.push_back(1);
-//     int ans = 1;
-//     while(data.size() != n){
-//         ans = primes[0] * data[p[0]];
-//         for(int i = 1; i < primes.size(); i++){
-//             ans = min(ans, primes[i] * data[p[i]]);
-//         }
-//         for(int i = 0; i < primes.size(); i++){
-//             if(primes[i] * data[p[i]] == ans) p[i]++;
-//         }
-//         data.push_back(ans);
-//     }
-//     return ans;
-// }
+int nthSuperUglyNumber(int n, vector<int>& primes){
+    vector<int> p(primes.size());
+    vector<int> data;
+    data.push_back(1);
+    int ans = 1;
+    while(data.size() != n){
+        ans = primes[0] * data[p[0]];
+        for(int i = 1; i < primes.size(); i++){
+            ans = min(ans, primes[i] * data[p[i]]);
+        }
+        for(int i = 0; i < primes.size(); i++){
+            if(primes[i] * data[p[i]] == ans) p[i]++;
+        }
+        data.push_back(ans);
+    }
+    return ans;
+}
 
 //有序序列中位数----- 能看到前半段最大值，后半段最小值 ===- 对顶堆
 // Heap<int> h1, h2;

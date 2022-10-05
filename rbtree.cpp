@@ -396,7 +396,7 @@ class Node
     Node *connect(Node *root)
     {
         Node *p = root;
-        while (p = layer_connect(p))
+        while (p == layer_connect(p))
             ; //返回下一层的头
         return root;
     }

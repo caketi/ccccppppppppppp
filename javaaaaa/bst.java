@@ -1,11 +1,18 @@
+import java.security.interfaces.RSAKey;
+import java.text.CollationElementIterator;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Stack;
 import java.util.stream.Collectors;
+
+import javax.management.QueryEval;
+import javax.xml.transform.TransformerException;
 
 public class bst {
 
@@ -182,6 +189,97 @@ public class bst {
         stack.offerFirst(cur.left);
       }
     }
+  }
+  public boolean isBalanced(TreeNode root){
+    return getHeight(root)>=0;
+  }
+  public int getHeight(TreeNode root){
+    if(root==null) return 0;
+    int leftHeight= getHeight(root.left);
+    if(leftHeight < 0) return -2;
+
+    int rightHeight = getHeight(root.right);
+    if(rightHeight < 0) return -2;
+    if(Math.abs(leftHeight-rightHeight) > 1) return -2;
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+  public TreeNode invertTree(TreeNode root){
+    if(root == null) return null;
+    TreeNode temp = root.right;
+    root.right = root.left;
+    root.left = temp;
+    invertTree(root.left);
+    invertTree(root.right);
+    return root;
+  }
+
+  public List<List<Integer>> levelOrder(TreeNode root){
+    List<List<Integer>> result = new ArrayList<>();
+    getResult(root, 0, result);
+    Collections.reverse(result);//reverse--levelOrderBottom
+    for(int i = 1; i < result.size(); i++){
+      Collections.reverse(result.get(i)); // reverse 蛇形，
+    }
+    return result;
+  }
+  public void getResult(TreeNode root, int k, List<List<Integer>> result){
+    if(root == null) return;
+    if(k == result.size()) result.add(new ArrayList<Integer>());
+    result.get(k).add(root.value);
+    getResult(root.left, k+1, result);
+    getResult(root.right, k+1, result);
+  }
+  public List<List<Integer>> levelOrderV2(TreeNode root){
+    List<List<Integer>> result = new ArrayList<>();
+    Queue<TreeNode> queue  = new LinkedList<>();
+    queue.offer(root);
+    myLevelOrder(root, result, queue, 0);
+    return result;
+  }
+  public void myLevelOrder(TreeNode root,  List<List<Integer>> result, Queue<TreeNode> queue, int k){
+    if(root == null) return;
+    if(k == result.size()) result.add(new ArrayList<Integer>());
+    while(!queue.isEmpty()) result.get(k).add(queue.poll().value);
+    if(root.left!=null) queue.offer(root.left);
+    if(root.right!=null) queue.offer(root.right);
+    myLevelOrder(root.left, result, queue, k+1);
+    myLevelOrder(root.right, result, queue, k+1);
+  
+  }
+  
+  public List<Integer> preorderTraversal(TreeNode root){
+    List<Integer> result = new ArrayList<>();
+    if(root == null) return result;
+    Deque<TreeNode> stack = new LinkedList<>();
+    Deque<Integer> statusStack = new LinkedList<>();
+    stack.push(root);
+    statusStack.push(2);
+    while(!stack.isEmpty()){
+      switch(statusStack.pop()){
+        case 0:{
+          statusStack.push(1); //柚子树处理完了，预计处理最红结果
+          if(stack.peek().right!=null){ 
+            stack.push(stack.peek().right);
+            statusStack.push(2);
+          }
+          break;
+        }
+        case 1:{
+          stack.pop();
+          break;
+        }
+        case 2:{
+          result.add(stack.peek().value);//根节点至此处理完，接着处理左子树
+          statusStack.push(0);
+          if(stack.peek().left != null){
+            stack.push(stack.peek().left);
+            statusStack.push(2);
+          }
+          break;
+        }
+      }
+    }
+    return result;
   }
 
   class getMinDiffV2 {

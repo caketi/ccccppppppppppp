@@ -11,6 +11,26 @@
 #include <vector>
 #include <time.h>
 using namespace std;
+void compute(stack<int> &number_stack, stack<char> &operation_stack)
+{
+    if (number_stack.size() < 2)
+    {
+        return;
+    }
+    int num2 = number_stack.top();
+    number_stack.pop();
+    int num1 = number_stack.top();
+    number_stack.pop();
+    if (operation_stack.top() == '+')
+    {
+        number_stack.push(num1 + num2);
+    }
+    else if (operation_stack.top() == '-')
+    {
+        number_stack.push(num1 - num2);
+    }
+    operation_stack.pop();
+}
 int caclculate(string s)
 {
     static const int STATE_BEGIN = 0;
@@ -82,26 +102,7 @@ int caclculate(string s)
         }
     }
 }
-void compute(stack<int> &number_stack, stack<char> &operation_stack)
-{
-    if (number_stack.size() < 2)
-    {
-        return;
-    }
-    int num2 = number_stack.top();
-    number_stack.pop();
-    int num1 = number_stack.top();
-    number_stack.pop();
-    if (operation_stack.top() == '+')
-    {
-        number_stack.push(num1 + num2);
-    }
-    else if (operation_stack.top() == '-')
-    {
-        number_stack.push(num1 - num2);
-    }
-    operation_stack.pop();
-}
+
 
 bool checkIsValidOrder(queue<int> &order)
 {
