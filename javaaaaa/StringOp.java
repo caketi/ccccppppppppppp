@@ -1,10 +1,53 @@
+import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Set;
 
 public class StringOp {
-
+  // 128最长连续序列
+  public int longestConsecutive(int[] nums){
+    Set<Integer> set = new HashSet<>();
+    for(int num : nums){
+      set.add(num);
+    }
+    int longgerStreak = 0;
+    for(int num : nums){
+      if(!set.contains(num-1)){ //判断num是不是头部，是就进入
+        int currentNum = num;
+        int currentStreak = 1;
+        while(set.contains(currentNum+1)){ //再判断是否存在连续的
+          currentNum++;
+          currentStreak++;
+        }
+        longgerStreak = Math.max(longgerStreak, currentStreak);
+      }
+    }
+    return longgerStreak;
+  }
+  public String frequencySort(String s){
+    char[] chars = s.toCharArray();
+    HashMap<Character, Integer> map = new HashMap<>();
+    for(char aChar : chars){
+      map.put(aChar, map.getOrDefault(aChar, 0) +1);
+    }
+    PriorityQueue<Character> priorityQueue = new PriorityQueue<Character>(new Comparator<Character>(){
+        public int compare(Character o1, Character o2){
+          return map.get(o2) - map.get(o1);
+        }      
+    });
+    String result = "";
+    while(!priorityQueue.isEmpty()){
+      Character poll = priorityQueue.poll();
+      for(int i = 0; i <map.get(poll); i++){
+        result += poll;
+      }
+    }
+    return result;
+  }
   public int longestWPI(int[] hours) {
     int sum = 0;
     int res = 0;

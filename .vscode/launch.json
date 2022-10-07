@@ -3,6 +3,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch unionFind",
+      "request": "launch",
+      "mainClass": "unionFind",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
+      "name": "Launch MyPQ",
+      "request": "launch",
+      "mainClass": "MyPQ",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
       "name": "Launch magic",
       "request": "launch",
       "mainClass": "magic",

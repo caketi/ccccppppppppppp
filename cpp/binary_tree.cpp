@@ -689,7 +689,24 @@ class flattenTree {
 };
 
 class lowestCommAncestor {
-
+  TreeNode *lCAV3(TreeNode *root, TreeNode *p, TreeNode *q){
+    if(root->val > p->val && root->val > q->val){
+      root= root->left;
+    }
+    if(root->val < p->val && root->val < q->val){
+      root= root->right;
+    }
+    return root;
+  }
+  TreeNode *lCAV2(TreeNode *root, TreeNode *p, TreeNode *q) {
+    if(root->val > p->val && root->val > q->val){
+      return lCAV2(root->left, p, q);
+    }
+    if(root->val < p->val && root->val < q->val){
+      return lCAV2(root->right, p, q);
+    }
+    return root;
+  }
   TreeNode *lCA(TreeNode *root, TreeNode *p, TreeNode *q) {
     if (root == q || root == p || root == NULL)
       return root;

@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.stream.Collectors;
-import javax.xml.transform.TransformerException;
 
 public class bst {
 
@@ -30,6 +29,62 @@ public class bst {
     public TreeNode root;
     public TreeNode right;
     public TreeNode left;
+  }
+  public boolean isSameTree(TreeNode p, TreeNode q){
+    if(p == null && q == null) return true;
+    if(p == null || q == null) return false;
+    if(p.value != q.value) return false;
+    return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+  }
+  public TreeNode lowestCommonAncestorRecursion(TreeNode root, TreeNode p, TreeNode q){
+    if(root.value > p.value && root.value > q.value){
+      return lowestCommonAncestorRecursion(root.left, p, q);
+    }
+    if(root.value < p.value && root.value < q.value){
+      return lowestCommonAncestorRecursion(root.right, p, q);
+    }
+    return root;
+  }
+  public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q){
+    while(true){
+      if(root.value > p.value && root.value > q.value){
+        root = root.left;
+      }else if(root.value < q.value && root.value < p.value){
+        root = root.right;
+      }else break;
+    }
+    return root;
+  }
+  public List<Integer> rightSideView(TreeNode root){
+    Queue<TreeNode> queue = new LinkedList<>();
+    List<Integer> result = new ArrayList<>();
+    if(root == null) return result;
+    queue.offer(root);
+    while(!queue.isEmpty()){
+      int size = queue.size();
+      for(int i = 0; i < size; i++){
+        TreeNode poll = queue.poll();
+        if(poll.left != null) queue.offer(poll.left);
+        if(poll.right != null) queue.offer(poll.right);
+        if(i == size-1) result.add(poll.value);
+      }
+    }
+    return result;
+  }
+
+  int maxSum = Integer.MIN_VALUE;
+  public int maxPathSum(TreeNode root) {
+    
+    getMax(root);
+    return maxSum;
+  }
+
+  public int getMax(TreeNode root) {
+    if (root == null) return 0;
+    int left = Math.max(getMax(root.left), 0);
+    int right = Math.max(getMax(root.right), 0);
+    maxSum = Math.max(maxSum, root.value + left + right);
+    return root.value + Math.max(left, right);
   }
 
   public int getCount(TreeNode root) {
@@ -106,7 +161,26 @@ public class bst {
     }
     return result;
   }
-
+  public int kthSmallest(TreeNode root, int k){
+    ArrayList<Integer> list = new ArrayList<>();
+    inOrderV1(root, list);
+    return list.get(k-1);
+  }
+  public void inOrderV1(TreeNode root, List<Integer> list){
+    if(root == null) return;
+    inOrderV1(root.left, list);
+    list.add(root.value);
+    inOrderV1(root.right, list);
+  }
+  public boolean isValidBST(TreeNode root){
+    TreeNode pre = null;
+    if(root == null) return true;
+    boolean left = isValidBST(root.left);
+    if(pre != null && pre.value >= root.value) return false;
+    pre = root;
+    boolean right = isValidBST(root.right);
+    return left && right;
+  }
   public boolean isValidSerializationV2(String preorder) {
     int i = 0;
     int slots = 1;
