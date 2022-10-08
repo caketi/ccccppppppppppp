@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -88,6 +89,85 @@ public class unionFind {
         stringBuffer.append(map.get(root).poll());
     }
     return stringBuffer.toString();
+  }
+  public List<List<String>> accountsMerge(List<List<String>> accounts){
+    Map<String, String> emailToName = new HashMap<>();
+    Map<String, Integer> emailToIndex = new HashMap<>();
+    int emailCount =  0;
+    for(List<String> account : accounts){
+      String name = account.get(0);
+      for(int i =1; i< account.size(); i++){
+        String email = account.get(i);
+        if(!emailToIndex.containsKey(email)){
+          emailToIndex.put(email, emailCount++);
+          emailToName.put(email, name);
+        }
+      }
+    }
+    unionFind uf = new unionFind(emailCount);
+    for(List<String> account : accounts){
+      String firstEmail = account.get(1);
+      int firstIndex = emailToIndex.get(firstEmail);
+      for(int i = 2; i < account.size(); i++){
+        String nextEmail = account.get(i);
+        int nextIndex = emailToIndex.get(nextEmail);
+        uf.unite(nextIndex, firstIndex);
+      }
+    }
+    Map<Integer, List<String>> IndexToEmails = new HashMap<>();
+    for(String email : emailToIndex.keySet()){
+      int index = uf.find(emailToIndex.get(email));
+      List<String> list = IndexToEmails.getOrDefault(index, new ArrayList<>());
+      list.add(email);
+      IndexToEmails.put(index, list);
+    }
+    List<List<String>> merged = new ArrayList<>();
+    for(List<String> emails : IndexToEmails.values()){
+      Collections.sort(emails);
+      String name = emailToName.get(emails.get(0));
+      List<String> list = new ArrayList<>();
+      list.add(name);
+      list.addAll(emails);
+      merged.add(list);
+    }
+    return merged;
+  }
+  public int[] findRedundantDirectedConnection(int[][] edges){
+    int nodeCount = edges.length;
+    unionFind uf = new unionFind(nodeCount+1);
+    int[] parent = new int[nodeCount+1];
+    for(int i = 1; i <= nodeCount; i++){
+      parent[i] = i;
+    }
+    int conflict =-1;
+    int cycle = -1;
+    for(int i = 0;i < nodeCount; i++){
+      int[] edge = edges[i];
+      int node1= edge[0], node2 = edge[1];
+      if(parent[node2] != node2){
+        conflict  =i;
+      }else {
+        parent[node2] = node1;
+        if(uf.find(node1) == uf.find(node2)){
+          cycle = i;
+        }else {
+          uf.unite(node1, node2);
+        }
+      }
+    }
+    if(conflict < 0){
+      int[] redudant = new int[]{edges[cycle][0], edges[cycle][1]};
+      return redudant;
+    }else {
+      int[] conflictEdge = new int[]{edges[conflict][0], edges[conflict][1]};
+      if(cycle >= 0){
+        int[] redudant = new int[]{parent[conflictEdge[1]], conflictEdge[1]};
+        return redudant;
+      }else {
+        int [] redudant = new int[]{conflictEdge[0], conflictEdge[1]};
+        return redudant;
+      }
+    }
   }
   public static void main(String[] args){
      
