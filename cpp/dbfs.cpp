@@ -18,6 +18,90 @@
 
 using namespace std;
 
+void FindSubSet(const string &input, int layer, string &solution) {
+  if (layer == input.length()) {
+    if (solution.size() == 0) {
+      cout << "empty set" << endl;
+    } else {
+      cout << solution << endl;
+    }
+    return;
+  }
+  solution.push_back(input.at(layer));
+  FindSubSet(input, layer, solution);
+  solution.pop_back();
+
+  FindSubSet(input, layer, solution);
+}
+// n-stores total number of ``pair of  ()` need to add. total levels == 2 * n
+// l stores the number of left parenthesis "(" added so far, r reversed.
+// solu_prefix ---- solution so far
+void DFSV2(int n, int l, int r, string &solu_prefix) {
+  if (l == n && r == n) {
+    cout << solu_prefix << endl;
+    return;
+  }
+  if (l < n) {
+    solu_prefix.push_back('(');
+    DFSV2(n, l + 1, r, solu_prefix);
+    solu_prefix.pop_back();
+  }
+  if (r < l) {
+    solu_prefix.push_back(')');
+    DFSV2(n, l, r + 1, solu_prefix);
+    solu_prefix.pop_back();
+  }
+}
+
+static int coin[4] = {25, 10, 5, 1};
+void FindCombination(int money_left = 99, int level = 0, int solu[4] = {}) {
+
+  if (level == 3) {
+    solu[level] = money_left;
+  }
+  for (int i = 0; i <= money_left / coin[level]; i++) {
+    solu[level] = i;
+    FindCombination(money_left - coin[level] * i, level + 1, solu);
+  }
+}
+
+void permutationV1(string &input, string &answer, vector<bool> &used,
+                   int level) {
+  if (level == input.size()) {
+    cout << answer << endl;
+    return;
+  }
+  for (int i = 0; i < input.length(); i++) {
+    if (used[i] == false) {
+      answer += input[i];
+      used[i] = true;
+      permutationV1(input, answer, used, level + 1);
+      used[i] = false;
+      answer.erase(answer.begin() + answer.size());
+    }
+  }
+}
+// 假设仅仅须要直接返回全部的全排列的话，那么非常easy，依次交换字符串中的相邻的字符就可以。
+void permutation(string &input, int index) {
+  if (index == input.length()) {
+    cout << input << endl;
+    return;
+  }
+
+  for (int i = index; i < input.size(); i++) {
+    swap(input.at(index), input.at(i));
+    permutation(input, index + 1);
+    swap(input.at(index), input.at(i));
+  }
+}
+vector<vector<int>> premute(vector<int> &nums) {
+  sort(nums.begin(), nums.end());
+  vector<vector<int>> ret;
+  do {
+    ret.push_back(nums);
+  } while (next_permutation(nums.begin(), nums.end()));
+  return ret;
+}
 struct TreeNode {
   int val;
   TreeNode *left;
@@ -417,7 +501,8 @@ bool makesquare(vector<int> &matchsticks) {
     arr[i] = sum / 4;
   return dfsticks(matchsticks.size() - 1, arr, matchsticks);
 }
-// n个火柴杆的总和 对4取余 == 0 -> true ，else false ，从大到小排序，先尝试大的减少回溯的可能。每次放置时，每条边上不可放置超过总和的1/4长度的
+// n个火柴杆的总和 对4取余 == 0 -> true ，else false
+// ，从大到小排序，先尝试大的减少回溯的可能。每次放置时，每条边上不可放置超过总和的1/4长度的
 bool generateV2(int i, vector<int> &nums, int target, int bucket[]) {
   if (i >= nums.size()) {
     return bucket[0] == target && bucket[1] == target && bucket[2] == target &&
@@ -519,7 +604,7 @@ vector<vector<int>> combinationSum(vector<int> &candidates, int target) {
 }
 
 bool connect(const string &word1, const string &word2) {
-  int cnt = 0; //word1 word2不相等字符个数
+  int cnt = 0; // word1 word2不相等字符个数
   for (int i = 0; i < word1.length(); i++) {
     if (word1[i] != word2[i]) {
       cnt++;
@@ -545,40 +630,42 @@ void construct_graph(string &beginWord, vector<string> &wordlist,
 }
 int BFS_graph(string &beginword, string &endword,
               map<string, vector<string>> &graph) {
-  queue<pair<string, int>> Q; // <顶点,步数>
-  set<string> visit;          // 记录访问过的顶点
-  Q.push(make_pair(beginword, 1)); //添加起始节点，步数1
+  queue<pair<string, int>> Q;      // <顶点,步数>
+  set<string> visit;               // 记录访问过的顶点
+  Q.push(make_pair(beginword, 1)); // 添加起始节点，步数1
   visit.insert(beginword);
   while (!Q.empty()) {
     string node = Q.front().first;
     int step = Q.front().second;
     Q.pop();
     if (node == endword) {
-      return step; //返回步数
+      return step; // 返回步数
     }
     vector<string> &neighbors = graph[node]; // 获得node的全部邻居
     for (int i = 0; i < neighbors.size(); i++) {
       if (visit.find(neighbors[i]) == visit.end()) { // 未加入队列
-        Q.push(make_pair(neighbors[i], step + 1)); //到达该节点步数+1
-        visit.insert(neighbors[i]); //标记neighbors[i]已被访问
+        Q.push(make_pair(neighbors[i], step + 1));   // 到达该节点步数+1
+        visit.insert(neighbors[i]); // 标记neighbors[i]已被访问
       }
     }
   }
   return 0;
 }
-// 返回最短路径 将普通队列更换为vector实现队列，保存所有的搜索节点--在pop节点时不会丢弃对头元素，只移动front指针
+// 返回最短路径
+// 将普通队列更换为vector实现队列，保存所有的搜索节点--在pop节点时不会丢弃对头元素，只移动front指针
 // 在队列节点中增加该节点的前驱节点在队列总的小标信息---可通过该下标找到是队列中的哪个节点搜索到的当前节点
 struct Qitem {
-  string node; //搜索节点
-  int parent_pos; //前驱节点在队列中的位置
-  int step; //到达当前节点的步数
+  string node;    // 搜索节点
+  int parent_pos; // 前驱节点在队列中的位置
+  int step;       // 到达当前节点的步数
   Qitem(string node, int parent_pos, int step)
       : node(node), parent_pos(parent_pos), step(step) {}
 };
 void BFS_graphV2(string &beginword, string &endword,
-                 map<string, vector<string>> &graph, vector<Qitem> &Q, //使用vector实现队列，可保存所有信息
+                 map<string, vector<string>> &graph,
+                 vector<Qitem> &Q, // 使用vector实现队列，可保存所有信息
                  vector<int> &end_word_pos) {
-  map<string, int> visit; //《单词，步数》
+  map<string, int> visit; // 《单词，步数》
   int min_step = 0;
   Q.push_back(Qitem(beginword.c_str(), -1, 1));
   visit[beginword] = 1;
@@ -615,7 +702,7 @@ vector<vector<string>> findLadders(string beginword, string endword,
   for (int i = 0; i < end_word_pos.size(); i++) {
     int pos = end_word_pos[i];
     vector<string> path;
-    while (pos != -1) { //没到头部
+    while (pos != -1) { // 没到头部
       path.push_back(Q[pos].node);
       pos = Q[pos].parent_pos;
     }
@@ -662,28 +749,28 @@ int trapRainWater(vector<vector<int>> &heightMap) {
     Q.push(QitemV2(row - 1, i, heightMap[row - 1][i]));
     mark[row - 1][i] = 1;
   }
- static const int dx[] = {-1,1,0,0};
- static const int dy[] = {0, 0, -1, 1};
- int result = 0;
- while(!Q.empty()){
+  static const int dx[] = {-1, 1, 0, 0};
+  static const int dy[] = {0, 0, -1, 1};
+  int result = 0;
+  while (!Q.empty()) {
     int x = Q.top().x;
     int y = Q.top().y;
     int h = Q.top().h;
     Q.pop();
-    for(int i = 0; i < 4; i++){
-        int newx = x + dx[i];
-        int newy = y + dy[i];
-        if(newx < 0 || newx >= row || newy <0 || newy>=column || mark[newx][newy]){
-            continue;
-        }
-        if(h > heightMap[newx][newy]){ 
-            result += h-heightMap[newx][newy]; //积水量是高度差
-            heightMap[newx][newy] = h; //积水后上升
-        }
-        Q.push(QitemV2(newx, newy, heightMap[newx][newy]));
-        mark[newx][newy] = 1;
+    for (int i = 0; i < 4; i++) {
+      int newx = x + dx[i];
+      int newy = y + dy[i];
+      if (newx < 0 || newx >= row || newy < 0 || newy >= column ||
+          mark[newx][newy]) {
+        continue;
+      }
+      if (h > heightMap[newx][newy]) {
+        result += h - heightMap[newx][newy]; // 积水量是高度差
+        heightMap[newx][newy] = h;           // 积水后上升
+      }
+      Q.push(QitemV2(newx, newy, heightMap[newx][newy]));
+      mark[newx][newy] = 1;
     }
- }
- return result;
-
+  }
+  return result;
 }
