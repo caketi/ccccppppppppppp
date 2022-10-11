@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -8,6 +7,85 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+class MyProqu{
+  public  int[] hp = new int[100010];
+  public  int size = 0;
+
+  public  void swap(int x, int y){
+    int temp = hp[x];
+    hp[x] = hp[y];
+    hp[y] = temp;
+  }
+  public  void offer(int x){
+    hp[size++] = x;
+    int child = size - 1;
+    int p = child /2 ;
+    while(p >= 0){
+      if(hp[p] < hp[child]){
+        swap(p, child);
+        child = p;
+        p = child/2;
+      }else {
+        break;
+      }
+    }
+  }
+  public static void main(String[] args){
+    MyProqu mq = new MyProqu();
+    mq.offer(1);
+    mq.offer(2);
+    mq.offer(3);
+    for(int i = 0; i<mq.size;i++){
+      System.out.println(mq.hp[i]);
+    }
+  }
+}
+
+class MyHeap {
+
+  public int[] hp = new int[10];
+  public int size = 0;
+
+  private void swap(int x, int y) {
+    int temp = y;
+    y = x;
+    x = temp;
+  }
+
+  private void shiftDown(int p, int size) {
+    int child = (p + 1) * 2;
+    // 
+    while (child < size) {
+      if (child + 1 < size && hp[child] > hp[child + 1]) child++;
+      if (hp[p] > hp[child]) {
+        swap(hp[p], hp[child]);
+        p = child;
+        child = (p + 1) * 2;
+      } else {
+        break;
+      }
+    }
+  }
+
+  public void createHeap() {
+    for (int i = 9; i >= 0; i--) {
+      hp[i] = i;
+     
+      size++;
+    }
+    for (int p = (size - 2 / 2); p >= 0; p--) {
+      shiftDown(p, size);
+    }
+  }
+
+  public static void main(String[] args) {
+    MyHeap hp = new MyHeap();
+    hp.createHeap();
+    for (int x : hp.hp) {
+      System.out.print(x + " ");
+    }
+  }
+}
 
 class heapi {
 
@@ -166,7 +244,7 @@ class heapi {
   }
 
   public int getNumberOfBacklogOrders(int[][] orders) {
-    PriorityQueue<int[]> buyQ = new PriorityQueue<>((o1, o2) -> o2[0] - o1[0]);  // 大 小
+    PriorityQueue<int[]> buyQ = new PriorityQueue<>((o1, o2) -> o2[0] - o1[0]); // 大 小
     PriorityQueue<int[]> sellQ = new PriorityQueue<>((o1, o2) -> o1[0] - o2[0]); // 小 大
     for (int[] order : orders) {
       int price = order[0], amount = order[1], orderType = order[2];
@@ -205,39 +283,41 @@ class heapi {
     }
     return result;
   }
-  public int nthUglyNumber(int n){
-    int[] ints = {2, 3, 5};
+
+  public int nthUglyNumber(int n) {
+    int[] ints = { 2, 3, 5 };
     HashSet<Long> set = new HashSet<>();
     PriorityQueue<Long> priorityQueue = new PriorityQueue<>();
     priorityQueue.offer(1l);
     set.add(1l);
     int result = 0;
-    for(int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++) {
       long curr = priorityQueue.poll();
-      result = (int)curr;
-      for(int anInt :ints){
+      result = (int) curr;
+      for (int anInt : ints) {
         long next = curr * anInt;
-        if(set.add(next)) priorityQueue.offer(next);
+        if (set.add(next)) priorityQueue.offer(next);
       }
     }
     return result;
   }
-  public int maximumScore(int a, int b, int c){
-    PriorityQueue<Integer> priorityQueue = new PriorityQueue<>((o1, o2)-> o2-o1);
+
+  public int maximumScore(int a, int b, int c) {
+    PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(
+      (o1, o2) -> o2 - o1
+    );
     priorityQueue.offer(a);
     priorityQueue.offer(b);
     priorityQueue.offer(c);
     int score = 0;
-    while(true){
+    while (true) {
       Integer first = priorityQueue.poll();
       Integer second = priorityQueue.poll();
-      if(second == 0) break;
+      if (second == 0) break;
       score += 1;
-      priorityQueue.offer(first-1);
-      priorityQueue.offer(second-1);
+      priorityQueue.offer(first - 1);
+      priorityQueue.offer(second - 1);
     }
     return score;
   }
-
-
 }

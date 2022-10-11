@@ -3,6 +3,34 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch MyProqu",
+      "request": "launch",
+      "mainClass": "MyProqu",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
+      "name": "Launch MyHeap",
+      "request": "launch",
+      "mainClass": "MyHeap",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
+      "name": "Launch a",
+      "request": "launch",
+      "mainClass": "a",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
+      "name": "Launch Unionset2",
+      "request": "launch",
+      "mainClass": "Unionset2",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
       "name": "Launch unionFind",
       "request": "launch",
       "mainClass": "unionFind",

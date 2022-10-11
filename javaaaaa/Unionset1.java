@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Stack;
 
 public class Unionset1 {
@@ -58,6 +59,97 @@ public class Unionset1 {
         parents.put(small, big);
         sizeMap.put(big, aSetSize + bSetSize);
         sizeMap.remove(small);
+      }
+    }
+  }
+}
+
+// 4 5
+// M 1 2
+// M 3 4
+// Q 1 2
+// Q 1 3
+// Q 3 4
+class Unionset2 {
+
+  static int N = 100010;
+  static int[] p = new int[N];
+
+  public static int find(int x) {
+    if (p[x] != x) {
+      p[x] = find(p[x]);
+    }
+    return p[x];
+  }
+
+  public static void main(String[] args) {
+    Scanner sca = new Scanner(System.in);
+    String[] str = sca.nextLine().split(" ");
+    int n = Integer.parseInt(str[0]);
+    int m = Integer.parseInt(str[1]);
+    for (int i = 1; i <= n; i++) p[i] = i;
+    while (m-- > 0) {
+      String op = sca.next();
+      int a = sca.nextInt();
+      int b = sca.nextInt();
+      if (op.equals("M")) {
+        p[find(a)] = find(b);
+      } else {
+        if (find(a) == find(b)) {
+          System.out.println("YES");
+        } else {
+          System.out.println("NO");
+        }
+      }
+    }
+  }
+}
+// 5 5
+// C 1 2
+// Q1 1 2
+// Q2 1 
+// C 2 5
+// Q2 5
+// Q2--查询集合中 有多少个点
+class a {
+
+  static int N = 100010;
+  static int[] p = new int[N];
+  static int[] size = new int[N];
+
+  public static int find(int x) {
+    if (p[x] != x) {
+      p[x] = find(p[x]);
+    }
+    return p[x];
+  }
+
+  public static void main(String[] args) {
+    Scanner sca = new Scanner(System.in);
+    int n = sca.nextInt();
+    int m = sca.nextInt();
+    for (int i = 1; i <= n; i++) {
+      p[i] = i;
+      size[i] = 1;
+    }
+    while (m-- > 0) {
+      String op = sca.next();
+      if (op.equals("C")) {
+        int a = sca.nextInt();
+        int b = sca.nextInt();
+        if (find(a) != find(b)) size[find(b)] += size[find(a)];
+        p[find(a)] = find(b);
+      } else if (op.equals("Q1")) {
+        int a = sca.nextInt();
+        int b = sca.nextInt();
+        if (find(a) == find(b)) {
+          System.out.println("YES");
+        } else {
+          System.out.println("NO");
+        }
+      } else {
+        int a = sca.nextInt();
+        System.out.println(size[find(a)]);
       }
     }
   }
