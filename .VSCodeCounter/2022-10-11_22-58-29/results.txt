@@ -1,0 +1,124 @@
+Date : 2022-10-11 22:58:29
+Directory : e:\ww\ccccppppppppppp
+Total : 85 files,  14809 codes, 2341 comments, 1061 blanks, all 18211 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C++      |         41 |      9,629 |      1,606 |        503 |     11,738 |
+| Java     |         29 |      4,002 |        691 |        452 |      5,145 |
+| Rust     |          4 |        936 |         12 |         43 |        991 |
+| Python   |          4 |        172 |         32 |         35 |        239 |
+| Markdown |          5 |         65 |          0 |         27 |         92 |
+| JSON     |          2 |          5 |          0 |          1 |          6 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                          | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                             |         85 |     14,809 |      2,341 |      1,061 |     18,211 |
+| .fleet                                                                        |          1 |          4 |          0 |          1 |          5 |
+| cpp                                                                           |         39 |      9,577 |      1,541 |        484 |     11,602 |
+| javaaaaa                                                                      |         29 |      4,002 |        691 |        452 |      5,145 |
+| openSourceCodetips                                                            |          1 |         13 |         65 |         16 |         94 |
+| python                                                                        |          4 |        172 |         32 |         35 |        239 |
+| rust                                                                          |          9 |      1,000 |         12 |         69 |      1,081 |
+| rust\.VSCodeCounter                                                           |          5 |         64 |          0 |         26 |         90 |
+| rust\.VSCodeCounter\2022-09-30_18-17-30                                       |          5 |         64 |          0 |         26 |         90 |
+| rust\mystack                                                                  |          4 |        936 |         12 |         43 |        991 |
+| rust\mystack\src                                                              |          4 |        936 |         12 |         43 |        991 |
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                      | language | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| e:\ww\ccccppppppppppp\.fleet\run.json                                         | JSON     |          4 |          0 |          1 |          5 |
+| e:\ww\ccccppppppppppp\README.md                                               | Markdown |          2 |          0 |          1 |          3 |
+| e:\ww\ccccppppppppppp\cpp\01-bag.cpp                                          | C++      |        207 |         10 |         11 |        228 |
+| e:\ww\ccccppppppppppp\cpp\Queue.cpp                                           | C++      |        156 |          0 |          4 |        160 |
+| e:\ww\ccccppppppppppp\cpp\binary_search.cpp                                   | C++      |        497 |         16 |         20 |        533 |
+| e:\ww\ccccppppppppppp\cpp\binary_tree.cpp                                     | C++      |        756 |         97 |         44 |        897 |
+| e:\ww\ccccppppppppppp\cpp\c_strcopy.cpp                                       | C++      |        110 |          4 |         12 |        126 |
+| e:\ww\ccccppppppppppp\cpp\dbfs.cpp                                            | C++      |        730 |         25 |         21 |        776 |
+| e:\ww\ccccppppppppppp\cpp\dp.cpp                                              | C++      |          2 |          0 |          1 |          3 |
+| e:\ww\ccccppppppppppp\cpp\encapsulateTrie.cpp                                 | C++      |        216 |        162 |         20 |        398 |
+| e:\ww\ccccppppppppppp\cpp\fenwickTree.cpp                                     | C++      |         73 |          0 |         11 |         84 |
+| e:\ww\ccccppppppppppp\cpp\frontMiddleBackQueue.cpp                            | C++      |        247 |         13 |         16 |        276 |
+| e:\ww\ccccppppppppppp\cpp\gcd.cpp                                             | C++      |         80 |          9 |          6 |         95 |
+| e:\ww\ccccppppppppppp\cpp\greedy.cpp                                          | C++      |        192 |         11 |         11 |        214 |
+| e:\ww\ccccppppppppppp\cpp\haash.cpp                                           | C++      |        395 |        102 |         23 |        520 |
+| e:\ww\ccccppppppppppp\cpp\hashmap.cpp                                         | C++      |         50 |          1 |          0 |         51 |
+| e:\ww\ccccppppppppppp\cpp\heap-priqueue.cpp                                   | C++      |        193 |          3 |          7 |        203 |
+| e:\ww\ccccppppppppppp\cpp\hman.cpp                                            | C++      |        349 |         17 |         13 |        379 |
+| e:\ww\ccccppppppppppp\cpp\indequeue.cpp                                       | C++      |        430 |          5 |         17 |        452 |
+| e:\ww\ccccppppppppppp\cpp\inenstack.cpp                                       | C++      |        332 |          3 |         13 |        348 |
+| e:\ww\ccccppppppppppp\cpp\lineTreeV2.cpp                                      | C++      |          0 |          0 |          1 |          1 |
+| e:\ww\ccccppppppppppp\cpp\linearTree.cpp                                      | C++      |         60 |          1 |          1 |         62 |
+| e:\ww\ccccppppppppppp\cpp\list.cpp                                            | C++      |        658 |         54 |         22 |        734 |
+| e:\ww\ccccppppppppppp\cpp\merge_sort.cpp                                      | C++      |        189 |        137 |         16 |        342 |
+| e:\ww\ccccppppppppppp\cpp\mobi.cpp                                            | C++      |         67 |         14 |          4 |         85 |
+| e:\ww\ccccppppppppppp\cpp\new_heap.cpp                                        | C++      |        185 |        119 |         31 |        335 |
+| e:\ww\ccccppppppppppp\cpp\quick_find.cpp                                      | C++      |         30 |          1 |          3 |         34 |
+| e:\ww\ccccppppppppppp\cpp\quick_sort.cpp                                      | C++      |        289 |         14 |         13 |        316 |
+| e:\ww\ccccppppppppppp\cpp\quick_union.cpp                                     | C++      |         25 |          1 |          7 |         33 |
+| e:\ww\ccccppppppppppp\cpp\radix_sort.cpp                                      | C++      |        373 |         35 |         11 |        419 |
+| e:\ww\ccccppppppppppp\cpp\rbtree.cpp                                          | C++      |        405 |          6 |         19 |        430 |
+| e:\ww\ccccppppppppppp\cpp\recu.cpp                                            | C++      |        568 |         17 |         24 |        609 |
+| e:\ww\ccccppppppppppp\cpp\serializeTree.cpp                                   | C++      |        147 |         15 |          3 |        165 |
+| e:\ww\ccccppppppppppp\cpp\stack.cpp                                           | C++      |        304 |        496 |         27 |        827 |
+| e:\ww\ccccppppppppppp\cpp\stringcomp.cpp                                      | C++      |        539 |         28 |         16 |        583 |
+| e:\ww\ccccppppppppppp\cpp\test-preoderserialization.cpp                       | C++      |         46 |          1 |          1 |         48 |
+| e:\ww\ccccppppppppppp\cpp\testcPP.cpp                                         | C++      |        207 |          3 |          3 |        213 |
+| e:\ww\ccccppppppppppp\cpp\trie.cpp                                            | C++      |        135 |         93 |         11 |        239 |
+| e:\ww\ccccppppppppppp\cpp\tt.cpp                                              | C++      |        118 |         18 |          9 |        145 |
+| e:\ww\ccccppppppppppp\cpp\weight_quick_union.cpp                              | C++      |        217 |         10 |         11 |        238 |
+| e:\ww\ccccppppppppppp\cpp\weighted_withpath.cpp                               | C++      |          0 |          0 |          1 |          1 |
+| e:\ww\ccccppppppppppp\javaaaaa\BDFS.java                                      | Java     |         31 |          0 |          2 |         33 |
+| e:\ww\ccccppppppppppp\javaaaaa\FrontMiddleBackQueue.java                      | Java     |        128 |          0 |         29 |        157 |
+| e:\ww\ccccppppppppppp\javaaaaa\HashMap.java                                   | Java     |         81 |         10 |          9 |        100 |
+| e:\ww\ccccppppppppppp\javaaaaa\MeregeSort.java                                | Java     |         36 |          0 |          6 |         42 |
+| e:\ww\ccccppppppppppp\javaaaaa\MyCircularQueue.java                           | Java     |         42 |          0 |          9 |         51 |
+| e:\ww\ccccppppppppppp\javaaaaa\MyCircularQueueV2node.java                     | Java     |         96 |          0 |         23 |        119 |
+| e:\ww\ccccppppppppppp\javaaaaa\MyHashMap.java                                 | Java     |        123 |         27 |         10 |        160 |
+| e:\ww\ccccppppppppppp\javaaaaa\MyPQ.java                                      | Java     |         49 |          1 |          7 |         57 |
+| e:\ww\ccccppppppppppp\javaaaaa\OuterClassTest.java                            | Java     |         26 |         12 |          6 |         44 |
+| e:\ww\ccccppppppppppp\javaaaaa\RBTree.java                                    | Java     |        309 |        234 |         31 |        574 |
+| e:\ww\ccccppppppppppp\javaaaaa\RBTreev2.java                                  | Java     |        305 |         23 |         21 |        349 |
+| e:\ww\ccccppppppppppp\javaaaaa\SelectSort.java                                | Java     |         22 |          1 |          4 |         27 |
+| e:\ww\ccccppppppppppp\javaaaaa\StringOp.java                                  | Java     |        195 |          4 |         11 |        210 |
+| e:\ww\ccccppppppppppp\javaaaaa\Twitter.java                                   | Java     |         90 |          0 |         18 |        108 |
+| e:\ww\ccccppppppppppp\javaaaaa\Unionset1.java                                 | Java     |        126 |         13 |         18 |        157 |
+| e:\ww\ccccppppppppppp\javaaaaa\binarySearch.java                              | Java     |         38 |          2 |          4 |         44 |
+| e:\ww\ccccppppppppppp\javaaaaa\bitOpr.java                                    | Java     |        112 |         29 |         11 |        152 |
+| e:\ww\ccccppppppppppp\javaaaaa\bst.java                                       | Java     |        550 |        150 |         59 |        759 |
+| e:\ww\ccccppppppppppp\javaaaaa\hashta.java                                    | Java     |         35 |          2 |          4 |         41 |
+| e:\ww\ccccppppppppppp\javaaaaa\heapi.java                                     | Java     |        285 |         13 |         26 |        324 |
+| e:\ww\ccccppppppppppp\javaaaaa\length.java                                    | Java     |         21 |          1 |          5 |         27 |
+| e:\ww\ccccppppppppppp\javaaaaa\list.java                                      | Java     |        533 |         81 |         63 |        677 |
+| e:\ww\ccccppppppppppp\javaaaaa\magic.class                                    | Java     |         15 |          0 |          0 |         15 |
+| e:\ww\ccccppppppppppp\javaaaaa\magic.java                                     | Java     |        119 |         11 |         13 |        143 |
+| e:\ww\ccccppppppppppp\javaaaaa\minheapmax.java                                | Java     |         64 |         39 |          8 |        111 |
+| e:\ww\ccccppppppppppp\javaaaaa\overrideload.java                              | Java     |         31 |          9 |          6 |         46 |
+| e:\ww\ccccppppppppppp\javaaaaa\randomMac.java                                 | Java     |        172 |         25 |         18 |        215 |
+| e:\ww\ccccppppppppppp\javaaaaa\stackqueue.java                                | Java     |        198 |          1 |         22 |        221 |
+| e:\ww\ccccppppppppppp\javaaaaa\unionFind.java                                 | Java     |        170 |          3 |          9 |        182 |
+| e:\ww\ccccppppppppppp\openSourceCodetips\nginx_roundup.cpp                    | C++      |         13 |         65 |         16 |         94 |
+| e:\ww\ccccppppppppppp\python\list.py                                          | Python   |         54 |          5 |         11 |         70 |
+| e:\ww\ccccppppppppppp\python\sort.py                                          | Python   |         23 |          1 |          3 |         27 |
+| e:\ww\ccccppppppppppp\python\type_object_class.py                             | Python   |         33 |         13 |          8 |         54 |
+| e:\ww\ccccppppppppppp\python\zipsort.py                                       | Python   |         62 |         13 |         13 |         88 |
+| e:\ww\ccccppppppppppp\rust\.VSCodeCounter\2022-09-30_18-17-30\details.md      | Markdown |         17 |          0 |          6 |         23 |
+| e:\ww\ccccppppppppppp\rust\.VSCodeCounter\2022-09-30_18-17-30\diff-details.md | Markdown |          9 |          0 |          6 |         15 |
+| e:\ww\ccccppppppppppp\rust\.VSCodeCounter\2022-09-30_18-17-30\diff.md         | Markdown |         12 |          0 |          7 |         19 |
+| e:\ww\ccccppppppppppp\rust\.VSCodeCounter\2022-09-30_18-17-30\results.json    | JSON     |          1 |          0 |          0 |          1 |
+| e:\ww\ccccppppppppppp\rust\.VSCodeCounter\2022-09-30_18-17-30\results.md      | Markdown |         25 |          0 |          7 |         32 |
+| e:\ww\ccccppppppppppp\rust\mystack\src\graph_al.rs                            | Rust     |         20 |          0 |          2 |         22 |
+| e:\ww\ccccppppppppppp\rust\mystack\src\lib.rs                                 | Rust     |        327 |          2 |         12 |        341 |
+| e:\ww\ccccppppppppppp\rust\mystack\src\main.rs                                | Rust     |        262 |          8 |         15 |        285 |
+| e:\ww\ccccppppppppppp\rust\mystack\src\sort_alg.rs                            | Rust     |        327 |          2 |         14 |        343 |
+| e:\ww\ccccppppppppppp\t.cpp                                                   | C++      |         39 |          0 |          3 |         42 |
+| Total                                                                         |          |     14,809 |      2,341 |      1,061 |     18,211 |
++-------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

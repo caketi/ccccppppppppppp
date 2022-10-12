@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch quickSort",
+      "request": "launch",
+      "mainClass": "quickSort",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
       "name": "Launch MyProqu",
       "request": "launch",
       "mainClass": "MyProqu",
