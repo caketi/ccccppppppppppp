@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <string>
 #include <map>
+#include <unordered_set>
 #include <set>
 #include <vector>
 #include <time.h>
@@ -16,6 +17,50 @@ using namespace std;
 
 int data2[100];
 int next2[100];
+struct ListNode{
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr){}
+    ListNode(int x, ListNode *next) : val(x), next(next){}
+};
+// head = [0,1,2,3] nums=[0,1,3]===output 2 [0,1] [3]2个组件
+int numComponents(ListNode *head, vector<int>& nums){
+    int n = nums.size();
+    int res = 0;
+    int k = 0;
+    for(ListNode *p = head; p ; p = p->next){
+        bool b = 0;
+        for(int &i : nums){
+            if(i == p->val){
+                b = 1;
+                break;
+            }
+        }
+        if(b == 1){
+            k++;
+            if(k==1) res++;
+        }else k = 0; //
+    }
+    return res;
+}
+int numComponentsV2(ListNode *head, vector<int>& nums){
+    unordered_set<int> hash;
+    for(int i : nums){
+        hash.insert(i);
+    }
+    int res = 0;
+    bool b = 0;
+    int k = 0;
+    for(ListNode *p = head; p; p=p->next){
+        if(hash.count(p->val)){
+            k++;
+            if(k==1) res++;
+        }else k = 0;
+    }
+    return res;
+}
+
 
 struct Node
 {

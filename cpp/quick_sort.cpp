@@ -11,6 +11,20 @@
 #include <vector>
 using namespace std;
 
+//769. [4,3,2,1,0] -- 1  分割成若干块，并对每块单独排序，连接起来后，结果和原数组的升序一致
+int maxChunkToSorted(vector<int>& arr){
+    int n =arr.size();
+    int m = 0;
+    int res = 0;
+    for(int i = 0; i < n; i++){
+        m = max(m, arr[i]);
+        if(m == i){
+            res++;
+        }
+    }
+    return res;
+}
+
 const int maxn = 2e5 + 10;
 const int inf = 0x3f3f3f3f;
 const int threshold = 16;

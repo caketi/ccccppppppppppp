@@ -15,6 +15,49 @@
 #include <vector>
 
 using namespace std;
+// 801.序列递增的最小交换次数
+int minSwap(vector<int>& nums1, vector<int>& nums2){
+  int n = nums1.size();
+  int f1, f2;//交换不交换
+  f1 = 0, f2 = 1;
+  for(int  i =1; i < n ;i++){
+    bool b1 = nums1[i] > nums1[i-1] && nums2[i] > nums2[i-1];
+    bool b2 = nums2[i] > nums1[i-1] && nums1[i] > nums2[i-1];
+    int a1 = f1, a2 =f2;
+    if(b1 && !b2){
+      f1 =a1;
+      f2 = a2+1;
+    }else if(!b1 && b2){
+      f1 =a2;
+      f2 =a1+1;
+    }else {
+      f1 =min(a1,a2);
+      f2=min(a1,a2)+1;
+    }
+  }
+  return min(f1,f2);
+}
+// 1790.执行一次字符串交换两字符串相等
+bool areAlmostEqual(string s1, string s2){
+  int n = s1.size();
+  int j = -1;
+  int t = 0;
+  for(int i = 0; i < n; i++){
+    if(s1[i] != s2[i]){
+      if(t==0){
+        t++;
+        j = i;
+      }else if(t == 1){
+        t++;
+        if(s1[i] != s2[j] || s1[j] != s2[i]) return 0;
+      }else {
+        return 0;
+      }
+    }
+  }
+  if(t == 0 || t == 2) return 1;
+  return  0;
+}
 int brute_force(const char *text, const char *pattern) {
   for (int i = 0; text[i]; ++i) {
     int flag = 1;
