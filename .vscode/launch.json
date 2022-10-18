@@ -3,6 +3,34 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch permutationNumber",
+      "request": "launch",
+      "mainClass": "permutationNumber",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
+      "name": "Launch NQue",
+      "request": "launch",
+      "mainClass": "NQue",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
+      "name": "Launch test",
+      "request": "launch",
+      "mainClass": "test",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
+      "name": "Launch Bfs",
+      "request": "launch",
+      "mainClass": "Bfs",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
       "name": "Launch dm",
       "request": "launch",
       "mainClass": "dm",
