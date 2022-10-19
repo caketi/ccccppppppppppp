@@ -3,8 +3,54 @@ class TreeNode:
         self.val = val
         self.left = None
         self.right = None
-
-
+def maxDepth(self, root: Optional[TreeNode]) -> int:
+    def dfs(root, depth):
+        if not root:
+            return depth
+        else:
+            return max(dfs(root.left, depth+1), dfs(root.right, depth+1))
+    return dfs(root, 0)
+# 96. 不同的二叉搜索树 dp[i] i个连续的数字
+# dp[6] = sum(  
+# 1: dp[0] * dp[5]
+# 2: dp[1] * dp[4]
+# 3: dp[2] * dp[3]
+# 4: dp[3] * dp[2]
+# 5: dp[4] * dp[1]
+# 6: dp[5] * dp[0]
+# )
+def numTrees(self, n:int) -> int:
+    dp  = [0] *(n+1)
+    dp[0] = 1
+    for i in range(n+1):
+        for j in range(i):
+            dp[i] = dp[i] + dp[j] * dp[i-j-1]
+    return dp[n]
+# l 记录最小值 r记录最大值
+def isValidBST(self, root: Optional[TreeNode]) -> bool:
+    def valid(root, l, r):
+        if not root:
+            return True
+        if root.val > l and root.val < r:
+            l = valid(root.left, l, root.val)
+            r = valid(root.right, root.val, r)
+            return l and r
+        else:
+            return False
+    return valid(root, float("-inf"), float("inf"))
+def isSymmetric(self, root: Optional[TreeNode]) -> bool:
+    def dfs(left, right):
+        if not left and not right:
+            return True
+        elif not left and right:
+            return False
+        elif left and not right:
+            return False
+        elif left.val != right.val:
+            return False
+        else:
+            return dfs(left.left, right.right) and dfs(left.right,right.left)
+    return dfs(root.left, root.right)
 def preOrder(root):
     res = []
 
@@ -84,7 +130,22 @@ def postOrder01(root):
             stack.append(root.right)
     return res[::-1]
 
-
+def levleOrder2(self, root:TreeNode)->List[List[int]]:
+    if not root:
+        return []
+    res = []
+    queue = [root]
+    while queue:
+        tmp = [node.val for node in queue]
+        res.append(tmp)
+        ll = []
+        for node in queue:
+            if node.left:
+                ll.append(node.left)
+            if node.right:
+                ll.append(node.right)
+            queue = ll
+    return res
 def levelOrder(root):
     res = []
     queue = []
@@ -165,3 +226,40 @@ class findModeV2:
                 pre = cur
                 cur = cur.right
         return result
+def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+    if not preorder or not inorder:
+        return None
+    root = TreeNode(preorder[0])
+    i = inorder.index(preorder[0])
+    root.left = self.buildTree(preorder[1:i+1], inorder[:i])
+    root.right = self.buildTree(preorder[i+1:], inorder[i+1:])
+    return root
+
+def flatten(self, root:TreeNode, pre =None) -> None:
+    def dfs(root):
+        if not root:
+            return
+        dfs(root.left)
+        dfs(root.right)
+        if root.left:
+            pre = root.left
+            while pre.right:
+                pre = pre.right
+            pre.right = root.right #右节点挂到左节点的最右边
+            root.right = root.left #整个左子树挂到根节点的右边
+            root.left = None
+        dfs(root)
+
+# 124
+def maxPathSum(self, root:TreeNode)->int:
+    self.res = float("-inf")
+    def dfs(root):
+        if not root:
+            return 0
+        left  = max(dfs(root.left), 0)
+        right = max(dfs(root.right), 0)
+        self.res = max(self.res, root.val+left+right)
+
+        return root.val+max(left,right)
+    dfs(root)
+    return self.res
