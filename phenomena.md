@@ -33,27 +33,37 @@ this Eidos comes under eidetic truths belonging to different levles of universal
 
 ## 3. Eidetic Seeing and Intuition of Something Individual
  - At First 
-> *essence==the "what" of an individuum*
+> *essence==the "what" of an individuum* < an individual instance or an individual being as distinguished from a group of similar instances or beings 2[Latin] : an indivisible entity>
  - Any intuition of something individual can be transmuted into eidetic seeing(ideation)
 > one "sees" the pure essence(eidos)  (not empirical)
+
+- intuition 
+1a: the power or faculty of attaining to direct knowledge or cognition without evident rational thought and inference
+b: immediate apprehension or cognition
+c: knowledge or conviction gained by intuition
+2: quick and ready insight
+- eidetic 
+Eidetic is the technical adjective used to describe what we more commonly call a photographic memory. The word ultimately derives from the Greek noun eidos, meaning "form." The ability of certain individuals to recall images, sounds, or events with uncanny<不可思议，诡异，离奇> accuracy is a subject of fascination for researchers in the field of psychology. Among notable people who were reputed to have eidetic memories is the late television comic Jackie Gleason, who reportedly was able to memorize an entire half-hour script in a single read-through.
+
 
 **Eidetic seeing can view the essence from a variety of levels from the most general to the most concrete**
 
 ---
-A natural limitation of eidetic seeing is that it is always one-sided never all-sided this holds true for all physical objects we only have one-sided adumbrations
+A natural limitation of eidetic seeing is that it is always one-sided never all-sided this holds true for all physical objects we only have one-sided adumbrations<offer a shadowy view of something.>
 <the act of giving the main facts and not the details about something, or something that gives these main facts:>
+You aren't likely to find adumbrate in children's stories or on the sports pages. That's not because this shady word is somehow off-color, but rather because it tends to show up most often in academic or political writing. In fact, some usage commentators find it too hard for "ordinary" use (although they are hard-pressed to define "ordinary"). Art and literary critics have long found it useful, and it's a definite candidate for those oft-published "lists of words you should know" (especially for vocabulary tests). You might remember adumbrate better if you know that it developed from the Latin verb adumbrare, which in turn comes from umbra, the Latin word for "shadow." To adumbrate, then, is to offer a shadowy view of something.
 ## Eidetic Seeing == Intuition
 Parts of Intuition
 the appearing 
-- the free possibilty of turning one's regard to correspoding individual and forming a consciousness of an example
+- the free possibilty of turning one's regard to corresponding individual and forming a consciousness of an example
 > intution:
 >    1. mattters of fact or
 >    2. Eidos
 
-## 4. Eidetic Seeing and Phantasy. Eidetic Cognition Independt of All Cognition of Matters of Fact
+## 4. Eidetic Seeing and Phantasy. Eidetic Cognition Independent of All Cognition of Matters of Fact
 
 **If essence is independent of matters of fact, then eidetic analysis can yield results independent of existence and the reality-content of intuition**
-> If we produce in free phantasy spatial formation, melodies, social practices, and the like, or if we phantasy acts of experiencing odliking or disliking, of willing, etc., then on that basis oby ideation we can see various pure essences originarily and perhaps even adequately
+> If we produce in free phantasy spatial formation, melodies, social practices, and the like, or if we phantasy acts of experiencing odliking or disliking, of willing, etc., then on that basis oby ideation we can see various pure essences originarily and perhaps even adequately<充分>
 
 ## 5.Judegments about Essences and Judgements having Eidetic Universal Validity
 # Judging About vs. Judging of 
@@ -70,7 +80,7 @@ Thus, the essence(the genus) color is other than the essence(the genus) sound
 
 
 
-- Eidetic Proposition
+- Eidetic Proposition <命题>
 - Eidetic Truth
 - what pertains to an eidetic truth: predicately formed affair-complex
 > "The predicately formed affair-complex posited as actual, is then a matter of fact" insofar as it becomes an actuality complex
@@ -129,3 +139,74 @@ Species == the lower essence
 Each essence has its place in a hierarchy of essences
 greater generality-whole
 greater spcificity-parts
+## 13. Generalization & Formalization
+**How are we to distinguish these levels of relationships? Two movements:**
+1. universalization
+2. materialization
+> "the subordinating of an essence to the 
+formal universality of a pure-logical essence
+must not be mistaken for the subordinating of 
+an essence to its higher essential genera.
+
+ex) the essence of triangle is supordinate 
+to the essence of spatial shape
+the essence of red subordinates to sesuous
+quality
+
+but both are subordinate to the essence of 
+essence 
+but the last is not an essential genus as it
+does not have any of these
+
+
+### Generalization and Formalization are 
+therfore distinct 
+
+so we must avoid the mistake of thinking 
+that the way any essence falls under 'essence'
+is sysnonymous with a suborinating to a 
+higher species of genus
+
+So, Husserl uses the term extension, saying 
+that any essence which is not an infima 
+species has an eidetic extension
+ex) eidetic extension, empirical extension
+
+## 14. Substrate-categories. The Substrate
+essence and the Todi Ti.
+empty substrates 
+synactical objectivities these have affair complexes of pure logic
+Material objectivities
+Not and individdum of a This Here
+because it is a formalization
+Todi ti
+
+## 15. Self Sufficient and None-selfsufficient Objects Concretum and Individuum
+
+Distinction: self sufficient and non-self sufficient objects
+ self sufficient if it does not refer back to a substrate whose
+ form it is
+ non self-sufficient if it dose refer back to a substrate that is its own form
+
+ An abstractum - a non-selfsufficient essence 
+ A Conretum - an absolutely self sufficient essence 
+ An Individuum- a This-Here
+ ## 16. Region and Category in  the Materially Filled Sphere. Synthetical Congnitions A Priori
+ A region = the highest generic unity belonging to a  concretum 
+ Each regional essence determines synthetical eidetic truths
+ > (truths grounded in it as this generic essence, but are not mere
+  particularizations of truths included in formal ontology.)
+  Tus, the regional axioms delimit and define the set of regional
+  categories
+  For kant = synthetical cognitions apriori are regional axioms
+  ## 17. Conclusions of Our Logical Considerations
+  So far, all of this concerns the formal logical sphere, not the 
+  materially filled experience we are ultimately interested in 
+  investigating
+  Articulated a schema for understanding the types of eidetic
+  descriptions 
+  Eidetic description can explore differing regions, each grounded
+  in rationality and certain synthetic a priori principles
+  The most difficult part of classification of phenomena lie in 
+  understanding and separating regions 
+  exmaple) materiality vs. psyche
