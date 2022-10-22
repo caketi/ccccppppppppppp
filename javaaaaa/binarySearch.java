@@ -1,6 +1,56 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class binarySearch {
+  // 排序好的数组，从数组总找到最靠近x的k个数（两数之差最小），返回结果升序
+  public List<Integer> findClosestElements(int[] arr, int k, int x){
+    int size = arr.length;
+    int removeNums = size - k;
+    int i = 0, j = arr.length -1;
+    while(removeNums > 0){ 
+      //  双指针移动，丢掉不符合条件的数字
+      if(x - arr[i] > arr[j] - x){
+        i++;
+      }else {
+        j--;
+      }
+      removeNums--;
+    }
+    // 从找区间---->找区间的左边界
+    // int i = 0, j = size -k;
+    // while(i < j){
+    //   int mid = i+j >> 1;
+    //   if(x - arr[mid] > arr[mid+k] -x ) i = mid +1;
+    //   else j = mid;
+    // }
+    List<Integer> res = new ArrayList<>();
+    for(int l = i; l < i+k; l++){// 从丢完后的头开始拿k个
+      res.add(arr[l]);
+    }
+    return res;
+  }
+  // 旋转数组的最小值 [2,2,2,0,1] 0  大区间 小区间 
+    // 特殊情况直接丢掉最右边的 [1,0,1] 然后从l->r遍历，如果a[l]<a[r] 则更新最小值索引为l 返回numbers[l]
+  // 看中间值是不是在旋转区间 特殊情况 a[m] = a[r] m-中间 r-右边[1,0,1,1]
+
+  public int  minArray(int[] numbers){
+    int i = 0, j = numbers.length - 1;
+    while(i < j){
+      int m = i + j >> 1;
+      if(numbers[m] > numbers[j]) i = m+1;
+      else if (numbers[m] < numbers[j]) j =m;
+      else { 
+        j--;
+        int x  =i ;
+        for(int k = i+1; k <j; k++){
+          if(numbers[k] < numbers[x]) x=k;
+        }
+        return numbers[x];
+      }
+    }
+    return numbers[i];
+  }
 
   public double findMedianSortedArray(int[] nums1, int[] nums2) {
     int n = nums1.length + nums2.length;
