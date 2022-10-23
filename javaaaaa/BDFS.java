@@ -83,7 +83,42 @@ class NQue {
       row[x] = col[y] = dg[y + x] = udg[n - x + y] = false;
     }
   }
-
+  // 一个非负整数数组arr，从start位置开始，位于下标i可跳到i+arr[i] // i-arr[i]
+  public boolean canReachV2(int[] arr, int start){
+    Queue<Integer> queue = new LinkedList<>();
+    int n = arr.length;
+    boolean[] visited = new boolean[n];
+    queue.add(start);
+    while(!queue.isEmpty()){
+      int size = queue.size();
+      for(int i = 0;i < size; i++){
+        int curPos = queue.poll();
+        int curValue = arr[curPos];
+        if(curValue == 0) return true;
+        int leftPos = curPos - curValue;
+        if(leftPos >= 0 && !visited[leftPos]){
+          visited[leftPos] = true;
+          queue.add(leftPos);
+        }
+        int rightPos = curPos+curValue;
+        if(rightPos < n && !visited[rightPos]){
+          visited[rightPos] = true;
+          queue.add(rightPos);
+        }
+      }
+    }
+    return false; 
+  }
+  public boolean canReach(int[] arr, int start){
+    boolean[] visited = new boolean[arr.length];
+    return dfsReach(arr, visited, start);
+  }
+  public boolean dfsReach(int[] arr, boolean[] visited, int index){
+    if(index < 0 || index > arr.length || visited[index]) return false;
+    if(arr[index] == 0) return true;
+    visited[index] = true;
+    return dfsReach(arr, visited, index + arr[index]) || dfsReach(arr, visited, index-arr[index]);
+  }
   public static void main(String[] args) {
     Scanner sca = new Scanner(System.in);
     int n = sca.nextInt();

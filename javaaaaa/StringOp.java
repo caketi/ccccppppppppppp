@@ -1,13 +1,68 @@
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
 public class StringOp {
+  String[] letter_map = { " ", "*", "abc", "adf", "ghi", "jkl" , "mno", "pqrs", "tuv", "mxyz"};
+  List<String> res = new ArrayList<>();
+  public List<String> letterCombinations (String digits){
+    if(digits.length() == 0 || digits == null) return new ArrayList<>();
+    res.add("");
+    for(int i = 0; i < digits.length(); i++){
+      String letter = letter_map[digits.charAt(i)-'0'];
+      int size = res.size();
+      for(int j = 0; j < size; j++){
+        String  tmp = res.remove(0);
+        for(int k = 0; k < letter.length(); k++){
+          res.add(tmp+letter.charAt(k));
+        }
+      }
+    }
+    // iterStr(digits, new StringBuffer(), 0);
+    return res;
+  }
+  // void iterStr(String str, StringBuffer stringBuffer, int index){
+  //   if(index == str.length()){
+  //     res.add(stringBuffer.toString());
+  //     return;
+  //   }
+  //   char c = str.charAt(index);
+  //   int pos = c - '0';
+  //   String map_string = letter_map[pos];
+  //   for(int i = 0; i < map_string.length(); i++){
+  //     stringBuffer.append(map_string.charAt(i));
+  //     iterStr(str, stringBuffer, index+1);
+  //     stringBuffer.deleteCharAt(stringBuffer.length()-1);
+  //   }
+  // }
+  // names = ["gta", "gta(1)", "gta"] ["gta","gta(1)","gta(2)"]
+  public String[] getFolderNames(String[] names){
+    if(names.length == 0 || names == null) return names;
+    String[] res = new String[names.length];
+    Map<String, Integer> map = new HashMap<>();
+    for(int i=0; i < names.length; i++){
+      if(!map.containsKey(names[i])){
+        res[i] = names[i];
+        map.put(names[i], 1);
+      }else {
+        int count = map.get(names[i]);
+        while(map.containsKey(names[i] + "(" + count + ")")){
+          count++;
+        }
+        map.put(names[i] + "(" + count + ")", 1);
+        map.put(names[i], map.get(names[i] + 1));
+        res[i]  = names[i] + "(" + count+")";
+      }
+    }
+    return res;
+  }
   // 128最长连续序列
   public int longestConsecutive(int[] nums){
     Set<Integer> set = new HashSet<>();

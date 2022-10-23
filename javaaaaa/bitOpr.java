@@ -1,8 +1,38 @@
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
+
 
 //java int 0-31 
 
 public class bitOpr {
+    public int nuSquares(int n){
+        Queue<Integer> queue = new LinkedList<>();
+        Set<Integer> set = new HashSet<>();
+        queue.offer(0);
+        set.add(0);
+        int level = 0;
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            level++;
+            for(int i = 0; i < size; i++){
+                int digit = queue.poll();
+                for(int j = 1; j <= n; j++){
+                    int nodeVal = j * j + digit;
+                    if(nodeVal == n) return level;
+                    if(nodeVal > n) break;
+                    if(!set.contains(nodeVal)){
+                        queue.offer(nodeVal);
+                        set.add(nodeVal);
+                    }
+                }
+            }
+        }
+        return level;
+
+    }
     HashMap<Integer,Integer> fibMap = new HashMap<>();
     public int fibV2(int n ){
         if(n < 2) return n;

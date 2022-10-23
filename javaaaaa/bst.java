@@ -22,6 +22,44 @@ public class bst {
   public static void main(String[] args) {
     print(10);
   }
+  // n = 6, edges = [[3,0], [3,1],[3,2], [3,4], [5,4]] 
+  // [3,4]
+  public List<Integer> findMinHeightTrees(int n, int[][] edges){
+    List<Integer> res = new ArrayList<>();
+    if(n == 1){
+      res.add(0);
+      return res;
+    }
+    int[] degree = new int[n];
+    List<List<Integer>> map = new ArrayList<>();
+    for(int i = 0; i < n; i++){
+      map.add(new ArrayList<>());
+    }
+    for(int[] edge : edges){
+      degree[edge[0]]++;
+      degree[edge[1]]++;
+      map.get(edge[0]).add(edge[1]);
+      map.get(edge[1]).add(edge[0]);
+    }
+    Queue<Integer> queue = new LinkedList<>();
+    for(int i = 0; i < n; i++){
+      if(degree[i] == 1) queue.add(i);
+    }
+    while(!queue.isEmpty()){
+      res = new ArrayList<>();
+      int size = queue.size();
+      for(int i = 0; i < size; i++){
+        int cur = queue.poll();
+        res.add(cur);
+        List<Integer> neighbors = map.get(cur);
+        for(Integer neighbor : neighbors){
+          degree[neighbor] --;
+          if(degree[neighbor] == 1) queue.offer(degree[neighbor]);
+        }
+      }
+    }
+    return res;
+  }
 
   public static class TreeNode {
 
@@ -29,6 +67,40 @@ public class bst {
     public TreeNode root;
     public TreeNode right;
     public TreeNode left;
+  }
+  class QueueNode{
+    TreeNode node;
+    int depth;
+    public QueueNode(TreeNode node, int depth){
+      this.node = node;
+      this.depth = depth;
+    }
+  }
+  public int minDepthV2(TreeNode root){
+    if(root == null) return 0;
+    Queue<QueueNode> queue = new LinkedList<>();
+    queue.offer(new QueueNode(root, 1));
+    while(!queue.isEmpty()){
+      QueueNode nodeDepth = queue.poll();
+      TreeNode node = nodeDepth.node;
+      int depth = nodeDepth.depth;
+      if(node.left == null && node.right == null) return depth;
+      if(node.left != null) queue.offer(new QueueNode(node.left, depth+1));
+      if(node.right != null) queue.offer(new QueueNode(node.left, depth+1));
+    }
+    return 0;
+  }
+  public int minDepth(TreeNode root){
+    if(root == null) return 0;
+    if(root.left == null && root.right == null) return 1;
+    int min_depth = Integer.MAX_VALUE;
+    if(root.left != null){
+      min_depth = Math.min(minDepth(root.left), min_depth);
+    }
+    if(root.right != null){
+      min_depth = Math.min(minDepth(root.right), min_depth);
+    }
+    return min_depth+1;
   }
   public boolean isSameTree(TreeNode p, TreeNode q){
     if(p == null && q == null) return true;
