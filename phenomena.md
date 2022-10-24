@@ -1,3 +1,8 @@
+善与恶只隔一线
+若ta的善恶是可以简单说清的事倒也罢了
+岩石有心，大地与神明依然
+倒不如说，天下如此之大，到处逛逛，多走多看，才能常感怀念
+东西南北，何方不得意。天地山海，尽是玲珑处。
 It will be the pre-eminent<重点> task of First Book to seek ways by which the excessive<过度> difficulties of penetrating into
 this new world can be overcome, so to speak, piece by piece. We shall start from the natural standpoint, from the 
 world as if confronts us, from consciousness as it offers itself in psychological experience and we shall lay bare the 

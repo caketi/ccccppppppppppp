@@ -24,7 +24,7 @@ public class StringOp {
           res.add(tmp+letter.charAt(k));
         }
       }
-    }
+    } //1.队列 2. 回溯
     // iterStr(digits, new StringBuffer(), 0);
     return res;
   }

@@ -1,12 +1,41 @@
 import java.io.OptionalDataException;
+import java.util.*;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Scanner;
-import javax.management.QueryEval;
-
 class permutationNumber{
+  // 690.员工的重要性
+   class Employee {
+    public int id;
+    public int importance;
+    public List<Integer> subordinates;
+   }
+   Map<Integer,Employee> map = new HashMap<>();
+   public int getImportance(List<Employee> employees, int id){
+    int n = employees.size();
+    for(int i = 0; i < n; i++) map.put(employees.get(i).id, employees.get(i));
+    int ans = 0;
+    Queue<Employee> queue = new LinkedList<>();
+    queue.offer(map.get(id));
+    while(!queue.isEmpty()){
+      Employee master = queue.poll();
+      ans += master.importance;
+      for(int oid : master.subordinates){
+        queue.offer(map.get(oid));
+      }
+    }
+    return ans;
+    // return getVal(id);
+   }
+  //  public int getVal(int id){
+  //   Employee master = map.get(id);
+  //   int ans = master.importance;
+  //   for(int subordinateId : master.subordinates){
+  //     Employee subordinate = map.get(subordinateId);
+  //     ans += subordinate.importance;
+  //     for(int oid : subordinate.subordinates) ans += getVal(oid);
+  //   }
+  //   return ans;
+  //  }
+
     static int N = 10;
     static boolean st[] = new boolean[N];
     static  int[] path = new int[N];

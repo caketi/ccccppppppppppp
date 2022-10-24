@@ -1,12 +1,14 @@
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
-
+ 
 class MyProqu{
   public  int[] hp = new int[100010];
   public  int size = 0;
@@ -88,7 +90,58 @@ class MyHeap {
 }
 
 class heapi {
-
+  public static void main(String[] args){
+    int[] test = {1,3,-1,-3,5,3,6,7};
+    int[] ans = maxSlidingWindowV2(test, 3);
+    for(int res : ans){
+      System.out.print(res+" ");
+    }
+  }
+  // [1,3,-1,-3,5,3,6,7], k=3
+  public static int[] maxSlidingWindowV2(int[] nums, int k){
+    int n = nums.length;
+    Deque<Integer> deque = new ArrayDeque<>();
+    for(int i = 0; i < k; i++){
+      while(!deque.isEmpty() && nums[i] > nums[deque.peekLast()]){
+        deque.pollLast();
+      }
+      deque.offerLast(i);
+    }
+    int[] ans = new int[n-k+1];
+    ans[0] = nums[deque.peekFirst()];
+    for(int i = k ;i < n; i++){
+      while(!deque.isEmpty() && nums[i] > nums[deque.peekLast()]){
+        deque.pollLast();
+      }
+      deque.offer(i);
+      while(deque.peekFirst() <= i- k){
+        deque.pollFirst();
+      }
+      ans[i-k+1] = nums[deque.peekFirst()];
+    }
+    return ans;
+  }
+  public int[] maxSlidingWindow(int[] nums, int k){
+    int n = nums.length;
+    PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<int[]>(){
+      public int compare(int[] o1, int[] o2){
+        return o1[0] != o2[0] ? o2[0] - o1[0] : o2[1] - o1[1];
+      }
+    });
+    for(int i = 0; i< n; i++){
+      pq.offer(new int[]{nums[i], i});
+    }
+    int[] ans = new int[n-k+1];
+    ans[0] = pq.peek()[0];
+    for(int i = k; i < n; i++){
+      pq.offer(new int[]{nums[i], i});
+      while(pq.peek()[1] <= i-k){ //除了滑动窗口范围
+        pq.poll();
+      }
+      ans[i-k+1] = pq.peek()[0];
+    }
+    return ans;
+  }
   public int[] getLeastNumbers(int[] arr, int k) {
     PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(); //小顶堆
     for (int i : arr) {

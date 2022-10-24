@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch heapi",
+      "request": "launch",
+      "mainClass": "heapi",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
       "name": "Launch permutationNumber",
       "request": "launch",
       "mainClass": "permutationNumber",

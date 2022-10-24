@@ -8,6 +8,8 @@ import java.util.Set;
 //java int 0-31 
 
 public class bitOpr {
+    // 279.n = 12 output=3  
+    // 1 + 4 + 9  n叉树 
     public int nuSquares(int n){
         Queue<Integer> queue = new LinkedList<>();
         Set<Integer> set = new HashSet<>();
