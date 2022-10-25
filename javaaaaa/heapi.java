@@ -103,7 +103,7 @@ class heapi {
     Deque<Integer> deque = new ArrayDeque<>();
     for(int i = 0; i < k; i++){
       while(!deque.isEmpty() && nums[i] > nums[deque.peekLast()]){
-        deque.pollLast();
+        deque.pollLast(); //队列不空，比较不断，小的踢出去，大的走进来！
       }
       deque.offerLast(i);
     }
@@ -111,10 +111,10 @@ class heapi {
     ans[0] = nums[deque.peekFirst()];
     for(int i = k ;i < n; i++){
       while(!deque.isEmpty() && nums[i] > nums[deque.peekLast()]){
-        deque.pollLast();
+        deque.pollLast(); //队列不空，比较不断，小的踢出去，大的走进来！
       }
       deque.offer(i);
-      while(deque.peekFirst() <= i- k){
+      while(deque.peekFirst() <= i- k){ //出了滑动窗口范围
         deque.pollFirst();
       }
       ans[i-k+1] = nums[deque.peekFirst()];
@@ -135,7 +135,7 @@ class heapi {
     ans[0] = pq.peek()[0];
     for(int i = k; i < n; i++){
       pq.offer(new int[]{nums[i], i});
-      while(pq.peek()[1] <= i-k){ //除了滑动窗口范围
+      while(pq.peek()[1] <= i-k){ //出了滑动窗口范围
         pq.poll();
       }
       ans[i-k+1] = pq.peek()[0];
