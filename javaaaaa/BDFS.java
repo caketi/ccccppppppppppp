@@ -1,30 +1,82 @@
-import java.io.OptionalDataException;
 import java.util.*;
 import java.util.HashMap;
-class permutationNumber{
+
+class permutationNumber {
+
+  public List<String> restoreIpAddresses(String s) {
+    int n = s.length();
+    List<String> res = new ArrayList<>();
+    if (n > 12 || n < 4) return res;
+    Deque<String> path = new ArrayDeque<>();
+    dfsIP(s, n, 0, 4, res, path);
+    return res;
+  }
+
+  private void dfsIP(
+    String s,
+    int len,
+    int begin,
+    int residue,
+    List<String> res,
+    Deque<String> path
+  ) {
+    if (begin == len) {
+      if (residue == 0) {
+        res.add(String.join(".", path));
+      }
+      return;
+    }
+    for (int i = begin; i < begin + 1; i++) {
+      if (i >= len) break;
+      if ((residue - 1) * 3 < len - i - 1) continue;
+      if (judgeIpSement(s, begin, i + 1)) {
+        String cur = s.substring(begin, i + 1);
+        path.addLast(cur);
+        dfsIP(s, len, i + 1, residue - 1, res, path);
+        path.removeLast();
+      }
+    }
+  }
+  private boolean judgeIpSement(String s, int left, int right){
+    int len = right - left + 1;
+    if(len > 1 && s.charAt(left) == '0'){
+      return false;
+    }
+    int res = 0;
+    while(left <= right){
+      res = res * 10 + s.charAt(left) - '0';
+      left++;
+    }
+    return res >= 0 && res <= 255;
+  }
+
   // 690.员工的重要性
-   class Employee {
+  class Employee {
+
     public int id;
     public int importance;
     public List<Integer> subordinates;
-   }
-   Map<Integer,Employee> map = new HashMap<>();
-   public int getImportance(List<Employee> employees, int id){
+  }
+
+  Map<Integer, Employee> map = new HashMap<>();
+
+  public int getImportance(List<Employee> employees, int id) {
     int n = employees.size();
-    for(int i = 0; i < n; i++) map.put(employees.get(i).id, employees.get(i));
+    for (int i = 0; i < n; i++) map.put(employees.get(i).id, employees.get(i));
     int ans = 0;
     Queue<Employee> queue = new LinkedList<>();
     queue.offer(map.get(id));
-    while(!queue.isEmpty()){
+    while (!queue.isEmpty()) {
       Employee master = queue.poll();
       ans += master.importance;
-      for(int oid : master.subordinates){
+      for (int oid : master.subordinates) {
         queue.offer(map.get(oid));
       }
     }
     return ans;
     // return getVal(id);
-   }
+  }
+
   //  public int getVal(int id){
   //   Employee master = map.get(id);
   //   int ans = master.importance;
@@ -36,33 +88,34 @@ class permutationNumber{
   //   return ans;
   //  }
 
-    static int N = 10;
-    static boolean st[] = new boolean[N];
-    static  int[] path = new int[N];
-    private static void dfs2(int u, int n){
-        if(u == n){
-            for(int i = 0; i < n;i++){
-                System.out.print(path[i] + " ");
-            }
-            System.out.println();
-        }
-        // 第一层递归：由多个分支，后续的递归：每次递归的时候所用到的数字
-        for(int i = 1; i <= n; i++){
-            if(!st[i] == true){
-                path[u] = i;
-                st[i] = true;
-                dfs2(u+1, n);
-                // 找到底后，吧啊最上面的数字设计false，回溯
-                st[i] =false;
-            }
-        }
-    }
+  static int N = 10;
+  static boolean st[] = new boolean[N];
+  static int[] path = new int[N];
 
-    public static void main(String[] args){
-        Scanner sca = new Scanner(System.in);
-        int n = sca.nextInt();
-        dfs2(0, n);
+  private static void dfs2(int u, int n) {
+    if (u == n) {
+      for (int i = 0; i < n; i++) {
+        System.out.print(path[i] + " ");
+      }
+      System.out.println();
     }
+    // 第一层递归：由多个分支，后续的递归：每次递归的时候所用到的数字
+    for (int i = 1; i <= n; i++) {
+      if (!st[i] == true) {
+        path[u] = i;
+        st[i] = true;
+        dfs2(u + 1, n);
+        // 找到底后，吧啊最上面的数字设计false，回溯
+        st[i] = false;
+      }
+    }
+  }
+
+  public static void main(String[] args) {
+    Scanner sca = new Scanner(System.in);
+    int n = sca.nextInt();
+    dfs2(0, n);
+  }
 }
 
 class NQue {
@@ -93,7 +146,7 @@ class NQue {
         }
         System.out.println();
       }
-     return ;
+      return;
     }
     // 放还是不放皇后
     dfs1(x, y + 1, s, n);
@@ -112,42 +165,49 @@ class NQue {
       row[x] = col[y] = dg[y + x] = udg[n - x + y] = false;
     }
   }
+
   // 一个非负整数数组arr，从start位置开始，位于下标i可跳到i+arr[i] // i-arr[i]
-  public boolean canReachV2(int[] arr, int start){
+  public boolean canReachV2(int[] arr, int start) {
     Queue<Integer> queue = new LinkedList<>();
     int n = arr.length;
     boolean[] visited = new boolean[n];
     queue.add(start);
-    while(!queue.isEmpty()){
+    while (!queue.isEmpty()) {
       int size = queue.size();
-      for(int i = 0;i < size; i++){
+      for (int i = 0; i < size; i++) {
         int curPos = queue.poll();
         int curValue = arr[curPos];
-        if(curValue == 0) return true;
+        if (curValue == 0) return true;
         int leftPos = curPos - curValue;
-        if(leftPos >= 0 && !visited[leftPos]){
+        if (leftPos >= 0 && !visited[leftPos]) {
           visited[leftPos] = true;
           queue.add(leftPos);
         }
-        int rightPos = curPos+curValue;
-        if(rightPos < n && !visited[rightPos]){
+        int rightPos = curPos + curValue;
+        if (rightPos < n && !visited[rightPos]) {
           visited[rightPos] = true;
           queue.add(rightPos);
         }
       }
     }
-    return false; 
+    return false;
   }
-  public boolean canReach(int[] arr, int start){
+
+  public boolean canReach(int[] arr, int start) {
     boolean[] visited = new boolean[arr.length];
     return dfsReach(arr, visited, start);
   }
-  public boolean dfsReach(int[] arr, boolean[] visited, int index){
-    if(index < 0 || index > arr.length || visited[index]) return false;
-    if(arr[index] == 0) return true;
+
+  public boolean dfsReach(int[] arr, boolean[] visited, int index) {
+    if (index < 0 || index > arr.length || visited[index]) return false;
+    if (arr[index] == 0) return true;
     visited[index] = true;
-    return dfsReach(arr, visited, index + arr[index]) || dfsReach(arr, visited, index-arr[index]);
+    return (
+      dfsReach(arr, visited, index + arr[index]) ||
+      dfsReach(arr, visited, index - arr[index])
+    );
   }
+
   public static void main(String[] args) {
     Scanner sca = new Scanner(System.in);
     int n = sca.nextInt();

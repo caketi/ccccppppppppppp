@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch LowerCase",
+      "request": "launch",
+      "mainClass": "LowerCase",
+      "projectName": "ccccppppppppppp_7893bc3b"
+    },
+    {
+      "type": "java",
       "name": "Launch heapi",
       "request": "launch",
       "mainClass": "heapi",
