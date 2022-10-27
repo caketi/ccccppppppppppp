@@ -1,11 +1,110 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 // 栈具有后进先出的特点，在遍历链表时将值按顺序放入栈中，最后出栈的顺序即为逆序。
 public class list {
+  // H x 链表头插入一个数x
+  // D k 删除第k个插入的数后面的数（k==0）删除头结点
+  // I k x 在k个插入的数后面插入一个数x k大于0
+  class LinkedListArray{
+    static int[] e = new int[100001]; //存val
+    static int[] ne = new int[1000001]; //存next
+    static int head, idx;
+    public static void main(String[] args){
+      Scanner sca = new Scanner(System.in);
+      int m = sca.nextInt();
+      
+      init();
+      while(m -- > 0){
+        char opt = sca.next().charAt(0);
+        if(opt == 'H'){
+          int x = sca.nextInt();
+          addHead(x);
+        }else if(opt == 'D'){
+          int k = sca.nextInt();
+          if(k == 0) head = ne[head];
+          else remove(k-1);
+        }else {
+          int k = sca.nextInt();
+          int x = sca.nextInt();
+          insert(k-1, x);
+        }
+      }
+    }
+    public static void init(){
+      head = -1;
+      idx = 0;
+    }
+    public static void addHead(int x){
+      e[idx] = x;
+      ne[idx] = head;
+      head = idx;
+      idx++;
+    }
+    public static void insert(int k , int x){
+      e[idx] = x;
+      ne[idx] = ne[k];
+      ne[k] = idx;
+      idx++;
+    }
+    public static void remove(int k){
+      ne[k] = ne[ne[k]];
+    }
+  }
+  // L x -- 在链表最左端插入x || R x 
+  // D k --将第k个插入的数删除
+  // IL k x -- 在第k个插入的数左侧插入一个数 || IR k x
+  class doubleLinkedListArray{
+    static int[] e = new int[10003];
+    static int[] le = new int[10003];
+    static int[] re = new int[10003];
+    static int ids;
+    public static void main(String[] args){
+      Scanner sca = new Scanner(System.in);
+      int m = sca.nextInt();
+      init();
+      while(m-- > 0){
+        String opt = sca.next();
+        if(opt.equals("D")){
+          int k = sca.nextInt();
+          remove(k+1);
+        }else if(opt.equals("L")){
+          int x = sca.nextInt();
+          add(0,x);
+        }else if(opt.equals("R")){
+          int x = sca.nextInt();
+          add(le[1], x);
+        }else if(opt.equals("IL")){
+          int k = sca.nextInt();
+          int x = sca.nextInt();
+          add(le[k+1], x);
+        }else {
+          int k = sca.nextInt();
+          int x = sca.nextInt();
+          add(k+1, x);
+        }
+      }
+      for(int i = re[0]; i != 1; i = re[i]){
+        System.out.println(e[i] + " ");
+      }
+    }
+    public static void init(){
+      re[0] = 1; // 0的右边1
+      le[1] = 0; // 1的左边0
+      ids = 2;  // 已插入2
+    }
+    public static void add(int k, int x){
+      e[ids] = x; //第ids个数是x
+      re[ids] = re[k]; // x的右边就是k的右边
+      le[ids] = k; //x的左边就是k
+      le[re[k]] = ids; // k的右边的左边就是x
+      re[k] = ids; // k的右就是x
+      ids++; // 已有的数++ 多了一个数
+    }
+    public static void remove(int k){
+      re[le[k]] = re[k]; // 删除一个数，把它的左右链接断掉，跳过就行
+      le[re[k]] = le[k];
+    }
+  }
 
   // class ListNode<E> {
   // private ListNode<E> pre;
