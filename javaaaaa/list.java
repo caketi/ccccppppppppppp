@@ -2,6 +2,104 @@ import java.util.*;
 
 // 栈具有后进先出的特点，在遍历链表时将值按顺序放入栈中，最后出栈的顺序即为逆序。
 public class list {
+  class hashList{
+    static int N = 100003, idx = 0;
+    static int[] e = new int[N];
+    static int[] ne = new int[N];
+    static int[] h = new int[N];
+    public static boolean find(int x){
+      int k = (x % N + N) % N;
+      //  遍历这个哈希数组，不为空， 下一个。 遍历拉链
+      for(int i = h[k]; i != -1; i = ne[i]){
+        if(e[i] == x){
+          return true;
+        }
+      }
+      return false;
+    }
+    public static void insert(int x){
+      int  k = (x % N + N) % N;
+      e[idx] = x;
+      ne[idx] = h[k];
+      h[k] = idx++;
+    }
+    
+  }
+  class hashLinear{
+    // I x 插入一个数字
+    // Q x 询问x是否在集合中出现过
+    static int N = 200003, nulls = 0x3f3f3f3f;
+    static int[] h = new int[N];
+    public static int find(int x){
+      int k = (x % N + N) % N;
+      while(h[k] != nulls && h[k] != x){
+        k++;
+        if(k == N) k = 0;
+      }
+      return k;
+    }
+    public static void main(String[] args){
+      Scanner sca = new Scanner(System.in);
+      int n = sca.nextInt();
+      for(int i = 0; i < N; i++) h[i] = nulls;
+      while(n-- > 0){
+        String op = sca.next();
+        int x = sca.nextInt();
+        int k = find(x);
+        if(op.equals("I")){
+          h[k] = x;
+        }else{
+          if(h[k] == nulls){
+            System.out.println("No");
+          }else{
+            System.out.println("YES");
+          }
+        }
+      }
+    }
+  }
+  class graphLevel{
+    // n个点m条边的有向图，图中可能存在重边和自环，所有边的长度都是1 点的编号1-n。 求1号店到2号店的最短距离，如果从1号店无法走到n好点，输出-1
+    // a b 代表a->b
+    static int N = 100010, idx = 0, tt = 0, hh = 0;
+    static int[] qu = new int[N];
+    static int[] e = new int[N];
+    static int[] ne = new int[N];
+    static int[] h = new int[N];
+    static int[] trace = new int[N];
+    public static void add(int a, int b){
+      e[idx] = b;
+      ne[idx] = h[a];
+      h[a] = idx++;
+    }
+    public static int bfs(int n){
+      qu[tt++] = 1;
+      trace[1] = 0;
+      while(tt-hh > 0){
+        int oldX= qu[hh++];
+        for(int i = h[oldX]; i!=0; i=ne[i]){
+          int j = e[i];
+          if(trace[j] == -1){
+            trace[j] = trace[oldX] + 1;
+            qu[tt++] = j;
+          }
+        }
+      }
+      return trace[n];
+    }
+    public static void main(String[] args){
+      Scanner sca = new Scanner(System.in);
+      int n = sca.nextInt();
+      int m = sca.nextInt();
+      for(int i = 0; i < m;i++){
+        int a = sca.nextInt();
+        int b = sca.nextInt();
+        add(a,b);
+      }
+      int minTrace = bfs(n);
+      System.out.println(minTrace);
+    }
+  }
   // H x 链表头插入一个数x
   // D k 删除第k个插入的数后面的数（k==0）删除头结点
   // I k x 在k个插入的数后面插入一个数x k大于0
