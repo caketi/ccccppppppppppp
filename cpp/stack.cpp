@@ -10,7 +10,34 @@
 #include <set>
 #include <vector>
 #include <time.h>
+#include <unordered_map>
 using namespace std;
+// 单调栈-=- [4,1,2] [1,3,4,2] 
+vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2){
+    stack<int> s;
+    vector<int> result(nums2.size());
+    unordered_map<int, int> vtoi;
+    for(int i = 0; i  <result.size(); i++){
+        result[i] = -1;
+        vtoi.insert(make_pair(nums2[i], i));
+    }
+    for(int i =0; i<nums2.size(); i++){
+        while(!s.empty() && nums2[s.top()] < nums2[i]){
+            result[s.top()] = i;
+            s.pop();
+        }
+        s.push(i);
+    }
+    vector<int> ans;
+    for(int i = 0; i < nums1.size(); i++){
+        if(result[vtoi[nums1[i]]] == -1){
+            ans.push_back(-1);
+        }else{ 
+            ans.push_back(nums2[result[vtoi[nums1[i]]]]);
+        }
+    }
+    return ans;
+}
 void compute(stack<int> &number_stack, stack<char> &operation_stack)
 {
     if (number_stack.size() < 2)
