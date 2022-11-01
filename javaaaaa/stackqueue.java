@@ -1,12 +1,101 @@
-import java.util.ArrayList;
-import java.util.Deque;
+import java.util.*;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Stack;
-
 public class stackqueue {
-
-  
+//创建一个栈-=- 寻找栈顶与右侧元素的关系
+  // 一个哈希表-- 记录每个元素与他右侧的第一个比他大的值
+  // 2. 遍历nums2将元素入栈
+  // 3. 遍历nums1在哈希表中寻找比它大的第一个元素
+  public int[] nextGreaterElement(int[] nums1, int[] nums2){
+    int len1 = nums1.length;
+    int len2 = nums2.length;
+    Stack<Integer> stack = new Stack<>();
+    Map<Integer, Integer> map = new HashMap<>();
+    for(int i = 0; i < len2; i++){
+      while(!stack.isEmpty() && stack.peek() < nums2[i]){
+        map.put(stack.pop(), nums2[i]);
+      }
+      stack.push(nums2[i]);
+    }
+    int[] res = new int[len1];
+    for(int i = 0; i < len1; i++){
+      res[i] = map.getOrDefault(nums1[i], -1);
+    }
+    return res;
+  }
+  public int[] nextGreaterElementsV2(int[] nums){
+    int n = nums.length;
+    int[] ans = new int[n];
+    Arrays.fill(ans, -1);
+    Stack<Integer> stack = new Stack<>();
+    for(int i = 0; i < n * 2; i++){
+      while(!stack.isEmpty() && nums[i%n] > nums[stack.peek()]){
+        int u = stack.pop();
+        ans[u] = nums[i%n];
+      }
+      stack.push(i%n);
+    }
+    return ans;
+  }
+  public int[] nextGreaterElementsV3(int[] nums){
+    int n = nums.length;
+    int[] ans = new int[n];
+    for(int i = n - 1; i > 0; i--){
+      if(nums[i-1] >= nums[i]){
+        ans[i-1] = ans[i];
+      }else {
+        ans[i-1] = i;
+      }
+    }
+    for(int i  = 0; i < n; i++){
+      int element = nums[i];
+      int j = ans[i];
+      ans[i] = -1;
+      do{
+        if(nums[j] > element){
+          ans[i] = nums[j];
+          break;
+        }
+        j++;
+        if(j >= n){
+          j -= n;
+        }
+      }while(j != 1);
+    }
+    return ans;
+  }
+  public int[] dailyTemperatures(int[] temperatures){
+    int len = temperatures.length;
+    int[] res = new int[len];
+    Stack<Integer> stack = new Stack<>();
+    for(int i = 0; i<len; i++){
+      int cur = temperatures[i];
+      while(!stack.isEmpty()&& cur > temperatures[stack.peek()]){
+        int idx = stack.pop();
+        res[idx] = i - idx;
+      }
+      stack.push(i);
+    }
+    return res;
+  }
+  class StockSpanner{
+    Stack<Integer> days, prices;
+    public StockSpanner(){
+      // 股票每天的跨度天数
+      days = new Stack<>();
+      prices = new Stack<>();
+      // 股票每天的价格
+    }
+    public int next(int price){
+      int day = 1;
+      while(!prices.isEmpty()&& prices.peek() <= price){
+        prices.pop();
+        day += days.pop();
+      }
+      prices.push(price);
+      days.push(day);
+      return day;
+    }
+  }
 // 1021删除最外层括号
   public String minRemoveToMakeValid2(String s) {
     StringBuilder stringBuilder = new StringBuilder(s);
