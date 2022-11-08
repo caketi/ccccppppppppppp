@@ -4,8 +4,10 @@ import java.util.Stack;
 // 当新加入的元素a为入栈后的最小值， 再讲a入栈前，先将此时的最小元素min入栈
 // 再入a，再1更新min
   class MinStack{
+    // 主栈
     Stack<Integer> stack;
     int min;
+    // 辅助栈存最小值
     Stack<Integer> min_stack;
     public MinStack(){
       stack = new Stack<>();
@@ -18,7 +20,7 @@ import java.util.Stack;
         min = val;
       }
       stack.push(val);
-      // if(!min_stack.isEmpty() || val >= min_stack.peek()){
+      // if(!min_stack.isEmpty() || val >= min_stack.peek()){ //保证最小值个数
       //   min_stack.push(val);
       // }
     }

@@ -1,13 +1,128 @@
+import java.util.*;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
 
 
-//java int 0-31 
+class BitSet{
+    int size, base, n, cnt;
+    int[] data;
+    public void  Bitset(int size){
+        this.size = size;
+        base = 30;
+        cnt = 0;
+        n = size / base + (size % base == 0 ? 0 :  1);
+        data = new int[n];
+    }
+    // 下标idx的值更新为1
+    public void fix(int idx){
+        int x = idx / base, y = idx % base;
+        if((data[x] & (1 << y)) == 0){
+            cnt++;
+            data[x] |= (1 << y);
+        }
+    }
+    // 下标idx的值更新为0
+    public void unfix(int idx){
+        int x = idx / base, y = idx % base;
+        if((data[x] & (1<<y)) != 0){
+            cnt--;
+            data[x] ^= (1<<y);
+        }
+    }
+    // 翻转
+    public void flip(){
+        for(int i=0; i < n; i++){
+            data[i] = ~data[i];
+        }
+        cnt = size -cnt;
+    }
+    // 检查每一位是否为1
+    public boolean all(){
+        return cnt == size;
+    }
+    // 至少有一位为1
+    public boolean one(){
+        return cnt > 0;
+    }
+    public int count(){
+        return cnt;
+    }
+    public String toString(){
+         StringBuffer s = new StringBuffer();
+         int x = size / base, y = size % base;
+         for(int i = 0; i < x; i++){
+            for(int j = 0; j < base; j++){
+                if((1<<j& data[i]) != 0) s.append(1);
+                else s.append(0);
+            }
+         }
+         for(int i  =0; i < y; i++){
+            if((1<<i & data[n-1])!= 0) s.append(1);
+            else s.append(0);
+         }
+         return s.toString();
+    }
 
+}
+
+//java int 0-31
 public class bitOpr {
+    // 2163.删除元素后和的最小差值
+    // 元素个数： 3 * n 可以从中删除恰好n个元素，剩下的2*n平分
+    // 前面n个 和 sumfrist 后面n个sumsecond。 sumfirst-sumsecond差值的最小值
+    // 前面删掉尽可能大的，后面删掉尽可能小的 2个堆，大堆 小堆
+    public long minimumDifference(int[] nums){
+        int m = nums.length;
+        int n = m / 3;
+        long ans = Long.MAX_VALUE;
+        PriorityQueue<Integer> left = new PriorityQueue<>((o1, o2) -> o2 - o1); 
+        PriorityQueue<Integer> right = new PriorityQueue<>();
+        long[] lsum = new long[m];
+        long sum = 0;
+        for(int i  =0; i< m;i++){
+            sum += nums[i];
+            left.offer(nums[i]);
+            if(left.size() < n) continue;
+            if(left.size() > n) sum -= left.poll(); //去掉大的
+            lsum[i] = sum; 
+        }
+        sum = 0;
+        for(int i = m -1; i >= n;i --){
+            sum += nums[i];
+            right.offer(nums[i]);
+            if(right.size() < n) continue ;
+            if(right.size() > n) sum -= right.poll(); //去掉小的
+            ans = Math.min(ans, lsum[i-1] - sum); //i是右边开始的部分，i-1左边
+        }
+        return ans;
+    }
+
+
+    // 2151.基于陈述统计最多好人数量
+    // 好人： 只说真话 坏人：真、假 statements[i][j] -- 0 1 2 i认为j是 坏人、好人、没说
+    // 玩家不会对自己进行陈述
+    public int maximumGood(int[][] statements){
+        int n = statements.length, ans = 0;
+        for(int i = 0, I = 1 << n; i< I; i++){
+            if(!check(statements, i, n)) continue;
+            ans = Math.max(ans, Integer.bitCount(i));
+        }
+        return ans;
+    }
+    public boolean check(int[][] statements,int mark, int n){
+        for(int i = 0; i <  n; i++){
+            if(((mark >> i) & 1) == 0) continue;
+            for(int j = 0; j < n; j++){
+                if(statements[i][j] == 2) continue;
+                if(statements[i][j] != ((mark >> j) & 1)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+
     // 279.n = 12 output=3  
     // 1 + 4 + 9  n叉树 
     public int nuSquares(int n){
@@ -35,8 +150,8 @@ public class bitOpr {
         return level;
 
     }
-    HashMap<Integer,Integer> fibMap = new HashMap<>();
     public int fibV2(int n ){
+        HashMap<Integer,Integer> fibMap = new HashMap<>();
         if(n < 2) return n;
         if(fibMap.containsKey(n)) return fibMap.get(n);
         int result = (fibV2(n-1) + fibV2(n-2)) % 1000000007;
