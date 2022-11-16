@@ -9,6 +9,86 @@ import java.util.Queue;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
+class LargestSubArraySum{
+  public int largestSum(int[] array){
+    // Assumptions: array != null && length >= 1
+    // The subarray must contain at least one element;
+    int result = array[0];
+    int cur = array[0];
+    // dp[i] means the largest sum of subarray ending at index i
+    // dp[i] = array[i]           if dp[i-1] <= 0
+    //       = dp[i-1] + array[i] if dp[i-1] > 0
+    // so that we can reduce the space consumption by recording the 
+    // latest largest sum
+    for(int i = 1; i < array.length; i++){
+      cur = Math.max(cur+array[i], array[i]);
+      result = Math.max(result, cur);
+    }
+    return result;
+  }
+}
+
+
+class TreeNode{
+  int value;
+  TreeNode left;
+  TreeNode right;
+}
+class MaxDiffNode{
+  // Given a binary tree, find the node with the max difference in the
+  // total number descendents in its left subtree and right subtree
+  public TreeNode maxDiffNode(TreeNode root){
+    if(root == null){
+      return null;
+    }
+    TreeNode[] node = new TreeNode[1];
+    int[] diff = new int[1];
+    diff[0] = -1;
+    numNodes(root, node, diff);
+    return node[0];
+  }
+  private int numNodes(TreeNode root, TreeNode[] node, int[] diff){
+    if(root == null){
+      return 0;
+    }
+    int leftNum = numNodes(root.left, node, diff);
+    int rightNum = numNodes(root.right, node, diff);
+    if(Math.abs(leftNum - rightNum) > diff[0]){
+      node[0] = root;
+      diff[0] = Math.abs(leftNum - rightNum);
+    }
+    return leftNum + rightNum + 1;
+  }
+}
+
+class NumNodesLeft{
+  static class TreeNode{
+    int key;
+    TreeNode left;
+    TreeNode right;
+    // stores the # of nodes in left subtree.
+    int numNodesLeft;
+    public TreeNode(int key){
+      this.key = key;
+    }
+  }
+  public void numNodesLeft(TreeNode root){
+    numNodes(root);
+  }
+  // return # of nodes in the subtree
+  private int numNodes(TreeNode root){
+    if(root == null){
+      return 0;
+    }
+    int leftNum = numNodes(root.left);
+    int rightNum = numNodes(root.right);
+    root.numNodesLeft = leftNum;
+    // return the total # of nodes in the subtree of root
+    return leftNum + rightNum + 1;
+  }
+}
+
+
 public class bst {
 
   public static void print(int x) {
