@@ -1,21 +1,13 @@
-#include <algorithm>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
+
 #include <iostream>
-#include <map>
-#include <queue>
-#include <set>
-#include <stack>
-#include <string>
-#include <vector>
 
 
-template <class T> class Array {
+
+namespace Arr {template <class T> class Arr {
 public:
-  Array() : data(0), sz(0) {}
-  Array(unsigned size) : sz(size), data(new T[size]) {}
-  ~Array() { delete[] data; }
+  Arr() : data(0), sz(0) {}
+  Arr(unsigned size) : sz(size), data(new T[size]) {}
+  ~Arr() { delete[] data; }
   const T &operator[](unsigned n) const {
     if (n >= sz || data == 0) {
       throw "Array subscript out of range";
@@ -34,9 +26,10 @@ public:
 private:
   T *data;
   unsigned sz;
-  Array(const Array &a);
-  Array &operator=(const Array &);
+  Arr(const Arr &a);
+  Arr &operator=(const Arr &);
 };
+}
 
 class Test {
 public:
@@ -68,7 +61,7 @@ Test::~Test() {std:: cout << "Test " << id << " destroyed" << std::endl; }
 // Test 2 destroyed
 // Test 1 destroyed
 int main() {
-  Array<int> x(10);
+  Arr::Arr<int> x(10);
   int i;
   for(i = 0; i < 10; i++){
     x[i] = i;
