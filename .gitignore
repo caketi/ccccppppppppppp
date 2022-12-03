@@ -4,3 +4,5 @@ fire_anna/
 rust/mystack/target/
 remote/
 cpp/*.exe
+.VSCodeCounter
+build
