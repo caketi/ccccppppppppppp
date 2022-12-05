@@ -7,3 +7,5 @@ https://grantjenks.com/docs/sortedcontainers/djangocon-2015-lightning-talk.html
 [read-list](http://www.grantjenks.com/docs/sortedcontainers/sf-python-2015-lightning-talk.html)
 
 [天下长河]()
+[脆弱的英雄 韩剧약한영웅]()
+[财阀家的小儿子]()
