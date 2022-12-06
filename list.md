@@ -108,3 +108,41 @@ while(p!= NULL){
     p=p->next;
 }
 ```
+- maximum elements in a linked list
+```c
+int max1(Node *p){
+    int m = -33333; MIN_INT;
+    while(p){
+        if(p->data > m){
+            m = p->data;
+        }
+        p = p->next;
+    }
+    return m;
+}
+int  max(Node *p){
+    int x = 0;
+    if(p == 0){
+        return MIN_INT;
+    }else{
+        x = max(p->next);
+        if(x > p->data){
+            return x;
+        }else{
+            return p->data;
+        }
+    }
+}
+```
+- counting nodes in a linked list
+```C
+int count(struct Node *p){
+    int x = 0;
+    if(p){
+        x = count(p->next);
+        return x + 1;
+    }else {
+        return x;
+    }
+}
+```
