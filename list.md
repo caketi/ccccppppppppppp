@@ -1,5 +1,6 @@
 - insert first in doubly list
-```c 
+
+```c
 Node *t = new Node;
 t->data = x;
 t->prev = NULL;
@@ -7,7 +8,9 @@ t->next = first;
 first->prev = t;
 first = t;
 ```
+
 - insert given index in doubly list
+
 ```c
 Node *t = new Node;
 t->data = x;
@@ -21,7 +24,9 @@ if(p->next){
 }
 p->next = t;
 ```
+
 - delete first in doubly list
+
 ```c
 p = first;
 first = first->next;
@@ -29,7 +34,9 @@ x = p->data;
 delete p;
 if(first) first->prev = NULL;
 ```
+
 - delete given index in doubly list
+
 ```c
 p = first;
 for(int i = 0; i < pos -1; i++){
@@ -45,6 +52,7 @@ delete p;
 ```
 
 - delete from linked list
+
 ```c
 int delete(int pos){
     Node *p, *q;
@@ -71,7 +79,9 @@ int delete(int pos){
     return x;
 }
 ```
+
 - check loop in list
+
 ```c
 int isLoop(Node *f){
     Node *p, *q;
@@ -84,7 +94,9 @@ int isLoop(Node *f){
     return p == q ? true:false;
 }
 ```
+
 - concatenating 2 linked list
+
 ```c
 p = first;
 while(p->next != NULL){
@@ -93,7 +105,9 @@ while(p->next != NULL){
 p->next = second;
 second = NULL;
 ```
+
 - reversing a linked list
+
 ```c
 p = first;
 i = 0;
@@ -108,7 +122,9 @@ while(p!= NULL){
     p=p->next;
 }
 ```
+
 - maximum elements in a linked list
+
 ```c
 int max1(Node *p){
     int m = -33333; MIN_INT;
@@ -134,7 +150,9 @@ int  max(Node *p){
     }
 }
 ```
+
 - counting nodes in a linked list
+
 ```C
 int count(struct Node *p){
     int x = 0;
@@ -143,6 +161,50 @@ int count(struct Node *p){
         return x + 1;
     }else {
         return x;
+    }
+}
+```
+
+- find intersection of 2 linked list
+
+```c
+p = first;
+while(p) push(&stk1, p);
+p = second;
+while(p) push(&stk2, p);
+while(stackTop(stk1) == stackTop(stk2)){
+    p = pop(&stk1); pop(&stk2);
+}
+printf("%d", p->data);
+```
+
+- find middle node of a linked list
+
+```c
+p = q = first;
+while(q){
+    q = q->next;
+    if(q) q = q->next;
+    if(q) p = p->next;
+}
+printf("%d", p->data);
+```
+- sparse matrix using linked list
+```c
+struct Node{
+    int col;
+    int val;
+    struct Node *next;
+};
+for(i = 0; i < m; i++){
+    p = a[i];
+    for(j = 0; j < n; j++){
+        if(j == p->col){
+            printf("%d", p->val);
+            p = p->next;
+        }else {
+            printf("o");
+        }
     }
 }
 ```
