@@ -1,3 +1,5 @@
+pub mod stack;
+
 #[allow(warnings)]
 pub mod sort_algorithms_v2 {
     pub fn merge<T: Ord + Copy>(left: &Vec<T>, right: &Vec<T>) -> Vec<T> {
