@@ -1,3 +1,6 @@
+self表示调用方法的对象，作为类方法的第一个参数，类似于C++中的this。
+Self表示调用者的类型。
+
 rust has to know the size at compile time！！！！！！！
 
 rust always chooses i32 for integers if you dont tell it to use different type
