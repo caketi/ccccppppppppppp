@@ -1,3 +1,16 @@
+// for( var i = 0; i < 2; i++){
+//         console.log(i)
+// }
+for( var i = 0; i < 2; i++){
+    (function(n){
+        console.log(i)
+    })(i)
+}
+
+for(let a = 0; a < 1; a++){
+    console.info(a)
+}
+
 // function foo(){
 //     var a = b = 100
 //     var a = 100
