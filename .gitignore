@@ -1,8 +1,4 @@
 *.exe
-f/
-fire_anna/
-rust/mystack/target/
-remote/
+
+rust/mystack/target
 cpp/*.exe
-.VSCodeCounter
-build
