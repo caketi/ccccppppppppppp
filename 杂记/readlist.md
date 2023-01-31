@@ -11,4 +11,5 @@ https://grantjenks.com/docs/sortedcontainers/djangocon-2015-lightning-talk.html
 [财阀家的小儿子]()
 [中国奇谭]()
 [三体电视剧]()
+[狂飙]()
 [昼夜诗文](https://www.bilibili.com/video/BV1PP4y1y7Cc)
