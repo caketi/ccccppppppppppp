@@ -13,3 +13,4 @@ https://grantjenks.com/docs/sortedcontainers/djangocon-2015-lightning-talk.html
 [三体电视剧]()
 [狂飙]()
 [昼夜诗文](https://www.bilibili.com/video/BV1PP4y1y7Cc)
+[云计算up](https://space.bilibili.com/471764841)
