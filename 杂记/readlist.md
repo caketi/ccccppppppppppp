@@ -3,7 +3,7 @@ https://grantjenks.com/docs/sortedcontainers/djangocon-2015-lightning-talk.html
 
 - search :
  **java nested class this**
-
+[贯穿你一生的创伤、内疚与羞耻--彼得.沙巴德博士](https://www.bilibili.com/video/BV1K84y157Nq)
 [read-list](http://www.grantjenks.com/docs/sortedcontainers/sf-python-2015-lightning-talk.html)
 [http://adl.miulab.tw](http://adl.miulab.tw)
 [天下长河]()
