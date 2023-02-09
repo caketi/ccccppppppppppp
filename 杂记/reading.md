@@ -12,6 +12,8 @@ https://github.com/somasekhar1919/ML_Fraud_Predication
 ## utorrent bug
 netsh winsock reset ======== cmd
 
+## java
+[字节码]( https://blog.csdn.net/MaoTongBin/article/details/128887524)
 
 ## Vue
-[vue source code ](https://www.bilibili.com/video/BV1Rd4y1a7vQ)
+[vue source code ](https://www.bilibili.com/video/BV1Rd4y1a7vQ)z3W2Q
