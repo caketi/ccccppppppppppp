@@ -13,6 +13,8 @@ https://github.com/rishabh7795/Auto-Insurance-Claim-Fraud-Detection
 https://github.com/djgribbin/code_sample r语言
 https://github.com/somasekhar1919/ML_Fraud_Predication
 
+当今东亚汉字文化圈的困境
+
 ## rust？
 
 [easy rust](https://www.bilibili.com/video/BV1Ve4y1i7X1)-- down 2022.12.24 14:09
