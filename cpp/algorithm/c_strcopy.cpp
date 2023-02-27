@@ -5,14 +5,56 @@
 #include <cstring>
 #include <iostream>
 #include <map>
+#include <objidlbase.h>
+#include <playsoundapi.h>
 #include <queue>
 #include <set>
 #include <stack>
+#include <stdio.h>
 #include <string>
 #include <unordered_map>
 #include <vector>
-
+#include <Windows.h>
+#include <winnt.h>
 using namespace std;
+
+bool readBinFile(const char fileName[], char** bufPtr){
+  if(FILE* fp = fopen(fileName, "rb")){
+    fseek(fp, 0, SEEK_END);
+    int length = ftell(fp);
+    *bufPtr = new char[length + 1];
+    fseek(fp, 0, SEEK_SET);
+    fread(*bufPtr, sizeof(char), length, fp);
+    return  true;
+  }else{
+    return false;
+  }
+}
+
+int main(int argc, char** argv){
+  char* buf;
+  // if(!readBinFile(argv[1], &buf)){
+  //   puts("failure to open COFF file.");
+  //   return 0;
+  // }
+  readBinFile("test.o", &buf);
+  IMAGE_FILE_HEADER* fileHdr = (IMAGE_FILE_HEADER*)buf;
+  IMAGE_SECTION_HEADER* sectionHdr = (IMAGE_SECTION_HEADER*)(buf + sizeof(IMAGE_FILE_HEADER));
+  for(int i = 0; i < (fileHdr->NumberOfSections); ++i){
+    printf("%s: %p\n",
+    sectionHdr[i].Name,
+    sectionHdr[i].PointerToRawData);
+  }
+
+}
+
+int strToInt(char *strNum) {
+  int v = 0;
+  while (*strNum) {
+    v = (10 * v + *strNum++ - '0');
+  }
+  return v;
+}
 
 // The result of the postfix ++ operator is the value of the operand. As a side
 // effect,the value of the operand object is incremented
@@ -60,10 +102,10 @@ void Mystrcpy3(char *des, char *src) {
 // 利用字符串末尾带'/0'的特性
 void Mystrcpy4(char *des, char *src) {
   while (*des++ == *src++)
-  return;
+    return;
 }
 
-int main() {
+int main1() {
   int i = 7;
   printf("%d\n", i++);
   printf("%d\n", i);
