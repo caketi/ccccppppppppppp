@@ -15,6 +15,10 @@ https://github.com/somasekhar1919/ML_Fraud_Predication
 
 当今东亚汉字文化圈的困境
 
+## book
+
+poweshell 自动化运维实践
+
 ## rust？
 
 [easy rust](https://www.bilibili.com/video/BV1Ve4y1i7X1)-- down 2022.12.24 14:09
@@ -55,7 +59,7 @@ netsh winsock reset ======== cmd
 [云计算up](https://space.bilibili.com/471764841)
 
 ## 影视？
-
+[黑暗荣耀theglory]()
 [天下长河]()
 [脆弱的英雄 韩剧약한영웅]()
 [财阀家的小儿子]()
