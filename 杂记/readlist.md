@@ -39,6 +39,7 @@ poweshell 自动化运维实践
 netsh winsock reset ======== cmd
 
 ## 文学？
+[台湾大学吴展良-《老子》]()
 
 [昼夜诗文](https://www.bilibili.com/video/BV1PP4y1y7Cc)
 
@@ -68,6 +69,8 @@ netsh winsock reset ======== cmd
 [云计算 up](https://space.bilibili.com/471764841)
 
 ## 影视？
+
+[不速来客]()
 
 [黑暗荣耀 theglory]()
 

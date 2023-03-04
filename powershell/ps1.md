@@ -1,4 +1,12 @@
 ise
+get-process | out-gridview -PassThru | get-member 输出表格形式
+write-eventlog -logname xxx -source "xxx" -eventid 1111 -entrytype information -message "xxx"
+
+export-csv 
+
+add-content
+
+SET-CONTENT -path E:\test-setcontent.txt 
 
 dir .\*.md | ForEach {Get-content $_ -Head 1; Get-content $_ -Tail 1}
 
