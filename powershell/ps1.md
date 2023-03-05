@@ -1,4 +1,13 @@
 ise
+
+
+## winRM & WSMan 
+service.msc 
+
+- 远程执行
+$createfilename = @("c:\log\c", "c:\log\cc")
+invoke-command -computername xxx -scriptblock { foreach($fi in $using:createfilename)(new-item -itemtype directory -path $fi)}
+
 get-process | out-gridview -PassThru | get-member 输出表格形式
 write-eventlog -logname xxx -source "xxx" -eventid 1111 -entrytype information -message "xxx"
 
