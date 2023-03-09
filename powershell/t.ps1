@@ -1,4 +1,5 @@
 # Get-ChildItem .\*.md | ForEach-Object {Get-content $_ -Head 1; Get-content $_ -Tail 1}
+# "sssabasf asfsakfsajfk" | select-string -AllMatches -Pattern "\bs?\b" | % Matches
 
 function DF {
     # DF -mf $true -fn t.txt -fdir E:\ww\ -desDir E:\ww\test
