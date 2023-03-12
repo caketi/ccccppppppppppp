@@ -1,4 +1,19 @@
-
+block 
+inline 
+inline-block
+## doctype 
+- 让浏览器标准模式渲染
+- 让浏览器知道元素的合法性
+## html4 or html5 
+## css reset --  yui lib  Normalize.css 
+``` css
+*{
+    margin: 0;
+    padding: 0 ;
+}
+```
+## a > div 为何合法
+不一定合法 ，取决于外面包裹的元素
 ## CSS 部分问题与解答
 
 
