@@ -1,0 +1,59 @@
+<!-- 文本一样排block  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>float</title>
+</head>
+<style>
+    .container{
+        width: 800px;
+        height: 200px;
+        font-size: 0;
+    }
+    .left{
+        font-size: 20px;
+        background-color: red;
+        display: inline-block;
+        height: 100%;
+        width: 200px;
+        /* position: absolute; */
+        /* height: 200px; */
+    }
+    .right{
+        font-size: 20px;
+        display: inline-block;
+        background-color: blue;
+        /* margin-left: 200px; */
+        
+        height:100%;
+        width: 200px;
+    }
+    .middle{
+        font-size: 20px;
+        display: inline-block;
+        background-color: green;
+        /* margin-left: 200px; */
+        height:100%;
+        width: 200px;
+        
+    }
+    div {
+        display: block;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="left">
+            left
+        </div>
+        <div class="middle">middle</div>
+        <div class="right">
+            right
+        </div>
+       
+    </div>
+</body>
+</html>
