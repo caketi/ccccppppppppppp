@@ -1,5 +1,15 @@
 ise
 
+## big(Oracle) mid(MySQL) small(SQLite)
+
+
+## 数据导入
+get-content set-content
+import-csv  export-csv 格式化数据提取
+select-string out-file
+
+-Delimeter 
+-Encoding 
 
 ## winRM & WSMan 
 service.msc 
