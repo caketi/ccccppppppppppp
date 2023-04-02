@@ -1,5 +1,44 @@
 ise
 
+## webrequest
+.parsedhtml.getElementsByTagName
+
+## export to xml
+
+```powershell
+$dataall = import-csv xxx.txt -Delimiter " "
+$fileloc = "xxx.xml"
+$xmlwriter = new-object system.xml.xmltextwriter($filedoc, $null)
+$xmlwriter.formatting="indented"
+$xmlwriter.indentchar="`t"
+$xmlwriter.writestartdocument()
+$xmlwriter.writestartelement("sensordata")
+$xmlwriter.writecomment("1000 rows sensor data")
+$n=0
+foreach($data in $dataall){
+    $xmlwriter.writestartelement("data")
+    $xmlwriter.writeAttributeString("type", "alldata")
+    $xmlwriter.writeelementString("date", $data.date)
+    $xmlwriter.writeelementString("date", $data.time)
+    $xmlwriter.writeelementString("date", $data.temperature)
+    $xmlwriter.writeelementString("date", $data.shidu)
+    $xmlwriter.writeelementString("date", $data.light)
+    $xmlwriter.writeEndElement()
+}
+
+$xmlwriter.writeEndElement()
+$xmlwriter.writeEndDocument()
+$xmlwriter.flush()
+$xmlwriter.close()
+
+```
+
+ft format-table
+export-clixml
+convertto-xml
+
+&gt &lt &amp   &quot
+
 ## big(Oracle) mid(MySQL) small(SQLite)
 
 
