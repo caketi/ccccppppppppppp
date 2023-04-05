@@ -1,0 +1,23 @@
+$fragm = Get-process | convertto-enhancedhtmlFragment -Properties name,company,@{name="handlecount";expression={$_.handlecount};css={if($_Handles -gt 455){"red"}}} convertto-enhancedhtml -htmlfragments $fragm -cssuri E:\ww\ccccppppppppppp\powershell\abb.css | out-file -filepath E:\ww\ccccppppppppppp\powershell\abb.html
+
+table{
+    font-family: "microsoft yahei";
+    border-collapse: collapse;
+    width: 100%
+}
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: red;
+    color: white;
+}
+tr{
+    border: 1px solid #eee;
+    padding: 2px;
+}
+tr:hover {
+    background-color: #bbb;
+}
+.red{
+    color: red;
+}
