@@ -1,5 +1,13 @@
 ise
 
+## wmi wbemtest
+
+
+## QRCODE 词云 
+pswordcloud 仅支持英文
+$poem = get-content -path xx.txt
+$poem | new-wordcloud -Path .\test.svg -Imagesize 800 -Typeface "Segoe Print" -FocusWord Caketi -AllowRotation none
+
 ## HTML
 
 convertTo-Html
