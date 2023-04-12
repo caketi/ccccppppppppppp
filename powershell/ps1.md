@@ -1,7 +1,21 @@
 ise
 
-## wmi wbemtest
+## Cim common interface model
+避免使用rpc135 
+wswan 限制 无法通过额外账户登录
 
+get-cimclass win32_share
+
+notepad
+get-ciminstance -class win32_process  -filter "name='notepad.exe'" | invoke-cimmethod -name terminate
+
+## wmi wbemtest 基于rpc（135） dcom（445）进行沟通
+Root\cimv2
+Root\webadministrator -- IIS相关命名空间
+Root\MicrosoftDNS 
+win32_perfFormattedData_Perfdisk_logicaldisk 
+get-wmiobject -class win32_operatingsystem -computername
+              -namespace root -class __namespace 
 
 ## QRCODE 词云 
 pswordcloud 仅支持英文
