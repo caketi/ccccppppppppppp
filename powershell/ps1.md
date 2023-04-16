@@ -1,5 +1,26 @@
 ise
 
+## yaml
+
+## 文件夹稽核 文件监控脚本 PowerBI数据可视化
+新建 修改 删除
+设置监听目录
+定义监听属性 行为
+注册监听行为
+写入日志
+## write-progress
+write-progress -activity "xxx" -PercentComplete -Status 
+-id -parentid
+
+```ps1
+for($i=0; $i -le 100; $i++){
+    Write-progress -Status $i -Activity "轮询i" -PercentComplete $i -Id 1
+    for($j=0; $j -le 100; $j++){
+        Write-progress -Status $j -Activity "轮询j" -PercentComplete $i -ParentId 1
+    }
+}
+```
+
 ## Cim common interface model
 避免使用rpc135 
 wswan 限制 无法通过额外账户登录
