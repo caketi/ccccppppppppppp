@@ -33,3 +33,27 @@ sass
 scss 
 
 $col @mixmin @include 
+## Component组件
+## svg iconpark
+## 轮播图
+over-flow: auto
+white-space: nowrap
+inline-block
+
+scroll-snap-align: start|center|end
+scroll-snap-type: [x|y] [mandatory|proximity]
+
+## box-shadow 
+- box-shadow 层次感 特殊效果 没有宽度的边框
+- text-shadow 立体感 印刷品质感
+- border-radius = 50% 圆
+- background repeat size position 纹理 渐变 背景图尺寸适应 雪碧图
+- clip-path 容器裁剪
+- 3d变换 transformer
+
+box-shadow ::before ::after 
+box-shadow outline 不占空间边框
+
+## 动画
+transition 补间动画
+@keyframes 
