@@ -1,3 +1,5 @@
+## 公共样式 页面样式
+## css modules 方案
 ## env
 
 - vue 4.x node v8.9
@@ -57,3 +59,14 @@ box-shadow outline 不占空间边框
 ## 动画
 transition 补间动画
 @keyframes 
+
+## 预处理器框架
+SASS-compass 
+
+## 插件
+browser-sync
+
+margin-left: -11px ??
+## acss滤镜效果
+filter: blur高斯模糊 / brightness / grayscale / sepia深褐色 
+border-radius: 5px; 1个值全补充 奇对奇 偶对偶 ---- 水平方向 | 垂直方向
