@@ -1,4 +1,7 @@
 ## 公共样式 页面样式
+## 高性能动画
+layer触发条件--- 3d perspective transform animation trasition改变opacity 
+video canvas flash css filter
 ## css modules 方案
 ## env
 
@@ -66,7 +69,7 @@ SASS-compass
 ## 插件
 browser-sync
 
-margin-left: -11px ??
+margin-left: -11px ?? 元素的左边框会向左移动，超出其容器的左侧边界。这通常用于调整元素的位置或对齐方式。
 ## acss滤镜效果
 filter: blur高斯模糊 / brightness / grayscale / sepia深褐色 
 border-radius: 5px; 1个值全补充 奇对奇 偶对偶 ---- 水平方向 | 垂直方向
