@@ -21,6 +21,7 @@ https://github.com/somasekhar1919/ML_Fraud_Predication
 [powershell 基础与提升]()
 
 [Android 逆向分析]()
+[cs后端]()
 
 ## book
 
@@ -69,6 +70,7 @@ netsh winsock reset ======== cmd
 [云计算 up](https://space.bilibili.com/471764841)
 
 ## 影视？
+[熊出没 熊芯]()
 
 [文豪野犬]()
 
