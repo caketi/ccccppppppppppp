@@ -1,8 +1,95 @@
 ##  spring
+http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle
 
+
+## crawler 
+503 --- service unavailable  5xx Server Error
+
+## spring boot
+spring framework 
+spring web mvc 
+auto configurations 
+
+- Delete api **question&**
+/fooddelivery.com/restaurants/{restaurantname}/deleteMenu
+/fooddelivery.com/restaurants/deleteByRestaurantname/{restaurantname}
+/users/deleteUser/{userId}
+
+
+## philosophy
+Provide choice at every level
+Maintain strong backward compatibility
+Care about API design
+Set high standards for code quality
+
+## 项目结构粗粒度理解
+domain - 定义所有的变量 jpa相关的Repository
+service - 实现所有的microservice
+rest - http交互
+
+
+
+configuration model and a dependency injection mechanism
 ## WEBSOCKET
 
-- **Fat jar**
+## @Embeddable VS @Entity
+**dependent vs independent**
+- **oo relation** 
+a dependent object is considered an aggregate or composite association
+
+- **relational model**  
+dependent object could have its own table 
+data could be embedded in the independent object's table 
+dependent data is included in the independent object's table .
+
+- **embedded object** 
+cannot be directly persisted or queried can only be persisted 
+or queried in the context of the source object in which it is 
+embedded.
+does not have  an id or table 
+e.g === address depends on user | user is independent on address 
+| address can be embedded in user | address is embeddable 
+
+---------------------------------------------------------------
+- > CrudRepository  
+**interafce for generic crud operations**
+
+- > PagingAndSortingRepository 
+**Iterable<T> findAll Page<T> findAll(Pageable pageable)**
+
+- > JpaRepository 
+**savaAndFlush deleteInBatch deleteAllInBatch**
+
+---------------------------------------------------------------
+
+**Answers** 
+
+--- all about design decision 
+
+```java
+import javax.persistence.Entity/GeneratedValue/Id/ManyToOne;
+import lombok.AllArgsConstructor;
+
+@Entity
+public class UserEntity{
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String username;
+
+    @Embedded
+    private Address address;
+}
+
+@Embeddable
+@AllArgsConstructor ---
+public class Address {
+    private String city;
+}
+```
+
+
+## POM & **Fat jar**
 @SpringBootApplication
 @RestController
 @RequestMapping(value="/{userId}", method=RequestMethod.GET)
