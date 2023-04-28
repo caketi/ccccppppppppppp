@@ -1,6 +1,8 @@
 ##  spring
 http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle
 
+## rabbitmq
+ConnectionFactory-> connection-> channel 
 
 ## crawler 
 503 --- service unavailable  5xx Server Error
