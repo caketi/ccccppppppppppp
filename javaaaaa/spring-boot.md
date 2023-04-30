@@ -1,6 +1,17 @@
 ##  spring
 http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle
 
+## Ads ranking 
+
+- click count  & impression 
+
+
+**TF*IDF** - measures the relative importance of a term in a given piece of text 
+**Term Frequency & Inverse Document Frequency**
+- how often term, e.g "dog", occur in the article
+- the **document frequency** measures how many docs a term appears in. **inverse document frequency(1/df)**
+then measures how **special** the term is.
+
 ## rabbitmq
 ConnectionFactory-> connection-> channel 
 
