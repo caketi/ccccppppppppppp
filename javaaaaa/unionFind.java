@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 public class unionFind {
-
+  
   int[] parent;
   int[] rank;
   int setCount;
