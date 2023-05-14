@@ -1,29 +1,28 @@
+
+# 现代性
+
+- 现代化残酷的一面：战争-殖民-市场的循环中孕育科技进步
+- 工业 农业 国防 科学技术 四个现代化
+- 人口规模巨大的现代化
+
+Modernization is a post-World II, early postcolonial concept, referring to an international catching-up "process of social change whereby less developed societies acquire characterisitics common to more developed societies -- 传统与现代的二元对立
+
+## 哲学的慰藉
+
+伊壁鸠鲁 -- 如何快乐
+塞内加 --
+蒙田 --     动物性
+叔本华 --  生命本质毫无意义 生命意志
+歌德
+
+
 graphql 自省机制
 data={"query":"{__schema {types {name}}}"}&id=1
-
 
 data={"query":"\u0071\u0075\u0065\u0072\u0079\u007b\u005f\u005f\u0074\u0079\u0070\u0065\u0028\u006e\u0061\u006d\u0065\u003a\u0022\u0066\u0066\u0066\u0066\u006c\u006c\u006c\u006c\u0061\u0061\u0061\u0067\u0067\u0067\u0067\u005f\u0031\u006e\u005f\u0068\u0033\u0072\u0033\u005f\u0066\u006c\u0061\u0067\u0022\u0029\u007b\u0020\u0066\u0069\u0065\u006c\u0064\u0073\u0020\u007b\u0020\u0064\u0065\u0073\u0063\u0072\u0069\u0070\u0074\u0069\u006f\u006e\u0020\u006e\u0061\u006d\u0065\u0020\u0074\u0079\u0070\u0065\u0020\u007b\u0020\u006e\u0061\u006d\u0065\u0020\u006b\u0069\u006e\u0064\u0020\u006f\u0066\u0054\u0079\u0070\u0065\u0020\u007b\u0020\u006e\u0061\u006d\u0065\u0020\u006b\u0069\u006e\u0064\u0020\u0064\u0065\u0073\u0063\u0072\u0069\u0070\u0074\u0069\u006f\u006e\u007d\u007d\u007d\u007d\u007d"}&id=1
 (query{__type(name:"ffffllllaaagggg_1n_h3r3_flag"){ fields { description name type { name kind ofType { name kind description}}}}})
 
 data={"query":"query{ffffllllaaagggg_1n_h3r3_flag{flag}}"}&id=1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 It will be the pre-eminent<重点> task of First Book to seek ways by which the excessive<过度> difficulties of penetrating into
 this new world can be overcome, so to speak, piece by piece. We shall start from the natural standpoint, from the 
