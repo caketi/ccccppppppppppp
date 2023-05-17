@@ -96,4 +96,6 @@ void my_sendto(int sockfd, char *out, unsigned char *msg, int msg_len)
 	sll.sll_ifindex = ethreq.ifr_ifindex;
 	//2、发送组好报文的帧数据
 	sendto(sockfd, msg, msg_len, 0, (struct sockaddr *)&sll, sizeof(sll));
+
+	//原始套接字 组帧数据报文---》 从本机的哪块网卡sendto（倒数第二个参数）出去
 }
