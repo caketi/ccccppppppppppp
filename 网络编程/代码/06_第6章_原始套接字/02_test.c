@@ -7,11 +7,20 @@
 #include<pthread.h>
 #include<unistd.h>//_exit
 #include<string.h>//strncpy
+// 0x0800: ip  
+// 0x0806: arp
+// 0x8035: rarp
+// 1: arp请求 2：arp应答 3：rarp请求 4：rarp应答
+
+// 以太网头部 arp协议头部
+// 6    6    2         2 		 2 				1       1     2   6    4   6   4
+// dmac smac frametype hardtype protocaltype  htypelen ptlen op smac sip dmac dip
+
 void my_sendto(int sockfd, char *out, unsigned char *msg, int msg_len);
 void *recv_msg(void *arg)
 {
 	int sockfd = (int)arg;
-	while(1)
+	while(1) // 网络环境复杂，多接受
 	{
 		unsigned char buf[1500]="";
 		recvfrom(sockfd, buf,sizeof(buf), 0,NULL,NULL);
@@ -27,7 +36,7 @@ void *recv_msg(void *arg)
 				char ip[16]="";
 				sprintf(ip,"%d.%d.%d.%d",\
 				buf[28+0],buf[28+1],buf[28+2],buf[28+3]);
-				printf("IP:%s--->MAC:%s\n",ip,mac);
+				printf("IP:%s--->MAC:%s\n",ip,mac);// 目的 - - 查询ip 对应的 mac
 			}
 		}
 	}
@@ -62,13 +71,13 @@ int main()
 		192,168,0,0/*目的IP*/
 	};
 	
-	//创建线程接受arp应答
+	//创建线程接受arp应答 -- 《先接收防止应答没接上》
 	pthread_t tid;
 	pthread_create(&tid,NULL, recv_msg, (void *)sockfd);
 	
 	//发送arp请求帧数据
-	int i=0;
-	for(i=1;i<255;i++)
+	int i=0; 
+	for(i=1;i<255;i++) // 扫描网段 192.168.0.0 - 192.168.0.255 对应的 mac
 	{
 		msg[41]=i;
 		my_sendto(sockfd, "eth0",msg, 42);

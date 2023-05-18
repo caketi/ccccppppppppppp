@@ -45,6 +45,9 @@ int main()
 		return 0;
 	}
 	//获取要发送的消息
+	// 飞秋格式 固定port-2425
+    // 版本:
+
 	printf("请输入要发送的消息:");
 	char data[128]="1_iptux_0#5#2:123:edu:edu:32:loveyou";
 	int data_len = strlen(data);

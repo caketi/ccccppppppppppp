@@ -2,6 +2,7 @@
 #include <pcap.h>
 int main()
 {
+	// pcap 捕获 过滤 分析  存储  数据包
 	//1、创建一个pcap句柄
 	pcap_t *pcap_handle = NULL;
 	pcap_handle = pcap_open_live("eth0",1500,0,0,NULL);
@@ -9,7 +10,7 @@ int main()
 	//2、接受数据
 	struct pcap_pkthdr pck_hdr;//记录收到数据的时间和报文长度
 	unsigned char *msg = NULL;//存放接受到的帧数据
-	msg = pcap_next(pcap_handle, &pck_hdr);
+	msg = pcap_next(pcap_handle, &pck_hdr); 
 	printf("报文长度:%u\n", pck_hdr.caplen);
 	//msg:mac ip  udp/tcp  data
 	//msg的mac地址解析 和 原始套接字一样

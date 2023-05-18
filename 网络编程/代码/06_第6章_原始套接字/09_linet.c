@@ -5,7 +5,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 int main()
-{	
+{	// libnet发送数据 pcap捕获
 	//1、初始化内存
 	libnet_t *lib_handle = libnet_init(LIBNET_LINK_ADV,"eth0",NULL);
 	
