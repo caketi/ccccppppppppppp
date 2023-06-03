@@ -34,7 +34,7 @@
 <p >分时（Time Sharing）；</p>
 </li>
 <li  class="">
-<p  class="te-preview-highlight"><a href="https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/detail/pc?id= >《08 | 用户和权限管理指令： 请简述 Linux 权限划分的原则？》</a>中学习过的环形保护模型；</p>
+<p  class="te-preview-highlight"><a href="https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/detail/pc?id=4614" >《08 | 用户和权限管理指令： 请简述 Linux 权限划分的原则？》</a>中学习过的环形保护模型；</p>
 </li>
 <li >
 <p  class="">区分不同级别的权限；</p>

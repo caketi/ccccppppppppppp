@@ -76,7 +76,7 @@
 <p >下面我找到一张 Windows 内核架构的图片给你一个直观感受。</p>
 <p ><img src="https://s0.lgstatic.com/i/image/M00/61/7F/Ciqc1F-P5suAH9CJAAFl4zKFbJc816.png" alt="Drawing 3.png" ></p>
 <p >Windows 同样支持 Multitask 和 SMP（对称多处理）。Windows 的内核设计属于混合类型。你可以看到内核中有一个 Microkernel 模块。而整个内核实现又像宏内核一样，含有的能力非常多，是一个完整的整体。</p>
-<p >Windows 下也有自己的可执行文件格式，这个格式叫作 Portable Executable（PE），也就是可移植执行文件，扩展名通常是<code data-backticks=" >.exe</code>、<code data-backticks=" >.dll</code>、<code data-backticks=" >.sys</code>等。</p>
+<p >Windows 下也有自己的可执行文件格式，这个格式叫作 Portable Executable（PE），也就是可移植执行文件，扩展名通常是<code data-backticks="1" >.exe</code>、<code data-backticks="1" >.dll</code>、<code data-backticks="1" >.sys</code>等。</p>
 <p >PE 文件的结构和 ELF 结构有很多相通的地方，我找到了一张图片帮助你更直观地理解。 因为这部分知识涉及编译原理，我这里就不详细介绍了，感兴趣同学可以在留言区和大家一起讨论，或者查阅更多资料。</p>
 <p ><img src="https://s0.lgstatic.com/i/image/M00/61/8A/CgqCHl-P5ySAAg5CAACF0kTmx_k209.png" alt="Lark20201021-153828.png" ></p>
 <p >Windows 还有很多独特的能力，比如 Hyper-V 虚拟化技术，有关虚拟化技术我们将在“模块八：虚拟化和其他”中详细讲解。</p>

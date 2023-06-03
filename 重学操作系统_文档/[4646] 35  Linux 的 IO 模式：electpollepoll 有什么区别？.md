@@ -49,7 +49,7 @@
   select(..., &amp;read_fd_set, &amp;write_fd_set, &amp;error_fd_set); 
 }
 </code></pre>
-<p ><strong >每次 select 操作会阻塞当前线程，在阻塞期间所有操作系统产生的每个消息，都会通过遍历的手段查看是否在 3 个集合当中</strong>。上面程序<code data-backticks=" >read_fd_set</code>中放入的是当数据可以读取时进程关心的 Socket；<code data-backticks=" >write_fd_set</code>是当数据可以写入时进程关心的 Socket；<code data-backticks=" >error_fd_set</code>是当发生异常时进程关心的 Socket。</p>
+<p ><strong >每次 select 操作会阻塞当前线程，在阻塞期间所有操作系统产生的每个消息，都会通过遍历的手段查看是否在 3 个集合当中</strong>。上面程序<code data-backticks="1" >read_fd_set</code>中放入的是当数据可以读取时进程关心的 Socket；<code data-backticks="1" >write_fd_set</code>是当数据可以写入时进程关心的 Socket；<code data-backticks="1" >error_fd_set</code>是当发生异常时进程关心的 Socket。</p>
 <p >**用户程序可以根据不同集合中是否有某个 Socket 判断发生的消息类型，**程序如下所示：</p>
 <pre class="lang-c++" ><code data-language="c++">fd_set read_fd_set, write_fd_set, error_fd_set;
 <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>) {
@@ -205,12 +205,12 @@
 <p >poll 虽然优化了编程模型，但是从性能角度分析，它和 select 差距不大。因为内核在产生一个消息之后，依然需要遍历 poll 关注的所有文件描述符来确定这条消息是否跟用户程序相关。</p>
 <h4 >epoll</h4>
 <p >为了解决上述问题，<strong >epoll 通过更好的方案实现了从操作系统订阅消息。epoll 将进程关注的文件描述符存入一棵二叉搜索树，通常是红黑树的实现</strong>。在这棵红黑树当中，Key 是 Socket 的编号，值是这个 Socket 关注的消息。因此，当内核发生了一个事件：比如 Socket 编号 1000 可以读取。这个时候，可以马上从红黑树中找到进程是否关注这个事件。</p>
-<p ><strong >另外当有关注的事件发生时，epoll 会先放到一个队列当中。当用户调用</strong><code data-backticks=" >epoll_wait</code>时候，就会从队列中返回一个消息。epoll 函数本身是一个构造函数，只用来创建红黑树和队列结构。<code data-backticks=" >epoll_wait</code>调用后，如果队列中没有消息，也可以马上返回。因此<code data-backticks=" >epoll</code>是一个非阻塞模型。</p>
+<p ><strong >另外当有关注的事件发生时，epoll 会先放到一个队列当中。当用户调用</strong><code data-backticks="1" >epoll_wait</code>时候，就会从队列中返回一个消息。epoll 函数本身是一个构造函数，只用来创建红黑树和队列结构。<code data-backticks="1" >epoll_wait</code>调用后，如果队列中没有消息，也可以马上返回。因此<code data-backticks="1" >epoll</code>是一个非阻塞模型。</p>
 <p ><strong >总结一下，select/poll 是阻塞模型，epoll 是非阻塞模型</strong>。<strong >当然，并不是说非阻塞模型性能就更好。在多数情况下，epoll 性能更好是因为内部有红黑树的实现</strong>。</p>
 <p >最后我再贴一段用 epoll 实现的 Socket 服务给你做参考，这段程序的作者将这段代码放到了 Public Domain，你以后看到公有领域的代码可以放心地使用。</p>
-<p >下面这段程序跟之前 select 的原理一致，对于每一个新的客户端连接，都使用 accept 拿到这个连接的文件描述符，并且创建一个客户端的 Socket。然后通过<code data-backticks=" >epoll_ctl</code>将客户端的文件描述符和关注的消息类型放入 epoll 的红黑树。操作系统每次监测到一个新的消息产生，就会通过红黑树对比这个消息是不是进程关注的（当然这段代码你看不到，因为它在内核程序中）。</p>
+<p >下面这段程序跟之前 select 的原理一致，对于每一个新的客户端连接，都使用 accept 拿到这个连接的文件描述符，并且创建一个客户端的 Socket。然后通过<code data-backticks="1" >epoll_ctl</code>将客户端的文件描述符和关注的消息类型放入 epoll 的红黑树。操作系统每次监测到一个新的消息产生，就会通过红黑树对比这个消息是不是进程关注的（当然这段代码你看不到，因为它在内核程序中）。</p>
 <p ><strong >非阻塞模型的核心价值，并不是性能更好。当真的高并发来临的时候，所有的 CPU 资源，所有的网络资源可能都会被用完。这个时候无论是阻塞还是非阻塞，结果都不会相差太大</strong>。（前提是程序没有写错）。</p>
-<p ><code data-backticks=" >epoll</code>有 2 个最大的优势：</p>
+<p ><code data-backticks="1" >epoll</code>有 2 个最大的优势：</p>
 <ol >
 <li >
 <p >内部使用红黑树减少了内核的比较操作；</p>
@@ -392,7 +392,7 @@
 	
 	  <span class="hljs-keyword">int</span> epollfd = epoll_create1(<span class="hljs-number">0</span>);
 	  <span class="hljs-keyword">if</span> (epollfd &lt; <span class="hljs-number">0</span>) {
-	    perror_die(<span class="hljs-string">"epoll_create</span>);
+	    perror_die(<span class="hljs-string">"epoll_create1"</span>);
 	  }
 	
 	  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">epoll_event</span> <span class="hljs-title">accept_event</span>;</span>

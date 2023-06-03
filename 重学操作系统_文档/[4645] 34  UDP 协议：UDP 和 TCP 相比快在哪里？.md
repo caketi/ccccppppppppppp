@@ -15,7 +15,7 @@
   c = c xor x;
 }
 </code></pre>
-<p ><code data-backticks=" >xor</code>是异或运算。上面的程序在计算字节数组 bytes 的校验和。<code data-backticks=" >c</code>是最终的结果。你可以看到将所有<code data-backticks=" >bytes</code>两两异或，最终的结果就是校验和。假设我们要传输 bytes，如果在传输过程中<code data-backticks=" >bytes</code>发生了变化，校验和有<strong >很大概率</strong>也会跟着变化。当然也可能存在<code data-backticks=" >bytes</code>发生变化，校验和没有变化的特例，不过校验和可以很大程度上帮助我们识别数据是否损坏了。</p>
+<p ><code data-backticks="1" >xor</code>是异或运算。上面的程序在计算字节数组 bytes 的校验和。<code data-backticks="1" >c</code>是最终的结果。你可以看到将所有<code data-backticks="1" >bytes</code>两两异或，最终的结果就是校验和。假设我们要传输 bytes，如果在传输过程中<code data-backticks="1" >bytes</code>发生了变化，校验和有<strong >很大概率</strong>也会跟着变化。当然也可能存在<code data-backticks="1" >bytes</code>发生变化，校验和没有变化的特例，不过校验和可以很大程度上帮助我们识别数据是否损坏了。</p>
 <p  class=""><img src="https://s0.lgstatic.com/i/image2/M01/05/49/CgpVE1_-o5GADgRkAABcTgxXiyw544.png" alt="Lark20210113-153833.png" ></p>
 
 <p >当要传输数据的时候，数据会被分片，我们把每个分片看作一个字节数组。然后在分片中，预留几个字节去存储校验和。校验和随着数据分片一起传输到目的地，目的地会用同样的算法再次计算校验和。如果二者校验和不一致，代表中途数据发生了损坏。</p>

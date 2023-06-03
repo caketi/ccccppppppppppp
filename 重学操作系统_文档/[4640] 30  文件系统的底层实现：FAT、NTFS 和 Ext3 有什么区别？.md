@@ -37,11 +37,11 @@
 <p ><img src="https://s0.lgstatic.com/i/image2/M01/03/FB/Cip5yF_ltCKAQ8wsAACxv79iv44798.png" alt="Lark20201225-174114.png" ></p>
 <p >如上图，/foo 和 /bar 两个目录中的 b.txt 和 c.txt 其实是一个文件，但是拥有不同的名称。这种形式我们称作“硬链接”，就是多个文件共享 inode。</p>
 <p ><img src="https://s0.lgstatic.com/i/image2/M01/03/FB/Cip5yF_ltCmANmxDAAEX0KEBlYU772.png" alt="Drawing 5.png" ></p>
-<p >硬链接有一个非常显著的特点，硬链接的双方是平等的。上面的程序我们用<code data-backticks=" >ln</code>指令为文件 a 创造了一个硬链接<code data-backticks=" >b</code>。如果我们创造完删除了 a，那么 b 也是可以正常工作的。如果要删除掉这个文件的 inode，必须 a,b 同时删除。这里你可以看出 a,b 是平等的。</p>
+<p >硬链接有一个非常显著的特点，硬链接的双方是平等的。上面的程序我们用<code data-backticks="1" >ln</code>指令为文件 a 创造了一个硬链接<code data-backticks="1" >b</code>。如果我们创造完删除了 a，那么 b 也是可以正常工作的。如果要删除掉这个文件的 inode，必须 a,b 同时删除。这里你可以看出 a,b 是平等的。</p>
 <p >和硬链接相对的是软链接，软链接的原理如下图：</p>
 <p ><img src="https://s0.lgstatic.com/i/image2/M01/03/FD/CgpVE1_ltDGAXzaKAADF0IcW0HA765.png" alt="Lark20201225-174117.png" ></p>
-<p >图中<code data-backticks=" >c.txt</code>是<code data-backticks=" >b.txt</code>的一个软链接，软链接拥有自己的<code data-backticks=" >inode</code>，但是文件内容就是一个快捷方式。因此，如果我们删除了<code data-backticks=" >b.txt</code>，那么<code data-backticks=" >b.txt</code>对应的 inode 也就被删除了。但是<code data-backticks=" >c.txt</code>依然存在，只不过指向了一个空地址（访问不到）。如果删除了<code data-backticks=" >c.txt</code>，那么不会对<code data-backticks=" >b.txt</code>造成任何影响。</p>
-<p >在 Linux 中可以通过<code data-backticks=" >ln -s</code>创造软链接。</p>
+<p >图中<code data-backticks="1" >c.txt</code>是<code data-backticks="1" >b.txt</code>的一个软链接，软链接拥有自己的<code data-backticks="1" >inode</code>，但是文件内容就是一个快捷方式。因此，如果我们删除了<code data-backticks="1" >b.txt</code>，那么<code data-backticks="1" >b.txt</code>对应的 inode 也就被删除了。但是<code data-backticks="1" >c.txt</code>依然存在，只不过指向了一个空地址（访问不到）。如果删除了<code data-backticks="1" >c.txt</code>，那么不会对<code data-backticks="1" >b.txt</code>造成任何影响。</p>
+<p >在 Linux 中可以通过<code data-backticks="1" >ln -s</code>创造软链接。</p>
 <pre class="lang-java" ><code data-language="java">ln -s a b # 将b设置为a的软链接(b是a的快捷方式)
 </code></pre>
 <p >以上，我们对文件系统的实现有了一个初步的了解。从<strong >整体设计上，本质还是将空间切块，然后划分成目录和文件管理这些分块</strong>。读、写文件需要通过 inode 操作磁盘。操作系统提供的是最底层读写分块的操作，抽象成文件就交给文件系统。比如想写入第 10001 个字节，那么会分成这样几个步骤：</p>
