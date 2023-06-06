@@ -1,3 +1,12 @@
+## 前端路由
+用户事件不同，响应
+
+## V-IF & v-show
+
+- v-if 通过操作dom元素来进行切换显示 true-存在 false-移除
+- v-show 通过简单控制dom元素的display属性 display-none
+
+
 ## 刷新后二次加载路由
 ```javascript
 1. window.location.reload()
