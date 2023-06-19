@@ -1,6 +1,17 @@
-block
-inline
-inline-block
+# qa
+
+seo搜索引擎优化
+DTD doctype
+header
+body
+
+    block
+    inline
+    inline-block
+
+## UTF-8 gb2312（gbk)
+
+1个汉字3个字节 1个汉字2个字节
 
 ## 如何清除浮动
 

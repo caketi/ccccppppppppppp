@@ -1,11 +1,79 @@
-<!-- &nbsp--空格 -->
+<!-- &nbsp--空格 cascade style sheet 结构层 样式层 行为层 -->
+<!-- @import url(xxx.css) 导入式会直接渲染html后加载css 行内 外链 内嵌 -->
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>css 选择器</title>
+    <ol type="a" reversed>
+        <li>acaketi</li>
+        <li>aaa/li>
+    </ol>
+    <dl>
+        <dt>caketi</dt>
+        <dd> wnt to hack noodles</dd>
+    </dl>
+    <form>
+        <p>
+            <!-- html4 label for -->
+            <input type="radio" name="sex" value="g" id="gg"><label for="gg">girl</label>
+            <label>
+                <input type="checkbox" name="hobby" value="caketi">caketi
+                <input type="radio" name="sex" value="b" checked>boy
+            </label>
+            <input type="text" placeholder="caketi" disabled>
+            <input type="text" placeholder="caketi">
+            <input type="radio" name="sex" value="b" checked>boy
+            <input type="radio" name="sex" value="g">girl
+        </p>
+
+        <input type="email">
+        <button>普通button</button>
+        <input type="submit" value="提交表单">
+        <input type="reset" value="重置表单">
+    </form>
+    <p>电子邮件：<input type="email"></p>
+    <p>颜色：<input type="color"></p>
+    <p>拖拽：<input type="range" min="10" max="20"></p>
+    <p>必填：<input type="text"></p>
+    <p>时间选择：<input type="time"></p>
+    <p>数字：<input type="number" min="1" max="3"></p>
+    <p>表单：<input type="submit" value="提交表单"></p>
+    <p>搜索：<input type="search"></p>
+    <p>密码：<input type="password"></p>
+    <p>
+        留言框：
+        <textarea cols="10" rows="11"></textarea>
+    </p>
+    <p>搜索：<input type="text" list="province-list"></p>
+    <datalist id="province-list">
+        <option value="山东"></option>
+        <option value="山东3"></option>
+        <option value="山东2"></option>
+        <option value="山地方"></option>
+        <option value="山XO"></option>
+    </datalist>
+    <p>下拉菜单：
+        <select>
+            <option value="js">js</option>
+            <option value="js2">js2</option>
+            <option value="js3">js3</option>
+        </select>
+    </p>
+
+
+    <table border="1" width="500">
+        <caption>表格标题</caption>
+        <tr>
+            <th>测试</th>
+            <th>测试2</th>
+            <th>测试3</th>
+        </tr>
+    </table>
     <table border="1111">
+
         <tr align="center">
             <td colspan="2">test1</td>
             <td colspan="3">rtt</td>
@@ -22,36 +90,39 @@
             <td>ttttt</td>
         </tr>
     </table>
-    
+
     <style>
-        .test2{
-            color: red!important;
+        .test2 {
+            color: red !important;
         }
-        .test2{
+
+        .test2 {
             width: 400px;
             height: 200px;
             border: 5px dashed red;
             color: blue;
         }
-        #test3{
+
+        #test3 {
             color: red;
         }
+
         .test1 {
             background-image: url();
             line-height: 60px;
             height: 100px;
             background: linear-gradient(to right, red, green);
         }
-       
-
     </style>
-    <br>!important优先级最高 
+    <br>!important优先级最高
     <br>元素属性优先级高
 </head>
+
 <body class="body" id="body">
     <div class="test1">test1</div>
     <div class="test2">test2</div>
     <div class="test3" style="color:blue">test3</div>
-    
+
 </body>
+
 </html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p.para{
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+        }
+        p:empty{
+            background-color: red;
+        }
+        input:focus{
+            background-color: red;
+        }
+        input:disabled{
+            border: 1px solid #000;
+        }
+        input:enabled{
+            border: 1px solid burlywood;
+        }
+        input:checked+span{
+            color:rebeccapurple;
+        }
+        :root{
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <p class="para"></p>
+    <p class="para"></p>
+    <p class="para">111</p>
+    <p class="para"> </p>
+  
+    <input type="text">
+    <input type="text" disabled>
+    <input type="text">
+
+    <p>
+        <input type="checkbox"> <span>caketi</span>
+        <input type="checkbox"> <span>caketi</span>
+        <input type="checkbox"> <span>caketi</span>
+    </p>
+    
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            border: 1px solid #000;
+        }
+        .box1 p:first-child{
+            color: red;
+        }
+        .box1 p:last-child{
+            color: brown;
+        }
+        .box1 p:nth-last-child(3){
+            font-size: 40px;
+        }
+        .box2 p:nth-child(3n+1){
+            color: aqua;
+        }
+        .box3 p:nth-of-type(3){
+            color:bisque;
+        }
+        .box3 h3:nth-of-type(2){
+            color: olive;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1">
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+    </div>
+    <div class="box2">
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+    </div>
+    <div class="box3">
+        <p>1</p>
+        <p>1</p>
+        <h3>hfsf</h3>
+        <p>1</p>
+        <p>1</p>
+        <h3>fsf</h3>
+        <p>1</p>
+    </div>
+
+
+</body>
+
+</html>
