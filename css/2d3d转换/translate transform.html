@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* rotateX() 横轴 */
+        /* rotateY() 纵轴 perspective景深设置 透视强度*/
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        
+        .box1{
+            width: 203px;
+            height: 203px;
+            border: 1px solid #000;
+            margin: 50px auto;
+            perspective: 300px;
+        }
+        .box1 p{
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+            background-color: orange;
+            transform: rotateX(22deg);
+        }
+        .box2{
+            width: 203px;
+            height: 203px;
+            border: 1px solid #000;
+            margin: 50px auto;
+            perspective: 300px;
+        }
+        .box2 p{
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+            background-color: orange;
+            transform: rotateY(22deg);
+        }
+        .box{
+            width:200px;
+            height: 200px;
+            border: 1px solid #000;
+            margin: 100px auto;
+            perspective: 300px;
+            position: relative;
+        }
+        .box p{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 200px;
+        }
+        .box p:nth-child(1){
+            background-color: blue;
+            transform: translateZ(100px); 
+            /* 前面 */
+        }
+        .box p:nth-child(2){
+            background-color: black;
+            transform: rotateX(90deg) translateZ(100px);
+            /* 顶面 */
+        }
+        .box p:nth-child(3){
+            background-color: green;
+            transform: rotateX(180deg) translateZ(100px);
+            /* 背面 */
+        }
+        .box p:nth-child(4){
+            background-color: pink;
+            transform: rotateX(-90deg) translateZ(100px);
+            /* 底面 */
+        }
+        .box p:nth-child(5){
+            background-color: fuchsia;
+            /* 侧面 */
+            transform: rotateY(90deg) translateZ(100px);
+        }
+        .box p:nth-child(6){
+            background-color: brown;
+        }
+    
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+    </div>
+    <div class="box1">
+        <p></p>
+    </div>
+    <div class="box2">
+        <p></p>
+    </div>
+</body>
+</html>

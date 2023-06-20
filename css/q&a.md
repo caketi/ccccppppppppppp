@@ -9,6 +9,34 @@ body
     inline
     inline-block
 
+## 绝对定位水平居中 50% margin-top margin-left 一半
+
+```css
+p{
+    width: 80px;
+    height: 80px;
+    background-color: orange;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -40px;
+    margin-left: -40px;
+}
+```
+
+## 如何创建BFC
+
+1. float的值不是none
+2. position的值不是static relative
+3. display的值是inline-block、flex或inline-flex
+4. overflow:hidden --- 非常好用
+
+- 垂直显示的盒子不要设置浮动，只有并排显示的盒子设置浮动
+- 大盒子带着小盒子跑 一个大盒子中，内部可以继续使用浮动
+- div免费，可不节约
+
+## 脱离文档流 浮动、绝对定位、固定定位
+
 ## UTF-8 gb2312（gbk)
 
 1个汉字3个字节 1个汉字2个字节
@@ -62,7 +90,7 @@ body
 
 这里是 [Front End Web Development Quiz](http://davidshariff.com/quiz/) 中的 CSS 部分问题与解答.
 
-1.  Q: CSS 属性是否区分大小写？
+1. Q: CSS 属性是否区分大小写？
 
         ```
         ul {
@@ -73,7 +101,7 @@ body
     A: 不区分。
     HTML，CSS 都对大小写不敏感，但为了更好的可读性和团队协作一般都小写，而在 XHTML 中元素名称和属性是必须小写的。
 
-2.  Q: 行内(inline)元素 设置`margin-top`和`margin-bottom` 是否起作用？
+2. Q: 行内(inline)元素 设置`margin-top`和`margin-bottom` 是否起作用？
 
     A: 不起作用。(答案是起作用，个人觉得不对。)
 
@@ -90,19 +118,19 @@ body
 
     <http://codepen.io/paddingme/pen/JwCDF>
 
-3.  Q: 对内联元素设置`padding-top`和`padding-bottom`是否会增加它的高度？（原题是 Does setting padding-top and padding-bottom on an inline element add to its dimensions?）
+3. Q: 对内联元素设置`padding-top`和`padding-bottom`是否会增加它的高度？（原题是 Does setting padding-top and padding-bottom on an inline element add to its dimensions?）
 
     A: 答案是不会。同上题比较纠结，不太明白这里的 dimensions 指的是到底是什么意思？放置一边，咱们来分析下。对于行内元素，设置左右内边距，左右内边距将是可见的。而设置上下内边距，设置背景颜色后可以看见内边距区域有增加，对于行内非替换元素，不会影响其行高，不会撑开父元素。而对于替换元素，则撑开了父元素。看下 demo，更好的理解下：
 
     <http://codepen.io/paddingme/pen/CnFpa>
 
-4.  Q: 设置`p`的`font-size:10rem`，当用户重置或拖曳浏览器窗口时，文本大小是否会也随着变化？
+4. Q: 设置`p`的`font-size:10rem`，当用户重置或拖曳浏览器窗口时，文本大小是否会也随着变化？
 
     A: 不会。
 
     `rem`是以`html`根元素中`font-size`的大小为基准的相对度量单位，文本的大小不会随着窗口的大小改变而改变。
 
-5.  Q: 伪类选择器`:checked`将作用与`input`类型为`radio`或者`checkbox`,不会作用于`option`。
+5. Q: 伪类选择器`:checked`将作用与`input`类型为`radio`或者`checkbox`,不会作用于`option`。
 
     A: 不对。
 
@@ -110,7 +138,7 @@ body
 
     > The :checked CSS pseudo-class selector represents any radio (`<input type="radio">`), checkbox (`<input type="checkbox">`) or option (`<option>`in a `<select>`) element that is checked or toggled to an on state. The user can change this state by clicking on the element, or selecting a different value, in which case the :checked pseudo-class no longer applies to this element, but will to the relevant one.
 
-6.  Q: 在 HTML 文本中，伪类`:root`总是指向`html`元素？
+6. Q: 在 HTML 文本中，伪类`:root`总是指向`html`元素？
 
     A: 不是（答案中给出了是 ==||）。以下摘自知乎[:root 与 html 在 CSS3 中指的是同一个元素吗？](http://www.zhihu.com/question/20312140)的答案：
 
@@ -120,11 +148,11 @@ body
     data:application/xhtml+xml,<div xmlns="http://www.w3.org/1999/xhtml"><style>:root { background: green; } html { background: red !important; }</style></div>
     ```
 
-7.  Q:`translate()`方法能移动一个元素在 z 轴上的位置？
+7. Q:`translate()`方法能移动一个元素在 z 轴上的位置？
 
     A: 不能。`translate()`方法只能改变 x 轴，y 轴上的位移。
 
-8.  Q: 如下代码中文本“Sausage”的颜色是?
+8. Q: 如下代码中文本“Sausage”的颜色是?
 
     ```
     <ul class="shopping-list" id="awesome">
@@ -140,7 +168,7 @@ body
 
     A: blue。
 
-9.  Q: 如下代码中文本“Sausage”的颜色是?
+9. Q: 如下代码中文本“Sausage”的颜色是?
 
     ```
     <ul class="shopping-list" id="awesome">
@@ -408,7 +436,7 @@ tips:根据以上考点总结下如下知识点，后期会写文章进行总结
   - [What is the difference between visibility:hidden and display:none?](http://stackoverflow.com/questions/133051/what-is-the-difference-between-visibilityhidden-and-displaynone)
   - [display:none 和 visibility:hidden 的区别！](http://bbs.blueidea.com/thread-2942695-1-1.html)
 
-  > `display:none`和`visibility:hidden`都是把网页上某个元素隐藏起来的功能，但两者有所区别，经过亲自实验，我发现使用`` visibility:hidden`属性会使对象不可见，但该对象在网页所占的空间没有改变（看不见但摸得到），等于留出了一块空白区域，而 `display:none`属性会使这个对象彻底消失（看不见也摸不到）
+  > `display:none`和`visibility:hidden`都是把网页上某个元素隐藏起来的功能，但两者有所区别，经过亲自实验，我发现使用`` visibility:hidden`属性会使对象不可见，但该对象在网页所占的空间没有改变（看不见但摸得到），等于留出了一块空白区域，而`display:none`属性会使这个对象彻底消失（看不见也摸不到）
 
   > `display:none` means that the the tag in question will not appear on the page at all (although you can still interact with it through the dom). There will be no space allocated for it between the other tags. visibility:hidden means that unlike display:none, the tag is not visible, but space is allocated for it on the page. so for example:
 
