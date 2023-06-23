@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 1200px;
+            overflow: hidden;
+            margin: 40px auto;
+        }
+        .box ul {
+            list-style: none;
+        }
+        .box ul li{
+            float: left;
+            width: 380px;
+            margin-right: 20px;
+            position: relative;
+        }
+        .box ul li img{
+            width: 380px;
+            height: 210px;
+        }
+        .box ul li .info{
+            font-weight: bold;
+            font-style: italic;
+            position: absolute;
+            width: 370px;
+            padding-left: 10px;
+            color: green;
+            bottom: 0;
+            padding-left: 10px;
+            line-height: 30px;
+            height: 30px;
+            background-color: gold;
+            /* 透明度设置为0 不是背景的透明度 是整体的透明度 */
+            opacity: 0;
+            /* 过渡 */
+            transition: opacity 1s ease 0s;
+        }
+        .box ul li:hover .info{
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li>
+                <img src="th.jfif" alt="">
+                <div class="info">test opacity & transition</div>
+            </li>
+            <li>
+                <img src="th.jfif" alt="">
+                <div class="info">overflow:hidden</div>
+            </li>
+            <li>
+                <img src="th.jfif" alt="">
+                <div class="info">transition: opacity 1s ease 0s</div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
