@@ -12,7 +12,12 @@
             margin: 0;
             padding: 0;
         }
-        
+        section{
+            width: 200px;
+            height: 200px;
+            margin: 100px auto;
+            perspective: 10000px;
+        }
         .box1{
             width: 203px;
             height: 203px;
@@ -44,10 +49,16 @@
         .box{
             width:200px;
             height: 200px;
-            border: 1px solid #000;
-            margin: 100px auto;
-            perspective: 300px;
+            /* border: 1px solid #000; */
+            /* margin: 100px auto; */
+            /* perspective: 300px; */
+            perspective: 10000px;
             position: relative;
+            transform-style: preserve-3d;
+            transition: all 10s ease 0s;
+        }
+        section:hover .box{
+            transform: rotateX(360deg) rotateY(360deg);
         }
         .box p{
             position: absolute;
@@ -72,7 +83,7 @@
             /* 背面 */
         }
         .box p:nth-child(4){
-            background-color: pink;
+            background-color: orange;
             transform: rotateX(-90deg) translateZ(100px);
             /* 底面 */
         }
@@ -83,20 +94,25 @@
         }
         .box p:nth-child(6){
             background-color: brown;
+            transform: rotateY(-90deg) translateZ(100px)
         }
     
 
     </style>
 </head>
 <body>
-    <div class="box">
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-    </div>
+    <section>
+        <div class="box">
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+        </div>
+
+    </section>
+
     <div class="box1">
         <p></p>
     </div>
