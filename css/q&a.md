@@ -11,6 +11,11 @@ body
     inline
     inline-block
 
+## slice() substring() substr()
+
+slice() substring() [a,b) -- 其中substring()的参数可以互换
+substr(1,3) 1开始取3个
+
 ## 绝对定位水平居中 50% margin-top margin-left 一半
 
 ol绝对定位，li浮动

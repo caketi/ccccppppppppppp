@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://lib.baomitu.com/babel-core/5.8.38/browser.min.js"></script>
+</head>
+
+<body>
+    <div id='root'></div>
+    <script type="text/babel">
+        // let Component = () => <div>stduy react</div>
+        // let reactEle = <div style="color:red">
+        //                     hello3
+        //                     <Component></Component>
+        //                     <p>
+        //                        <span>good</span>
+        //                     </p>
+        //                 </div>
+        //         console.log(reactEle);
+
+        // class ClassComponent{
+        //     render(){
+        //         return <span>caketi</span>
+        //     }
+        // }
+        // let componentNode = <div><ClassComponent></ClassComponent></div>
+        // console.log(componentNode);
+
+        class Component extends React.Component {
+            render() {
+                return <div>caketi</div>
+            }
+        }
+        // function Component(){
+        // 
+        // }
+        //    React.Component.prototype
+
+        class Component {
+            constructor() {
+                this.state = {}
+            }
+            render() {
+                return <div>caketi</div>
+            }
+        }
+        console.log(<Component></Component>);
+        ReactDOM.render(<Component></Component>, document.getElementById('root'))
+
+
+
+
+        
+        // let FuncComponent = function () {
+        // }
+        // FuncComponent.prototype = new React.Component();
+        // FuncComponent.prototype.render = function () {
+        //     return <div>caketi</div>
+        // }
+        // console.log(FuncComponent.prototype);
+        // ReactDOM.render(<FuncComponent></FuncComponent>, document.getElementById('root'))
+    </script>
+</body>
+
+</html>
