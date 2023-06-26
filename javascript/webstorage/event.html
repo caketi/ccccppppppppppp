@@ -1,0 +1,9 @@
+<button onclick="changeStore()">触发更新,看本地存储字段的变化 开两个本网页 触发更新 本页面无log信息 另一个有</button>
+<script>
+    const changeStore = () =>{
+        localStorage.setItem('username', new Date().getTime());
+    }
+    addEventListener("storage", (e) =>{
+        console.info(e);
+    }, true);
+</script>

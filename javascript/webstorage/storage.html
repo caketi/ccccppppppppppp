@@ -1,0 +1,29 @@
+<script>
+    let Store = function(storeType){
+        if(storeType === "memory"){
+            // 返回内存存储设备
+        }
+    }
+    let sessionStorage$1;
+    let Storage$1 = function(storeType){
+        if(sessionStorage$1){
+            throw new Error('Uncaught TypeError: Illegal constructor');
+        }
+        if(storeType === 'sessionStorage'){
+            this.store = new Store('memory');
+        }else {
+            this.store = new Store('file');
+        }
+    }
+    Storage$1.prototype['clear'] = function(){}
+    Storage$1.prototype['getItem'] = function(key){}
+    Storage$1.prototype['setItem'] = function(key,val){}
+    Storage$1.prototype['removeItem'] = function(key){}
+    function browserCreateSessionStorage(){
+        sessionStorage$1 = new Storage$1("sessionStorage");
+    }
+    browserCreateSessionStorage();
+    console.log(sessionStorage$1);
+  
+
+</script>

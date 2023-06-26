@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="box">
+        <p>p1</p>
+        <p id="para">
+            <span id="p">22</span>p2
+        </p>
+        <p>p3</p>
+    </div>
+    <ul id="list1">
+        <li>list1</li>
+        <li>list1</li>
+        <li>list1</li>
+        <li>list1</li>
+    </ul>
+    <script>
+        // getElementById--ie6--getElementByTagName
+        // getElementByClassName--ie9--querySelector--querySelectorAll
+        var li_inlist = document.querySelectorAll('#list1 li');
+        console.info(li_inlist)  
+        // 长度为1的数组
+        console.info(typeof li_inlist)
+
+        var list1 = document.getElementById('list1');
+        var li_inlist1 = list1.getElementsByTagName('li');
+        console.info(li_inlist1)
+
+        var the_p = document.querySelector('#box p:nth-child(3)');
+        console.info(the_p)
+
+        var box = document.getElementById('box');
+        var para = document.getElementById('para');
+        var p_span = document.getElementById('p');
+        // 返回元素的所有子元素节点 兼容IE6 无嵌套？？？
+        function getChildren(node) {
+            var children = [];
+            for (var i = 0; i < node.childNodes.length; i++) {
+                if (node.childNodes[i].nodeType == 1) {
+                    children.push(node.childNodes[i]);
+                }
+            }
+            return children;
+        }
+
+        console.info(getChildren(box));
+        console.info(getChildren(para));
+
+        function getElementPrevSibling(node) {
+            var o = node;
+
+            while (o.previousSibling != null) {
+                // document的nodeType=9  元素节点 1 例如<p> <div>
+                // 文字节点 3  注释节点 8  
+                // DTD节点 10
+                if (o.previousSibling.nodeType == 1) {
+                    return o.previousSibling;
+                    // 找到了1
+                }
+                o = o.previousSibling;
+                // 没找到继续向上找
+            }
+        }
+        console.info(getElementPrevSibling(para));
+
+        function getAllElementSibling(node) {
+            var prevs = [];
+
+            var nexts = [];
+
+            var o = node;
+
+            while (o.previousSibling != null) {
+                if (o.previousSibling.nodeType == 1) {
+                    prevs.unshift(o.previousSibling);
+                }
+                o = o.previousSibling;
+            }
+
+            o = node;
+            // 复位 向下
+            while (o.nextSibling != null) {
+                if (o.nextSibling.nodeType == 1) {
+                    prevs.push(o.nextSibling);
+                }
+                o = o.nextSibling;
+            }
+            return prevs.concat(nexts);
+        }
+        console.log(getAllElementSibling(para));
+    </script>
+
+</body>
+
+</html>

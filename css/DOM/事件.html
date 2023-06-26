@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .modal {
+            width: 888px;
+            height: 200px;
+            background-color: #444;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -100px;
+            margin-left: -444px;
+        }
+
+        #box2 {
+            position: absolute;
+            top: 200px;
+            left: 200px;
+            width: 200px;
+            height: 200px;
+            background-color: aquamarine;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: #444;
+        }
+
+        body {
+            /* height: 2000px; */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box2"></div>
+
+
+    <p>
+        <input type="text" id="test_code1">
+    <h1 id="info1"></h1>
+    <input type="text" id="test_code2">
+    <h1 id="info2"></h1>
+    </p>
+
+    <p>
+        只能输入小写字母和数字 <input type="text" id="field">
+    </p>
+
+
+    <button id="btn">弹出弹出层</button>
+    <div class="modal" id="modal"></div>
+
+    <div id="box"></div>
+    <h1 id="info">0</h1>
+    <script>
+
+        var oBox2 = document.getElementById('box2');
+        var t = 200;
+        var l = 200;
+        document.onkeydown = function (e) {
+            switch (e.keyCode) {
+                case 37:
+                    l -= 3;
+                    break;
+                case 38:
+                    t -= 3;
+                    break;
+                case 39:
+                    l += 3;
+                    break;
+                case 40:
+                    t += 3;
+                    break;
+            }
+            oBox2.style.left = l + 'px';
+            oBox2.style.top = t + 'px';
+        }
+
+        var oTest_code1 = document.getElementById('test_code1')
+        var oInfo1 = document.getElementById('info1')
+        var oInfo2 = document.getElementById('info2')
+        var oTest_code2 = document.getElementById('test_code2')
+
+        oTest_code1.onkeypress = function (e) {
+            oInfo1.innerText = '该字符的字符码是' + e.charCode;
+        }
+        oTest_code2.onkeydown = function (e) {
+            oInfo2.innerText = '该按键的键码是' + e.keyCode;
+        }
+
+
+        var oField = document.getElementById('field');
+        oField.onkeypress = function (e) {
+            console.info(e.charCode);
+            //     字符码    键码
+            // 0-9 48-57
+            // A-Z 65-90
+            // a-z 97-122
+
+            if (!(e.charCode >= 48 && e.charCode <= 57 || e.charCode >= 97 && e.charCode <= 122)) {
+                e.preventDefault();
+            }
+        }
+
+        var oBtn = document.getElementById('btn');
+        var oModal = document.getElementById('modal');
+
+        oBtn.onclick = function (e) {
+            e.stopPropagation();
+            oModal.style.display = 'block';
+        };
+
+        document.onclick = function () {
+            oModal.style.display = 'none';
+        };
+
+        oModal.onclick = function (e) {
+            e.stopPropagation();
+        }
+
+        var oBox = document.getElementById('box');
+        var oInfo = document.getElementById('info');
+
+        var a = 0;
+
+        oBox.onmousewheel = function (e) {
+            e.preventDefault();
+            if (e.deltaY > 0) {
+                a++;
+            } else {
+                a--;
+            }
+            oInfo.innerText = a;
+        }
+    </script>
+
+</body>
+
+</html>

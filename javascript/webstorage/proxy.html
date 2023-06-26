@@ -1,0 +1,28 @@
+<script>
+    const handler = {
+        get: function(target, prop, receiver){
+            if(prop == 'setItem'){
+                // return target[prop];
+                // 返回的是target对象 this改变了 调用的是sessionStorageProxy 返回的是sessionStorage
+                return target[prop].bind(sessionStorage) 
+               
+            }
+            if(prop == 'removeItem'){
+                return target[prop].bind(sessionStorage);
+            }
+            return target[prop];
+        },
+        set: function(target, prop, value){
+            if(prop == 'getItem'){
+                return traget[prop].bind(sessionStorage);
+            }
+            target[prop] = value;
+            return true;
+        }
+    }
+    const sessionStorageProxy = new Proxy(sessionStorage, handler);
+    sessionStorageProxy.setItem("age", 1);
+    // sessionStorageProxy.removeItem("age");
+    console.log(sessionStorageProxy);
+    console.log(sessionStorage);
+</script>

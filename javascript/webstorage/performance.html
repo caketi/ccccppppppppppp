@@ -1,0 +1,12 @@
+<button onclick="run()">test</button>
+<script>
+    const store = {}
+    const run = () => {
+        for(let i = 0; i < 10000; i++){
+            let key = 'num_' + i;
+            let val = i;
+            // sessionStorage.setItem(key, val);
+            store[key] = val;
+        }
+    }
+</script>
