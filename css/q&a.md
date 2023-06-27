@@ -11,6 +11,16 @@ body
     inline
     inline-block
 
+## http
+
+0.9 --- GET  无请求头 无状态码 短链接
+1.0 --- GET POST HEAD 请求头 状态码
+1.1 --- 单个IP地址提供多个域名 长链接 分块编码 更多的请求方法
+2   --- 多路复用 并行请求通过同一链接处理---将一种资源优先于另一种资源的能力
+3
+
+http请求无状态 --- 降低服务器压力 -- 参考cookie session token
+
 ## slice() substring() substr()
 
 slice() substring() [a,b) -- 其中substring()的参数可以互换

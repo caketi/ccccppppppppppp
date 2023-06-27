@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 1000px;
+            height: 130px;
+            border: 1px solid #000;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+
+        .box ul {
+            list-style: none;
+            width: 5555px;
+            position: relative;
+        }
+
+        .box ul li {
+            float: left;
+            margin-left: 10px;
+           
+        }
+        .box ul li h1{
+            
+            width: 200px;
+            height: 100px;
+            line-height: 100px;
+           
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" class="box">
+        <ul id="list">
+            <li><h1>1</h1></li>
+            <li><h1>2</h1></li>
+            <li><h1>3</h1></li>
+            <li><h1>4</h1></li>
+            <li><h1>5</h1></li>
+            <li><h1>6</h1></li>
+        </ul>
+    </div>
+
+    <script>
+        var box = document.getElementById('box');
+        var list = document.getElementById('list');
+
+        list.innerHTML += list.innerHTML;
+
+        var left = 0;
+        var timer;
+        move();
+        function move() {
+            clearInterval(timer);
+
+            timer = setInterval(function () {
+                left -= 4;
+                if (left <= -1260) {
+                    left = 0;
+                }
+                list.style.left = left + 'px';
+            }, 20);
+        }
+
+        box.onmouseenter = function(){
+            clearInterval(timer);
+        };
+        box.onmouseleave = function(){
+            move();
+        };
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

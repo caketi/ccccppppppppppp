@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+            left: 100px;
+            top: 100px;
+        }
+        
+    </style>
+</head>
+<body>
+    <button id="btn">test</button>
+    <div id="box"></div>
+
+    <h1 id="info">0</h1>
+    <button id="start">start</button>
+    <button id="stop">stop</button>
+    
+    <script>
+        var btn = document.getElementById('btn');
+        var box = document.getElementById('box');
+
+        // 1 -- left   2 -- right
+        var pos = 1;
+        var lock = true;
+        var left = 100;
+
+        btn.onclick = function(){
+            if(!lock) return;
+            lock = false;
+
+            box.style.transition = 'all 2s linear 0s';
+            if(pos == 1){
+                box.style.left = '1100px';
+                pos = 2;
+            }else if (pos == 2){
+                box.style.left = '100px';
+                pos = 1;
+            }
+            // var timer = setInterval(() => {
+            //     left += 10;
+            //     if(left >= 1000){
+            //         clearInterval(timer);
+            //     }
+            //     box.style.left = left + 'px';
+            // }, 20);
+            setTimeout(() => {
+                lock =true;
+            }, 2000);
+        }
+
+
+
+
+        var info = document.getElementById('info');
+        var start_btn = document.getElementById('start');
+        var stop_btn = document.getElementById('stop');
+
+        var a = 0;
+        var timer;
+        
+        start_btn.onclick = function(){
+            clearInterval(timer);
+            timer = setInterval(() => {
+                info.innerText = ++a;
+            }, 1000);
+        };
+
+        stop_btn.onclick = function(){
+            clearInterval(timer);
+        }
+    </script>
+</body>
+</html>

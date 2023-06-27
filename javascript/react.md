@@ -38,3 +38,4 @@ ReactDOM.render(<FuncComponent></FuncComponent>, document.getElementById('root')
 
 组件---进入渲染流程---isReactComponent---是--实例化类组件并传入props--调用构造函数---实例化类组件---调用render函数---返回---虚拟dom对象
 --否--直接调用函数并传入props--返回--虚拟dom对象
+

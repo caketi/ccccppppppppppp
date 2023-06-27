@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .carousel {
+        width: 354px;
+        height: 472px;
+        border: 1px solid #000;
+        margin: 50px auto;
+        /* 让两个btn以div为基准 */
+        position: relative;
+        overflow: hidden;
+    }
+    .carousel ul {
+        list-style: none;
+        /* 如果发现浮动上不去，加一个超大的宽 */
+        width: 6666px; 
+
+        position: relative;
+        left: 0px;
+        transition: left 1s ease 0s;
+    }
+    .carousel ul li {
+        float: left;
+    }
+    .carousel .leftbtn{
+        position: absolute;
+        left: 20px;
+        width: 50px;
+        height: 50px;
+        /* 居中 top margin-top */
+        top: 50%;
+        margin-top: -25px;
+        background-color: orange;
+        border-radius: 50%;
+    }
+    .carousel .rightbtn{
+        position: absolute;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        /* 居中 top margin-top */
+        top: 50%;
+        margin-top: -25px;
+        background-color: orange;
+        border-radius: 50%;
+    }
+</style>
+<body>
+    <div class="carousel">
+        <ul id="list">
+            <li><img src="1.jpg" alt=""></li>
+            <li><img src="th.jfif" alt=""></li>
+            <li><img src="th.jfif" alt=""></li>
+            <li><img src="1.jpg" alt=""></li>
+        </ul>
+        <a href="javascript:;" class="leftbtn" id="leftbtn"></a>
+        <a href="javascript:;" class="rightbtn" id="rightbtn"></a>
+    </div>
+    <script>
+        var leftbtn = document.getElementById('leftbtn');
+        var rightbtn = document.getElementById('rightbtn');
+        var list = document.getElementById('list');
+
+        var clone1thliPic = list.firstElementChild.cloneNode(true);
+        list.appendChild(clone1thliPic);
+
+        var idx = 0;
+
+        // 节流锁
+        var lock = true;
+
+        rightbtn.onclick = function(){
+
+            if(!lock) return;
+            lock = false;
+
+            // 最后一张图片会把过渡去掉 给补上
+            list.style.transition = 'left .5s ease 0s';
+            idx++;
+            if(idx > 4){
+                setTimeout(function(){
+                    // 去掉过渡 瞬间移动 
+                    list.style.transition = 'none';
+                    list.style.left = 0;
+                    idx = 0;
+                }, 500);
+            }
+            list.style.left  = -idx * 650 + 'px';
+
+            setTimeout(() => {
+                lock = true;
+            }, 500);
+        }
+
+        leftbtn.onclick = function(){
+
+            if(!lock) return;
+            lock = false;
+
+            // 第0张 瞬间用假的替换
+            if(idx == 0){
+                list.style.transition ='none';
+                // 直接移动到最后的假图片上
+                list.style.left = -5 * 650 + 'px';
+
+                setTimeout(() => {
+                    list.style.transition = 'left .5s ease 0s';
+                    idx = 4;
+                    list.style.left = -idx * 650 + 'px';
+                }, 0);
+            }else{
+                idx --;
+                list.style.left = -idx * 650 + 'px';
+            }
+
+            setTimeout(()=>{
+                lock = true;
+            }, 500);
+        }
+
+
+
+
+    </script>
+</body>
+</html>
