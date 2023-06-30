@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      height: 5000px;
+      background: linear-gradient(rgb(209, 127, 127), rgb(135, 224, 135));
+    }
+
+    a {
+      display: block;
+      width: 40px;
+      height: 40px;
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background-color: orange;
+    }
+
+    button {
+      width: 80px;
+      height: 40px;
+      position: fixed;
+      bottom: 10px;
+      right: 60px;
+      background-color: rgb(110, 85, 180);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 返回顶部锚点css3 -->
+  <!-- 这种是瞬间到顶部,没有过程的, 效果不好 -->
+  <a href="#top">回到顶部</a>
+
+  <!-- 使用js实现返回顶部, 使用到的技术是BOM中的改变卷动值scrollTop -->
+  <!-- 注意window.scrollY是只读的, document.documentElement.scrollTop不是只读的 -->
+  <button id="backtotop">返回顶部</button>
+  <script>
+    var oBtn = document.getElementById('backtotop');
+    var timer;
+    oBtn.onclick = function () {
+      // 设表先关
+      clearInterval(timer);
+      //定时器慢慢返回顶部
+      timer = setInterval(() => {
+        // 不断的让卷度高度scrollTop减少
+        document.documentElement.scrollTop -= 100;
+        // 定时器是一定要停的
+        if (document.documentElement.scrollTop <= 0) {
+          clearInterval(timer);
+        }
+
+      }, 20);
+    }
+  </script>
+</body>
+
+</html>
