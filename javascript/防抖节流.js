@@ -33,6 +33,7 @@ function debounce(fn, delay, resultCallback, immediate = false) {
   return _debounce;
 }
 
+// 需要限流的函数 限流间隔？
 function throttle(fn, interval) {
   let lastTime = 0;
 
