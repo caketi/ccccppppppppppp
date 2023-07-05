@@ -1,7 +1,15 @@
+let timer = null;
+if (timer) {
+    clearTimeout(timer);
+}
+setTimeout(() => {
+    console.log(1)
+}, 300);
+
 // 1.javascript 对象中不能用对象做key 但是Map可以
-const obj1 = {name: "w"}
-const obj2 = {name: "z"}
-const info = { 
+const obj1 = { name: "w" }
+const obj2 = { name: "z" }
+const info = {
     [obj1]: 'aa',
     [obj2]: 'aaaa'
 }
